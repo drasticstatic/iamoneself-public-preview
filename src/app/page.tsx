@@ -268,8 +268,8 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* GitHub link in footer */}
-          <div className="mt-12 pt-6 border-t border-neutral-100 dark:border-neutral-800">
+          {/* GitHub source link */}
+          <div className="mt-8">
             <a
               href="https://github.com/drasticstatic/iamoneself-public-preview"
               target="_blank"
