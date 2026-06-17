@@ -73,7 +73,7 @@ export default function Home() {
         {/* Soft radial glow */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(251,191,36,0.12)_0%,_transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,_rgba(251,191,36,0.06)_0%,_transparent_70%)]"
+          className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_rgba(251,191,36,0.12)_0%,_transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,_rgba(251,191,36,0.06)_0%,_transparent_70%)]"
         />
 
         <motion.h1
@@ -129,7 +129,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
         >
           <span className="text-neutral-400 dark:text-neutral-600 text-xs tracking-widest uppercase">
             Scroll
@@ -268,8 +268,8 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* GitHub source link */}
-          <div className="mt-8">
+          {/* Footer links */}
+          <div className="mt-8 flex items-center justify-center gap-6">
             <a
               href="https://github.com/drasticstatic/iamoneself-public-preview"
               target="_blank"
@@ -277,8 +277,14 @@ export default function Home() {
               className="inline-flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-600 transition hover:text-neutral-600 dark:hover:text-neutral-400"
             >
               <ExternalLink className="h-3.5 w-3.5" />
-              View source on GitHub
+              Source
             </a>
+            <Link
+              href="/404"
+              className="inline-flex items-center gap-1 text-xs text-neutral-400 dark:text-neutral-600 transition hover:text-neutral-600 dark:hover:text-neutral-400"
+            >
+              ✦ 404
+            </Link>
           </div>
         </motion.div>
       </section>
