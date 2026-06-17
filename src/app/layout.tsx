@@ -16,6 +16,12 @@ export const metadata: Metadata = {
   title: "I Am One Self — The Holy Earth Foundation",
   description:
     "Discover the Unity of Being. A Course in Miracles & Mystic Teachings of Christ-Mind. Spiritual life coaching, Plants & Miracles retreats, and the Sufi Message of Love, Harmony, and Beauty.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+  },
   keywords: [
     "A Course in Miracles",
     "spiritual awakening",

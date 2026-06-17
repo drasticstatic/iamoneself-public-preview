@@ -11,6 +11,7 @@ import {
   Sun,
   Eye,
   TreePine,
+  ExternalLink,
 } from "lucide-react";
 
 const fadeUp = {
@@ -121,6 +122,23 @@ export default function Home() {
             <BookOpen className="h-4 w-4" />
             Read the FAQ
           </Link>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        >
+          <span className="text-neutral-400 dark:text-neutral-600 text-xs tracking-widest uppercase">
+            Scroll
+          </span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-px h-8 bg-gradient-to-b from-amber-400 to-transparent dark:from-amber-500"
+          />
         </motion.div>
       </section>
 
@@ -248,6 +266,19 @@ export default function Home() {
             >
               Contact
             </Link>
+          </div>
+
+          {/* GitHub link in footer */}
+          <div className="mt-12 pt-6 border-t border-neutral-100 dark:border-neutral-800">
+            <a
+              href="https://github.com/drasticstatic/iamoneself-public-preview"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-600 transition hover:text-neutral-600 dark:hover:text-neutral-400"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              View source on GitHub
+            </a>
           </div>
         </motion.div>
       </section>
