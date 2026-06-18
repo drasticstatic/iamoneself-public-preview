@@ -11,6 +11,10 @@ export default function FAQPage() {
 
   const lc = search.toLowerCase();
 
+  // Slugify category name for anchor linking from teaching modals
+  const slug = (s: string) =>
+    s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
   const filtered = search
     ? faqData
         .map((cat) => ({
@@ -52,7 +56,7 @@ export default function FAQPage() {
       {/* FAQ Sections */}
       <section className="px-6 pb-24 mx-auto max-w-4xl space-y-16">
         {filtered.map((category) => (
-          <div key={category.category}>
+          <div key={category.category} id={slug(category.category)}>
             <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-2">
               {category.category}
             </h2>
@@ -114,23 +118,23 @@ export default function FAQPage() {
             Still have questions?
           </h2>
           <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-            Book a free discovery call or apply for our next retreat.
+            Book a free discovery call or apply for our next retreat to learn more.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/retreats"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-white shadow-lg hover:bg-amber-700 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5"
             >
               <Mountain className="h-4 w-4" />
               Apply for Retreat
             </Link>
             <a
-              href="https://www.iamoneself.com/about-the-speaker"
+              href="https://www.iamoneself.com/spirituallifecoaching"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 dark:border-neutral-700 px-6 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 dark:border-neutral-700 px-6 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 transition-all shadow-sm hover:shadow-md hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:-translate-y-0.5"
             >
-              About the Speaker
+              Spiritual Life Coaching
               <ExternalLinkIcon className="h-3.5 w-3.5" />
             </a>
           </div>

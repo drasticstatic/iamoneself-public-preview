@@ -56,7 +56,7 @@ export default function RetreatsPage() {
               href={center.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md hover:border-amber-300 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700"
+              className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-amber-300 hover:-translate-y-0.5 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700"
             >
               <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                 {center.name}
@@ -86,7 +86,7 @@ export default function RetreatsPage() {
               href="https://iamoneself.retreat.guru"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-white shadow-lg hover:bg-amber-700 transition-colors"
+              className="inline-flex items-center justify-center rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5"
             >
               Apply via Retreat Guru
             </a>
@@ -94,7 +94,7 @@ export default function RetreatsPage() {
               href="https://www.ayaadvisors.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-neutral-300 dark:border-neutral-700 px-6 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              className="inline-flex items-center justify-center rounded-full border border-neutral-300 dark:border-neutral-700 px-6 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 shadow-sm hover:shadow-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all hover:-translate-y-0.5"
             >
               Find us on Aya Advisors
             </a>

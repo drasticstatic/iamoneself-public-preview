@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -10,8 +11,8 @@ import {
   Feather,
   ExternalLink,
   Globe,
-  Eye,
 } from "lucide-react";
+import { TeachingModal, type TeachingPill } from "@/components/TeachingModal";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -57,11 +58,11 @@ const navCards = [
     external: false,
   },
   {
-    href: "https://www.iamoneself.com/about-the-speaker",
-    title: "About the Speaker",
+    href: "https://www.iamoneself.com/letterstoself",
+    title: "Letters to Self",
     description:
-      "The story of a Kundalini awakening, the true Spiritual Eye of Light, and the discovery of the Golden Halo.",
-    icon: Sparkles,
+      "Personal letters of spiritual insight, reflection, and the journey toward Single-Mindedness — written from the heart of the teaching.",
+    icon: Feather,
     external: true,
   },
   {
@@ -74,9 +75,73 @@ const navCards = [
   },
 ];
 
+// Explore the Teachings — pill topics with modal content
+const teachings: TeachingPill[] = [
+  {
+    id: "miracle-principles",
+    label: "Miracle Principles",
+    title: "The Miracle Principles",
+    body: "The foundation of our teaching — cognitive shifts that take you from body-identification (darkness/guilt) to soul-identification (light/peace). During ceremony, the sacred brew amplifies these principles so you can experience them directly. Drawn from A Course in Miracles, they represent the journey from the ego's thought system to the Holy Spirit's correction.",
+    faqAnchor: "the-teaching-the-experience",
+  },
+  {
+    id: "golden-halo",
+    label: "Golden Halo of Light",
+    title: "The Golden Halo of Light",
+    body: "The Golden Halo manifests around the head and bodies of everyone when the true Spiritual Eye opens. It is the Face of Christ and the Unified Mind of Light — a vision through the power of miracle forgiveness that ends the illusion of differences and offers the remembrance of the Sons of God who share our true Self.",
+    faqAnchor: "the-teaching-the-experience",
+  },
+  {
+    id: "eagle-condor",
+    label: "Eagle & Condor Prophecy",
+    title: "The Flight of the Eagle and the Condor",
+    body: "The prophecy that the Western mind of Medicine (The Eagle — Jesus, A Course in Miracles) will one day join with the Indigenous mind of Plant Wisdom (The Condor) for the good of humanity. The two teachings now live in harmony to heal mankind. The symbol of this union is the Barn Owl — the two birds flying as one — representing Single-Mindedness and seraphic teaching.",
+    faqAnchor: "the-teaching-the-experience",
+  },
+  {
+    id: "escape-darkness",
+    label: "Escape from Darkness",
+    title: "The Escape from Darkness",
+    body: 'Most of us live on the "outer fringes" of physical perception, caught in a cycle of grievances and past-dwelling. Escape from Darkness is the process of moving back into non-differentiated light — recognizing that the source of light is within you, not the physical sun. As A Course in Miracles asks: "Do you not see that all your misery comes from the strange belief that you are powerless?"',
+    faqAnchor: "the-teaching-the-experience",
+  },
+  {
+    id: "chaiconi-bari",
+    label: "Chaiconi Bari",
+    title: "Chaiconi Bari",
+    body: '"Chaiconi" speaks to the wisdom Spirits invisible to human eyes but seen when the Spiritual Eye is activated — Spirits of the plants, ancestors, and shamans who watch over the tradition from a higher realm. "Bari" means a radiant circular energy field that nurtures and sustains life. Together, the term represents the Holy Spirit, the Mind of the Atonement where the Christ stands revealed in the Golden Halo.',
+    faqAnchor: "the-teaching-the-experience",
+  },
+  {
+    id: "icaro",
+    label: "Icaros",
+    title: "The Icaros — Healing Songs",
+    body: "Ikaros are healing songs received by Curanderos during long periods of fasting and isolation working with master plants. They are living medicine encoded with the life force and energy of the plants and spirits. The ikaros provide shamanic plant-spirit healing, clearing negative energies and guiding the ceremony.",
+    faqAnchor: "the-teaching-the-experience",
+  },
+  {
+    id: "dieta",
+    label: "The Dieta",
+    title: "The Dieta — Sacred Preparation",
+    body: "The Dieta is a set of traditional dietary and lifestyle guidelines observed before, during, and after retreat. It cleanses the body, reduces toxins, and opens sensitivity to the plant wisdom. Avoid pork, processed foods, alcohol, and caffeine. Abstain from sexual activity. Follow for at least 2 weeks before and 1 month after the retreat — some choose longer.",
+    faqAnchor: "preparation-the-dieta",
+  },
+  {
+    id: "mariah",
+    label: "The Mariah Level",
+    title: "The Mariah — Highest Level of Mastery",
+    body: "Mariah is the level where an individual has regained control over physical reality. At this level, the mind recognizes no limits — shape-shifting, walking through walls, walking on water become possible. It represents the highest level because it means no limit on the mind. Jesus demonstrated this level in A Course in Miracles.",
+    faqAnchor: "shamanic-lineage-levels",
+  },
+];
+
 export default function Home() {
+  const [activePill, setActivePill] = useState<TeachingPill | null>(null);
+
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Teaching Modal Portal */}
+      <TeachingModal pill={activePill} onClose={() => setActivePill(null)} />
       {/* ── Hero ── */}
       <section className="relative flex flex-col items-center justify-center min-h-screen px-6 py-24 text-center overflow-hidden bg-gradient-to-b from-amber-50 via-white to-white dark:from-neutral-950 dark:via-neutral-950 dark:to-neutral-900">
         {/* Soft radial glow */}
@@ -119,14 +184,14 @@ export default function Home() {
         >
           <Link
             href="/retreats"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm font-medium text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 dark:bg-amber-500 dark:shadow-amber-500/20 dark:hover:bg-amber-400"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-8 py-3.5 text-sm font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5 dark:bg-amber-500 dark:shadow-amber-500/20 dark:hover:bg-amber-400"
           >
             <Mountain className="h-4 w-4" />
             Explore Retreats
           </Link>
           <Link
             href="/faq"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 px-8 py-3.5 text-sm font-medium text-neutral-700 transition hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 px-8 py-3.5 text-sm font-medium text-neutral-700 transition-all shadow-sm hover:shadow-md hover:bg-neutral-50 hover:-translate-y-0.5 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
           >
             <BookOpen className="h-4 w-4" />
             Read the FAQ
@@ -204,7 +269,7 @@ export default function Home() {
                   href={card.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md hover:border-amber-300 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700 h-full"
+                  className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-amber-300 hover:-translate-y-0.5 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700 h-full"
                 >
                   <div className="flex items-center gap-3">
                     <card.icon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
@@ -220,7 +285,7 @@ export default function Home() {
               ) : (
                 <Link
                   href={card.href}
-                  className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md hover:border-amber-300 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700 h-full"
+                  className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-amber-300 hover:-translate-y-0.5 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700 h-full"
                 >
                   <div className="flex items-center gap-3">
                     <card.icon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
@@ -236,6 +301,50 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+      </section>
+
+      {/* ── Explore the Teachings — Pill Buttons ── */}
+      <section className="px-6 py-16 max-w-4xl mx-auto text-center">
+        <motion.h2
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+          custom={0}
+          className="text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-50"
+        >
+          Explore the Teachings
+        </motion.h2>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+          custom={1}
+          className="mt-3 text-neutral-600 dark:text-neutral-400"
+        >
+          Tap a teaching to learn more — each opens a window into the path.
+        </motion.p>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+          custom={2}
+          className="mt-8 flex flex-wrap justify-center gap-3"
+        >
+          {teachings.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setActivePill(t)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 px-4 py-2 text-sm font-medium text-amber-700 dark:text-amber-300 transition-all shadow-sm hover:shadow-md hover:bg-amber-100 dark:hover:bg-amber-950/50 hover:-translate-y-0.5"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              {t.label}
+            </button>
+          ))}
+        </motion.div>
       </section>
     </div>
   );
