@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { faqData } from "@/data/faq";
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function FAQPage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-neutral-950">
+    <>
       {/* Hero */}
       <section className="relative px-6 py-24 mx-auto max-w-4xl text-center">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white">
@@ -65,23 +66,23 @@ export default function FAQPage() {
             Book a free discovery call or apply for our next retreat.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://retreat.guru"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/retreats"
               className="inline-flex items-center justify-center rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-white shadow-lg hover:bg-amber-700 transition-colors"
             >
               Apply for Retreat
-            </a>
+            </Link>
             <a
-              href="mailto:info@iamoneself.com"
+              href="https://www.iamoneself.com/about-the-speaker"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full border border-neutral-300 dark:border-neutral-700 px-6 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
             >
-              Contact Us
+              About the Speaker
             </a>
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

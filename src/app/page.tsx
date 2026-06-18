@@ -8,10 +8,9 @@ import {
   BookOpen,
   Mountain,
   Feather,
-  Sun,
-  Eye,
-  TreePine,
   ExternalLink,
+  Globe,
+  Eye,
 } from "lucide-react";
 
 const fadeUp = {
@@ -23,31 +22,23 @@ const fadeUp = {
   }),
 };
 
-const teachingTopics = [
-  { icon: Sun, label: "The Golden Halo of Light" },
-  { icon: BookOpen, label: "Spiritual Principles" },
-  { icon: Sparkles, label: "Rainbow Body Teachings" },
-  { icon: Heart, label: "Sufi Teachings" },
-  { icon: Eye, label: "Nobel Silence" },
-  { icon: TreePine, label: "Vedanta Teachings" },
-  { icon: Feather, label: "The Fallen Angels of Humanity" },
-  { icon: Mountain, label: "Flight of Eagle & Condor" },
-];
-
+// 6 bento nav cards — mirrors the Wix site architecture
 const navCards = [
   {
-    href: "/plants-and-miracles",
+    href: "https://www.iamoneself.com",
+    title: "I Am One Self",
+    description:
+      "The Holy Earth Foundation — Sufi Message of Love, Harmony, and Beauty. The complete Wix site with all teachings.",
+    icon: Globe,
+    external: true,
+  },
+  {
+    href: "https://www.iamoneself.com/plantsandmiracles",
     title: "Plants & Miracles",
     description:
       "The Flight of the Eagle & Condor — where A Course in Miracles meets the ancient Amazonian healing tradition.",
     icon: Feather,
-  },
-  {
-    href: "/teachings",
-    title: "Spiritual Life Coaching",
-    description:
-      "One-on-one guidance in miracle forgiveness, ACIM study, Kundalini awakening, and the escape from darkness.",
-    icon: Heart,
+    external: true,
   },
   {
     href: "/retreats",
@@ -55,13 +46,31 @@ const navCards = [
     description:
       "Chaiconi Bari Ayahuasca Retreats in the Peruvian Amazon. Spiritual healing with traditional curanderos.",
     icon: Mountain,
+    external: false,
   },
   {
-    href: "/about",
-    title: "About Isaiah Kenney",
+    href: "/faq",
+    title: "FAQ",
+    description:
+      "Everything you need to know — the medicine, preparation, safety, travel logistics, and integration support.",
+    icon: BookOpen,
+    external: false,
+  },
+  {
+    href: "https://www.iamoneself.com/about-the-speaker",
+    title: "About the Speaker",
     description:
       "The story of a Kundalini awakening, the true Spiritual Eye of Light, and the discovery of the Golden Halo.",
     icon: Sparkles,
+    external: true,
+  },
+  {
+    href: "https://www.iamoneself.com/spirituallifecoaching",
+    title: "Spiritual Life Coaching",
+    description:
+      "One-on-one guidance in miracle forgiveness, ACIM study, Kundalini awakening, and the escape from darkness.",
+    icon: Heart,
+    external: true,
   },
 ];
 
@@ -178,9 +187,9 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ── Navigation Cards ── */}
+      {/* ── 6 Bento Navigation Cards ── */}
       <section className="px-6 py-16 max-w-5xl mx-auto">
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {navCards.map((card, i) => (
             <motion.div
               key={card.href}
@@ -190,103 +199,43 @@ export default function Home() {
               variants={fadeUp}
               custom={i}
             >
-              <Link
-                href={card.href}
-                className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md hover:border-amber-300 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700"
-              >
-                <div className="flex items-center gap-3">
-                  <card.icon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                    {card.title}
-                  </h3>
-                </div>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  {card.description}
-                </p>
-              </Link>
+              {card.external ? (
+                <a
+                  href={card.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md hover:border-amber-300 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700 h-full"
+                >
+                  <div className="flex items-center gap-3">
+                    <card.icon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                    <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                      {card.title}
+                    </h3>
+                    <ExternalLink className="h-3.5 w-3.5 text-neutral-400 ml-auto" />
+                  </div>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    {card.description}
+                  </p>
+                </a>
+              ) : (
+                <Link
+                  href={card.href}
+                  className="group flex flex-col gap-3 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md hover:border-amber-300 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-amber-700 h-full"
+                >
+                  <div className="flex items-center gap-3">
+                    <card.icon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                    <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                      {card.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    {card.description}
+                  </p>
+                </Link>
+              )}
             </motion.div>
           ))}
         </div>
-      </section>
-
-      {/* ── Navigator Preview ── */}
-      <section className="px-6 py-16 max-w-4xl mx-auto w-full">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeUp}
-          custom={0}
-        >
-          <h2 className="text-center text-2xl font-semibold text-neutral-900 dark:text-neutral-50 mb-8">
-            Explore the Teachings
-          </h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {teachingTopics.map(({ icon: Icon, label }, i) => (
-              <motion.span
-                key={label}
-                variants={fadeUp}
-                custom={i}
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
-              >
-                <Icon className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" />
-                {label}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ── Footer CTA ── */}
-      <section className="px-6 py-20 text-center border-t border-neutral-100 dark:border-neutral-800">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={fadeUp}
-          custom={0}
-        >
-          <p className="text-xl font-medium text-neutral-900 dark:text-neutral-100">
-            God Saves!
-          </p>
-          <p className="mt-2 text-neutral-500 dark:text-neutral-400">
-            — Isaiah Kenney
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/teachings"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 px-6 py-3 text-sm font-medium text-amber-700 transition hover:bg-amber-50 dark:border-amber-800 dark:text-amber-400 dark:hover:bg-amber-950"
-            >
-              <Heart className="h-4 w-4" />
-              Spiritual Life Coaching
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 px-6 py-3 text-sm font-medium text-neutral-600 transition hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-800"
-            >
-              Contact
-            </Link>
-          </div>
-
-          {/* Footer links */}
-          <div className="mt-8 flex items-center justify-center gap-6">
-            <a
-              href="https://github.com/drasticstatic/iamoneself-public-preview"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-600 transition hover:text-neutral-600 dark:hover:text-neutral-400"
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-              Source
-            </a>
-            <Link
-              href="/404"
-              className="inline-flex items-center gap-1 text-xs text-neutral-400 dark:text-neutral-600 transition hover:text-neutral-600 dark:hover:text-neutral-400"
-            >
-              ✦ 404
-            </Link>
-          </div>
-        </motion.div>
       </section>
     </div>
   );
