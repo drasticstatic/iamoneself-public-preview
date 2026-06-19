@@ -2,7 +2,21 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Sparkles, Home, BookOpen, Mountain, ExternalLink, Feather, Globe, Heart, Mail } from "lucide-react";
+import {
+  Sparkles,
+  Home,
+  BookOpen,
+  Mountain,
+  ExternalLink,
+  Feather,
+  Globe,
+  Heart,
+  Mail,
+  Leaf,
+  Mic,
+  Play,
+  Flower2,
+} from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -15,7 +29,7 @@ const fadeUp = {
 
 // Gh-pages internal routes
 const ghpagesRoutes = [
-  { href: "/", label: "Retreat Portal Home", icon: Home },
+  { href: "/", label: "Portal Home", icon: Home },
   { href: "/retreats", label: "Retreats", icon: Mountain },
   { href: "/faq", label: "FAQ", icon: BookOpen },
 ];
@@ -23,13 +37,25 @@ const ghpagesRoutes = [
 // Wix site pages
 const wixRoutes = [
   { href: "https://www.iamoneself.com", label: "I Am One Self — Home", icon: Globe },
-  { href: "https://www.iamoneself.com/plantsandmiracles", label: "Plants & Miracles", icon: Feather },
+  { href: "https://www.iamoneself.com/plantsandmiracles", label: "Plants & Miracles", icon: Leaf },
   { href: "https://www.iamoneself.com/letterstoself", label: "Letters to Self", icon: Feather },
   { href: "https://www.iamoneself.com/spirituallifecoaching", label: "Spiritual Life Coaching", icon: Heart },
   { href: "https://www.iamoneself.com/about-the-speaker", label: "Contact", icon: Mail },
-  { href: "https://www.iamoneself.com/phsychedelicmysticteachings", label: "Psychedelic Mystic Teachings", icon: Sparkles },
-  { href: "https://www.iamoneself.com/voiceoftheonepodcast", label: "Voice of the One Podcast", icon: Globe },
-  { href: "https://www.iamoneself.com/talks-on-youtube", label: "Talks on YouTube", icon: Globe },
+  { href: "https://www.iamoneself.com/phsychedelicmysticteachings", label: "Mystic Teachings", icon: Flower2 },
+  { href: "https://www.iamoneself.com/voiceoftheonepodcast", label: "Voice of the One Podcast", icon: Mic },
+  { href: "https://www.iamoneself.com/talks-on-youtube", label: "Talks on YouTube", icon: Play },
+];
+
+// ACIM source references — resource/accreditation
+const acimLinks = [
+  {
+    href: "https://acimce.app/book/W-95#W-95.16",
+    label: "A Course in Miracles — Workbook Lesson 95 (CE Edition)",
+  },
+  {
+    href: "https://acim.org/acim/lesson-95/i-am-one-self-united-with-my-creator/en/s/499",
+    label: "A Course in Miracles — Workbook Lesson 95 (FIP Edition)",
+  },
 ];
 
 export default function NotFound() {
@@ -89,6 +115,26 @@ export default function NotFound() {
                     <r.icon className="h-4 w-4 text-amber-500" />
                     {r.label}
                   </Link>
+                </li>
+              ))}
+
+              {/* Divider + ACIM Source References */}
+              <div className="my-3 h-px bg-neutral-200 dark:bg-neutral-800" />
+              <p className="px-3 py-1 text-[10px] uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-600">
+                Source References
+              </p>
+              {acimLinks.map((r) => (
+                <li key={r.href}>
+                  <a
+                    href={r.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all shadow-sm hover:shadow-md rounded-md px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:-translate-y-0.5"
+                  >
+                    <BookOpen className="h-4 w-4 text-amber-500" />
+                    <span className="text-sm">{r.label}</span>
+                    <ExternalLink className="h-3 w-3 text-neutral-400 ml-auto" />
+                  </a>
                 </li>
               ))}
             </ul>

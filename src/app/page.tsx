@@ -13,6 +13,7 @@ import {
   Globe,
   MessageCircle,
   Send,
+  Leaf,
 } from "lucide-react";
 import { TeachingModal, type TeachingPill } from "@/components/TeachingModal";
 
@@ -40,7 +41,7 @@ const navCards = [
     title: "Plants & Miracles",
     description:
       "The Flight of the Eagle & Condor — where A Course in Miracles meets the ancient Amazonian healing tradition.",
-    icon: Feather,
+    icon: Leaf,
     external: true,
   },
   {
@@ -141,10 +142,10 @@ export default function Home() {
   const [activePill, setActivePill] = useState<TeachingPill | null>(null);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
-  // Hide scroll indicator once user scrolls past hero
+  // Hide scroll indicator once user scrolls past hero, reappear at top
   useEffect(() => {
     const onScroll = () => {
-      if (window.scrollY > 100) setShowScrollIndicator(false);
+      setShowScrollIndicator(window.scrollY <= 100);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -170,10 +171,12 @@ export default function Home() {
           className="relative max-w-3xl text-3xl font-semibold leading-snug tracking-tight sm:text-5xl sm:leading-tight text-neutral-900 dark:text-neutral-50"
         >
           <span className="text-amber-600 dark:text-amber-400">
-            &ldquo;I am one Self,
-          </span>{" "}
-          united with my Creator, at one with every aspect of creation, and
-          limitless in power and in peace.&rdquo;
+            &ldquo;I am one Self, united with my Creator,
+          </span>
+          <br />
+          at one with every aspect of creation,
+          <br />
+          and limitless in power and in peace.&rdquo;
         </motion.h1>
 
         <motion.p
@@ -183,8 +186,17 @@ export default function Home() {
           custom={1}
           className="mt-6 max-w-xl text-lg text-neutral-600 dark:text-neutral-400"
         >
-          A Sufi Message of Love, Harmony, and Beauty — The Holy Earth
-          Foundation
+          A Sufi Message of Love, Harmony, and Beauty
+        </motion.p>
+
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={1.5}
+          className="mt-1 max-w-xl text-base text-neutral-500 dark:text-neutral-500 italic"
+        >
+          — The Holy Earth Foundation
         </motion.p>
 
         <motion.div

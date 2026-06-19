@@ -122,6 +122,8 @@ export default function Navbar() {
           >
             <Home className="h-5 w-5 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
             <span className="drop-shadow-sm">Retreat Portal</span>
+            <span className="text-neutral-300 dark:text-neutral-700 mx-0.5">|</span>
+            <span className="drop-shadow-sm text-sm font-normal text-neutral-500 dark:text-neutral-500">Home</span>
           </Link>
 
           {/* Desktop links — evenly spread */}
