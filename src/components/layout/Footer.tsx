@@ -1,7 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ExternalLink, Code, Mail, Sparkles, Home } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="border-t border-neutral-100 dark:border-neutral-800 bg-white dark:bg-neutral-950">
       {/* CTA Section — "God Saves!" + Contact + 404 */}
@@ -47,6 +59,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <Link
               href="/"
+              onClick={handleHomeClick}
               className="inline-flex items-center gap-1 transition-all hover:text-amber-600 dark:hover:text-amber-400 hover:-translate-y-0.5"
             >
               <Home className="h-3 w-3" />

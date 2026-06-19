@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -15,6 +15,9 @@ import {
   Mountain,
   BookOpen,
   Globe,
+  Leaf,
+  ChevronDown,
+  Sparkles,
 } from "lucide-react";
 
 // Internal nav links — shown in main navbar and hamburger
@@ -24,7 +27,17 @@ const navLinks = [
   {
     href: "https://www.iamoneself.com/plantsandmiracles",
     label: "Plants & Miracles",
-    icon: Feather,
+    icon: Leaf,
+    external: true,
+  },
+];
+
+// Dropdown items for the iamoneself.com menu
+const siteLinks = [
+  {
+    href: "https://www.iamoneself.com",
+    label: "iamoneself.com",
+    icon: Globe,
     external: true,
   },
   {
@@ -33,11 +46,25 @@ const navLinks = [
     icon: Feather,
     external: true,
   },
+  {
+    href: "https://www.iamoneself.com/spirituallifecoaching",
+    label: "Spiritual Life Coaching",
+    icon: Heart,
+    external: true,
+  },
+  {
+    href: "https://www.iamoneself.com/about-the-speaker",
+    label: "Contact",
+    icon: Mail,
+    external: true,
+  },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [siteMenuOpen, setSiteMenuOpen] = useState(false);
+  const siteMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -49,7 +76,22 @@ export default function Navbar() {
   // Close mobile menu on route change
   useEffect(() => {
     setMenuOpen(false);
+    setSiteMenuOpen(false);
   }, [pathname]);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (
+        siteMenuRef.current &&
+        !siteMenuRef.current.contains(e.target as Node)
+      ) {
+        setSiteMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   return (
     <header
@@ -100,42 +142,61 @@ export default function Navbar() {
             )
           )}
 
+          {/* 404 Page link */}
+          <Link
+            href="/404"
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
+              pathname === "/404"
+                ? "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30"
+                : "text-neutral-600 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-neutral-100 dark:hover:bg-neutral-800/50"
+            }`}
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            404
+          </Link>
+
           <span className="w-px h-5 bg-neutral-200 dark:bg-neutral-800 mx-1" />
 
-          {/* SLC — after divider, before Contact */}
-          <a
-            href="https://www.iamoneself.com/spirituallifecoaching"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-neutral-600 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800/50 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-          >
-            <Heart className="h-3.5 w-3.5" />
-            Spiritual Life Coaching
-            <ExternalLink className="h-3 w-3" />
-          </a>
+          {/* iamoneself.com dropdown */}
+          <div ref={siteMenuRef} className="relative">
+            <button
+              onClick={() => setSiteMenuOpen(!siteMenuOpen)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
+                siteMenuOpen
+                  ? "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30"
+                  : "text-neutral-600 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-neutral-100 dark:hover:bg-neutral-800/50"
+              }`}
+            >
+              <Globe className="h-3.5 w-3.5" />
+              iamoneself.com
+              <ChevronDown
+                className={`h-3 w-3 transition-transform duration-200 ${
+                  siteMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
 
-          {/* Contact */}
-          <a
-            href="https://www.iamoneself.com/about-the-speaker"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-neutral-600 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800/50 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-          >
-            <Mail className="h-3.5 w-3.5" />
-            Contact
-            <ExternalLink className="h-3 w-3" />
-          </a>
-
-          {/* iamoneself.com */}
-          <a
-            href="https://www.iamoneself.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-all rounded-md hover:bg-amber-50 dark:hover:bg-amber-950/20 font-medium shadow-sm hover:shadow-md hover:-translate-y-0.5"
-          >
-            <Globe className="h-3.5 w-3.5" />
-            iamoneself.com
-          </a>
+            {siteMenuOpen && (
+              <div className="absolute right-0 top-full mt-1 w-64 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xl py-1 z-50">
+                {siteLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setSiteMenuOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors"
+                  >
+                    <link.icon className="h-4 w-4 text-amber-500" />
+                    {link.label}
+                    {link.external && (
+                      <ExternalLink className="h-3 w-3 text-neutral-400 ml-auto" />
+                    )}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* GitHub */}
           <a
@@ -145,10 +206,11 @@ export default function Navbar() {
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-neutral-500 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-all rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800/50 shadow-sm hover:shadow-md hover:-translate-y-0.5"
           >
             <Code className="h-3.5 w-3.5" />
+            GitHub
           </a>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden relative z-50 p-2 -mr-2 text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors shadow-sm hover:shadow-md rounded-md"
@@ -162,7 +224,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu overlay — solid bg (not transparent) */}
       <div
         className={`md:hidden fixed inset-0 z-40 transition-all duration-300 ${
           menuOpen
@@ -176,13 +238,27 @@ export default function Navbar() {
           onClick={() => setMenuOpen(false)}
         />
 
-        {/* Panel — solid bg, darker to prevent bleed */}
+        {/* Panel — solid background, not transparent */}
         <div
           className={`absolute top-0 right-0 h-full w-72 bg-white dark:bg-neutral-950 shadow-2xl p-6 pt-20 transition-transform duration-300 ${
             menuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex flex-col gap-1">
+            {/* Home */}
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className={`flex items-center gap-2 px-4 py-3 text-sm rounded-lg transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
+                pathname === "/"
+                  ? "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 font-medium"
+                  : "text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
+              }`}
+            >
+              <Home className="h-4 w-4 text-amber-500" />
+              Home
+            </Link>
+
             {navLinks.map((link) =>
               link.external ? (
                 <a
@@ -200,6 +276,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => setMenuOpen(false)}
                   className={`flex items-center gap-2 px-4 py-3 text-sm rounded-lg transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
                     pathname === link.href
                       ? "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 font-medium"
@@ -212,39 +289,42 @@ export default function Navbar() {
               )
             )}
 
+            {/* 404 Page */}
+            <Link
+              href="/404"
+              onClick={() => setMenuOpen(false)}
+              className={`flex items-center gap-2 px-4 py-3 text-sm rounded-lg transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
+                pathname === "/404"
+                  ? "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 font-medium"
+                  : "text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
+              }`}
+            >
+              <Sparkles className="h-4 w-4 text-amber-500" />
+              404 Page
+            </Link>
+
             <div className="my-3 h-px bg-neutral-200 dark:bg-neutral-800" />
 
-            <a
-              href="https://www.iamoneself.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-3 text-sm text-amber-600 dark:text-amber-400 font-medium rounded-lg hover:bg-amber-50 dark:hover:bg-amber-950/20 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <Globe className="h-4 w-4 text-amber-500" />
-              Visit iamoneself.com
-            </a>
+            {/* iamoneself.com section heading */}
+            <p className="px-4 py-1 text-xs font-medium text-neutral-400 dark:text-neutral-600 uppercase tracking-wider">
+              iamoneself.com
+            </p>
 
-            <a
-              href="https://www.iamoneself.com/spirituallifecoaching"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <Heart className="h-4 w-4 text-amber-500" />
-              Spiritual Life Coaching
-              <ExternalLink className="h-3.5 w-3.5 text-neutral-400 ml-auto" />
-            </a>
-
-            <a
-              href="https://www.iamoneself.com/about-the-speaker"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <Mail className="h-4 w-4 text-amber-500" />
-              Contact
-              <ExternalLink className="h-3.5 w-3.5 text-neutral-400 ml-auto" />
-            </a>
+            {siteLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              >
+                <link.icon className="h-4 w-4 text-amber-500" />
+                {link.label}
+                {link.external && (
+                  <ExternalLink className="h-3.5 w-3.5 text-neutral-400 ml-auto" />
+                )}
+              </a>
+            ))}
 
             <div className="my-3 h-px bg-neutral-200 dark:bg-neutral-800" />
 

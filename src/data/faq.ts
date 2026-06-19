@@ -134,7 +134,7 @@ export const faqData: FAQCategory[] = [
       {
         question: 'What happens during "The Transition" (purging)?',
         answer:
-          "Purging is a natural part of the healing process — whether it appears as physical release, sweating, or crying. It is the body's way of letting go of old conditioning. In our community, we view this not as something to fear, but as a necessary correction to bring you back to peace.",
+          "Purging is a natural part of the healing process — whether it appears as physical release, sweating, or crying. It is the body's way of letting go of old conditioning. In our community, we view this not as something to fear, but as a necessary correction to bring you back to peace. Purging at the front end — vomiting — is not always necessary or expected. Sometimes the body strictly purges out the rear. Both are natural, both are valid, and both are part of the medicine doing its work. We frequently work with companion plants like Bobinsana and Ajo Sacha to help support the purging process when needed.",
       },
       {
         question: "Who should NOT participate?",
@@ -392,7 +392,7 @@ export const faqData: FAQCategory[] = [
       {
         question: "What is pre-retreat integration and does it exist?",
         answer:
-          "Yes — and it is just as important as post-retreat integration. Pre-retreat integration is the preparation work that sets the foundation for what happens in ceremony. This includes the dieta (physical clearing), contemplative practices, setting clear intentions, and beginning the conversation with yourself about what you are ready to release. Many people also schedule a discovery call with our team before the retreat to discuss their intentions and concerns. The conversation itself is part of the miracle — as Kenney says, 'The people you're going to talk to, a lot of them are hurting deeply. They're seeking answers. Part of the process is doing the intake. And answering as many questions as we can. The conversation itself is a miracle.' The application process, the questions we ask, and the care we take in screening — all of this is the beginning of the healing, before you ever set foot in Peru.",
+          "Yes — and it is just as important as post-retreat integration. Pre-retreat integration is the preparation work that sets the foundation for what happens in ceremony. This includes the dieta (physical clearing), contemplative practices, setting clear intentions, and beginning the conversation with yourself about what you are ready to release. Many people also schedule a discovery call with our team before the retreat to discuss their intentions and concerns. The conversation itself is part of the miracle — the people we talk to are often carrying deep pain, yes, but they are also carrying a profound readiness for healing. Seeking answers is not weakness — it is courage. Part of the process is doing the intake, answering the questions that open the door. The conversation itself is a miracle. The application process, the questions we ask, and the care we take in screening — all of this is the beginning of the healing, before you ever set foot in Peru.",
       },
     ],
   },
@@ -435,6 +435,26 @@ export const faqData: FAQCategory[] = [
         question: "What is Nicotina Rustica and why is it in the brew?",
         answer:
           "Nicotina Rustica (Mapacho) is a native Amazonian tobacco — far more potent than commercial tobacco. It is used in several ways: small amounts are traditionally cooked into the Ayahuasca brew to aid purging. As a hapé (snuff), it is blown into the nostrils for grounding and energetic clearing. As smoke (soplada), the Curandero blows it over participants to move energy, seal the auric field, or clear heavy energies. It is considered a grandfather spirit — protective and grounding. The tobacco used in our tradition is natural and ceremonial — it bears no resemblance to commercial cigarettes, which contain thousands of chemical additives. Used respectfully in ceremony, Nicotina Rustica is a powerful ally.",
+      },
+      {
+        question: "What is Chiric Sanango?",
+        answer:
+          "Chiric Sanango (Brunfelsia grandiflora) is one of the most revered master plants in the Amazonian tradition. Its name comes from 'chiric' meaning 'cold' — referring to the intense cold many feel when it enters the body. It makes its way into many of the brews prepared by our healers. Chiric Sanango is associated with profound visionary experiences — many who have dieted this plant report encounters with angelic beings and luminous, otherworldly realms. It is considered a plant of the highest spiritual order, opening the door to celestial perception and deep communion with the divine.",
+      },
+      {
+        question: "What is Uchu Sanango?",
+        answer:
+          "Uchu Sanango (Tabernaemontana undulata) is another powerful master plant in the Shipibo tradition, closely related to Chiric Sanango. Like its counterpart, it makes its way into many brews and is respected for its intensity. Uchu Sanango is known for producing deep visionary states and working at the level of the mind's foundations — bringing unconscious material into awareness for healing and transformation. The Sanango plants are considered among the most profound teachers in the tradition, demanding deep respect and careful dieta.",
+      },
+      {
+        question: "What is Malva (the marshmallow plant)?",
+        answer:
+          "Malva — the marshmallow plant — is a gentle but powerful companion plant. Its leaves dissolve in water, becoming a gelatinous, jelly-like drink that soothes and cleanses the digestive tract and gut energy. After drinking Ayahuasca, especially through a rough night, the digestive system can be heavily worked. Malva helps settle and restore that energy — cleansing what the medicine has stirred up in the gut, both physically and energetically. It is one of the most comforting plants in the tradition, often prepared the morning after a difficult ceremony.",
+      },
+      {
+        question: "What is Pasto Limon (lemongrass)?",
+        answer:
+          "Pasto Limon — lemongrass — grows wild in the Amazon with large, aromatic blades. It is one of the most helpful plants after ceremony and in the morning. The tea is calming, earthy, and grounding — helping settle the nervous system after the intensity of the night. It grows abundantly around the retreat centers and is often the first thing offered after ceremony. Its gentle, familiar warmth helps bring you back into your body and into the present moment. For many guests, a cup of Pasto Limon after ceremony becomes a small ritual of return.",
       },
       {
         question: "What is a Master Plant Dieta and how is it different from the regular retreat?",
