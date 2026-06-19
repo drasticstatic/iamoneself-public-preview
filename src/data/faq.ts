@@ -328,6 +328,21 @@ export const faqData: FAQCategory[] = [
         answer:
           "Participants must be 18 or older. There is no upper age limit — guests in their 60s and 70s have had profoundly meaningful experiences. What matters more than age is physical fitness, psychological readiness, and medical clearance. The Amazon environment is physically demanding (heat, humidity, walking on uneven terrain), and the ceremony experience requires willingness to face difficult material. We evaluate each applicant individually.",
       },
+      {
+        question: "What are the sleeping, shower, and bathroom facilities like?",
+        answer:
+          "Facilities vary by center but all provide the essentials. Sleeping: individual beds with mosquito nets in shared tambo (traditional huts) or private rooms (subject to availability). Bring your own pillow or blanket if you have preferences — the retreat provides basics, but personal comfort items help some guests feel more at ease. Showers: most centers have cold-water showers (the Amazon is warm, so this feels refreshing). Some centers have limited hot water. Towels are provided but bringing a quick-dry travel towel is wise. Toilets: typically composting or flush toilets in shared bathroom structures. This is the Amazon — not a hotel. The facilities are clean and functional, but rustic. Most guests find they adapt within the first day, and the simplicity becomes part of the experience.",
+      },
+      {
+        question: "Is laundry available at the retreat?",
+        answer:
+          "Most centers offer basic laundry service for a small fee — hand-washing or machine wash. Some guests bring enough clothing for the entire retreat to avoid the need. If using the service, allow 1-2 days turnaround. The humidity means things dry slowly. Quick-dry fabrics are your friend. This is one of those details that seems bigger before you arrive than after — once you are in the flow of the retreat, laundry falls away as a concern.",
+      },
+      {
+        question: "What about nutrition and meals during the retreat?",
+        answer:
+          "All meals are dieta-compliant: simple, clean, and traditional. Expect rice, plantains, soups, root vegetables, fresh fruits, and occasional fish. The food is light and intentionally simple — it supports the ceremonial work by keeping your body unburdened. Portions are adequate and you will not go hungry. We accommodate dietary preferences (vegetarian, vegan, gluten-free, pescatarian) — indicate on your application. What surprises many guests is how satisfying the simple food becomes after ceremony. The body craves clean nourishment. Complex, heavy meals would actually work against the process.",
+      },
     ],
   },
   {
@@ -369,6 +384,63 @@ export const faqData: FAQCategory[] = [
         answer:
           "This is one of the most unexpectedly challenging aspects of returning home. The experience can be difficult to describe, and not everyone in your life will understand or be receptive. Our advice: share selectively. You do not owe anyone the full story. Share what feels right, with people who are genuinely curious and supportive. For others, 'I went on a spiritual retreat in Peru and it was profound' is enough. Many guests find that writing in their journal — or talking with others from the retreat — is more satisfying than trying to explain to people who weren't there. Our integration calls also provide a space where everyone speaks the same language.",
       },
+      {
+        question: "What are integration sessions and why do they matter?",
+        answer:
+          "Integration sessions are structured support conversations — 1-on-1 or in small groups — that happen after each ceremony and continue for 3 months after the retreat. They are where the real work of the retreat takes root. In ceremony, you receive insights, visions, and healing. In integration, you learn how to bring those insights into your daily life. Without integration, the retreat experience can feel like a vivid dream that slowly fades. With it, the shifts become permanent. Our integration program includes coaching calls, community circles, journaling prompts, and access to our resource library. Think of the retreat as planting the seed and integration as the watering and tending.",
+      },
+      {
+        question: "What is pre-retreat integration and does it exist?",
+        answer:
+          "Yes — and it is just as important as post-retreat integration. Pre-retreat integration is the preparation work that sets the foundation for what happens in ceremony. This includes the dieta (physical clearing), contemplative practices, setting clear intentions, and beginning the conversation with yourself about what you are ready to release. Many people also schedule a discovery call with our team before the retreat to discuss their intentions and concerns. The conversation itself is part of the miracle — as Kenney says, 'The people you're going to talk to, a lot of them are hurting deeply. They're seeking answers. Part of the process is doing the intake. And answering as many questions as we can. The conversation itself is a miracle.' The application process, the questions we ask, and the care we take in screening — all of this is the beginning of the healing, before you ever set foot in Peru.",
+      },
+    ],
+  },
+  {
+    category: "Plant Medicines & Companion Plants",
+    description: "The sacred brew, its ingredients, and the master plants that support the healing journey.",
+    items: [
+      {
+        id: "what-is-the-medicine",
+        question: "What is in the sacred brew?",
+        answer:
+          "Our traditional brew follows a 7-generation Shipibo-Conibo lineage recipe. The primary ingredients are: the Ayahuasca vine (Banisteriopsis caapi) which contains harmine and other harmala alkaloids — these act as MAO inhibitors (MAOI), allowing the DMT to become orally active. The second ingredient is Chakruna leaf (Psychotria viridis) which contains N,N-DMT — the visionary compound. Some lineages also include Chaliponga leaf (Diplopterys cabrerana), which contains 5-MeO-DMT, known for its intensely mystical, dissolve-into-the-light quality. Small amounts of Nicotina Rustica — a native Amazonian tobacco — are also traditionally cooked into the brew to aid purging. These proportions are not arbitrary — they are the result of centuries of indigenous empirical wisdom.",
+      },
+      {
+        question: "What about other plant medicines — San Pedro, psilocybin, hapé?",
+        answer:
+          "Our tradition works primarily with Ayahuasca and the master plants of the Amazon. San Pedro (Huachuma/Wachuma) is a different cactus medicine with its own tradition, common in Andean ceremonies — some of our Sacred Valley locations offer complementary Huachuma ceremonies as part of extended programs. Psilocybin mushrooms are not part of our tradition. Hapé (also spelled rapé) is a sacred Amazonian snuff made from Nicotina Rustica and various medicinal tree ashes — it is used as a complementary tool for grounding and clearing during dieta. Different traditions and vegetalistas work with the whole spectrum of plant medicines depending upon what you are dealing with. Our focus is on the Ayahuasca tradition and its master plant dietas.",
+      },
+      {
+        question: "What is Ajo Sacha?",
+        answer:
+          "Ajo Sacha (Mansoa alliacea) is one of the most commonly used master plants in the Shipibo tradition. Its name means 'false garlic' — the crushed leaves smell like garlic. The roots go deep — both literally and spiritually. Ajo Sacha is primarily used for purging: it helps move stuck energy and physical toxicity out of the body. During dieta with Ajo Sacha, many people experience vivid jungle dreams and a heightening of the senses. It is considered a protective plant — clearing negative energies and strengthening the auric field. It is one of the first plants a Curandero may diet because it opens the pathway for deeper work.",
+      },
+      {
+        question: "What is Bobinsana?",
+        answer:
+          "Bobinsana (Calliandra angustifolia) is a beautiful, gentle master plant known for opening the heart. If you carry a lot of fear — especially fear about drinking Ayahuasca — Bobinsana is commonly used to calm and soothe. It softens the anxiety and opens emotional receptivity. It is frequently included in the main brew for this reason. During dieta, Bobinsana often produces dreams of water, rivers, and pink flowers. It is considered a feminine plant spirit — nurturing, compassionate, and grounding. For those working through grief or heartbreak, Bobinsana can be profoundly supportive.",
+      },
+      {
+        question: "What is Chuchuhuasi?",
+        answer:
+          "Chuchuhuasi is a large canopy tree whose bark is used in dieta. It is a powerful amplifier — of sounds, tastes, physical touch, and especially of grievances. As Kenney describes from his own dieta: 'It amplifies everything. Sounds, tastes, physical touch, and grievances. Makes the jungle feel even more damp. Forces grievances up into your mind.' This is not a plant for the faint of heart — it brings up whatever is buried and forces you to look at it. For those ready to face deep-seated resentments and the ego's thought system of attack, Chuchuhuasi provides an uncompromising mirror. It is traditionally used for physical pain and inflammation as well as spiritual cleansing.",
+      },
+      {
+        question: "What is Ayahuma?",
+        answer:
+          "Ayahuma (Couroupita guianensis) is called 'the Doctor' — the Castanha tree with cannonball-like fruit. It is one of the most demanding master plants. As Kenney says: 'It also forces grievances up into your mind. All kinds of dark energy and satanic and murderous thoughts that you have lurking in there. Thoughts about women, young girls too. It forces you to deal with all that.' Ayahuma strips away every rationalization and defense, bringing the raw, unfiltered content of the unconscious into awareness. This is intense, difficult work — but for those called to do it, the liberation on the other side is profound. It represents the deepest form of the Escape from Darkness teaching: you cannot forgive what you refuse to see. Ayahuma makes you see it all.",
+      },
+      {
+        question: "What is Nicotina Rustica and why is it in the brew?",
+        answer:
+          "Nicotina Rustica (Mapacho) is a native Amazonian tobacco — far more potent than commercial tobacco. It is used in several ways: small amounts are traditionally cooked into the Ayahuasca brew to aid purging. As a hapé (snuff), it is blown into the nostrils for grounding and energetic clearing. As smoke (soplada), the Curandero blows it over participants to move energy, seal the auric field, or clear heavy energies. It is considered a grandfather spirit — protective and grounding. The tobacco used in our tradition is natural and ceremonial — it bears no resemblance to commercial cigarettes, which contain thousands of chemical additives. Used respectfully in ceremony, Nicotina Rustica is a powerful ally.",
+      },
+      {
+        question: "What is a Master Plant Dieta and how is it different from the regular retreat?",
+        answer:
+          "A Master Plant Dieta goes far beyond the standard retreat dieta (which is about physical preparation). In a Master Plant Dieta, you diet a specific plant in isolation — drinking its preparation daily, following strict dietary restrictions, refraining from all stimulation (no reading, no music, no conversation beyond essential needs). The plant reveals itself to you through dreams, visions, physical sensations, and direct spiritual encounter. This is the traditional path of apprenticeship. It is demanding — physically, emotionally, and spiritually. But the depth of relationship you develop with a master plant through extended dieta cannot be replicated any other way. Most Master Plant Dietas are 7-30 days.",
+      },
     ],
   },
   {
@@ -404,6 +476,21 @@ export const faqData: FAQCategory[] = [
         question: "What is the application process like?",
         answer:
           "Apply through our Retreat Guru listing or Aya Advisors profile. You will complete an online application and a comprehensive medical form covering your health history, current medications, mental health background, previous experiences, and emergency contacts. Each application is reviewed by our team and medical advisor — typically within a few days. If there are medical questions, we may contact you for clarification or request a letter from your physician. Once approved, you will receive detailed preparation instructions, a packing list, and arrival logistics. A deposit secures your spot; the balance is due before the retreat begins.",
+      },
+      {
+        question: "What is your privacy policy?",
+        answer:
+          "Your personal health information is treated with the same confidentiality as medical records. Application data is stored securely and shared only with our medical advisor on a need-to-know basis. We do not sell, share, or distribute your information to third parties. Communication is conducted over secure channels. During the retreat, what is shared in ceremony and sharing circles remains confidential among participants and staff. We take privacy seriously — this is sacred work, and trust is its foundation.",
+      },
+      {
+        question: "Is the application form secure?",
+        answer:
+          "We use established, encrypted platforms (Retreat Guru and Aya Advisors) for our applications. These platforms use industry-standard SSL/TLS encryption and comply with data protection regulations. Your payment information is processed through secure payment processors — we never see or store your credit card details. If you have concerns about digital security, we can discuss alternative submission methods during the application process.",
+      },
+      {
+        question: "Is this legal where I live?",
+        answer:
+          "Legal status varies by country. In Peru, the medicine is recognized as Cultural Patrimony of the Nation and is fully legal. It is also legal in Bolivia, Brazil, Ecuador, and Colombia. In the US, UK, and Australia, it is classified as Schedule 1 — however, certain churches have obtained legal exemption for ceremonial use. Portugal, Spain, and India exist in a legal grey area. The legality applies to the location of the ceremony — attending a retreat in Peru is legal regardless of your home country. What is illegal is bringing the medicine back across borders. We provide detailed guidance on this during the application process.",
       },
     ],
   },
