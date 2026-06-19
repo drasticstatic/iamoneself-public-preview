@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { faqData } from "@/data/faq";
 import { Search, Mountain, ExternalLink as ExternalLinkIcon } from "lucide-react";
@@ -8,12 +8,38 @@ import { Search, Mountain, ExternalLink as ExternalLinkIcon } from "lucide-react
 export default function FAQPage() {
   const [search, setSearch] = useState("");
   const [openIndex, setOpenIndex] = useState<string | null>(null);
+  const [highlightId, setHighlightId] = useState<string | null>(null);
 
   const lc = search.toLowerCase();
 
   // Slugify category name for anchor linking from teaching modals
   const slug = (s: string) =>
     s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+  // Auto-open FAQ item when arriving via anchor hash (e.g. from teaching modals)
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+
+    // Find the matching FAQ item across all categories
+    for (const cat of faqData) {
+      for (const item of cat.items) {
+        if (item.id === hash) {
+          const key = `${cat.category}-${item.question}`;
+          setOpenIndex(key);
+          setHighlightId(hash);
+          // Scroll to it after render
+          requestAnimationFrame(() => {
+            const el = document.getElementById(hash);
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+          });
+          // Clear highlight after 3s
+          setTimeout(() => setHighlightId(null), 3000);
+          return;
+        }
+      }
+    }
+  }, []);
 
   const filtered = search
     ? faqData
@@ -72,7 +98,12 @@ export default function FAQPage() {
                 return (
                   <div
                     key={item.question}
-                    className="rounded-xl border border-neutral-100 dark:border-neutral-800 overflow-hidden transition-colors hover:border-amber-200 dark:hover:border-amber-900"
+                    id={item.id || undefined}
+                    className={`rounded-xl border overflow-hidden transition-colors scroll-mt-20 ${
+                      highlightId === item.id
+                        ? "border-amber-400 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 shadow-md"
+                        : "border-neutral-100 dark:border-neutral-800 hover:border-amber-200 dark:hover:border-amber-900"
+                    }`}
                   >
                     <button
                       onClick={() => setOpenIndex(isOpen ? null : key)}

@@ -25,26 +25,31 @@ export const faqData: FAQCategory[] = [
           "Our sacred brew is a traditional entheogen prepared from a 7-generation lineage recipe. It is a Magic Principle — an outside substance used by the Holy Spirit to provide temporary healing power and insight. It amplifies the content of the mind, bringing conditioning and 'level confusion' into awareness so that healing can occur.",
       },
       {
+        id: "chaiconi-bari",
         question: 'What is "Chaiconi Bari"?',
         answer:
           'Chaiconi Bari is Shipibo-Conibo in origin. "Chaiconi" speaks to the wisdom Spirits invisible to human eyes but seen when the Spiritual Eye is activated — Spirits of the plants, ancestors, and shamans who watch over the tradition from a higher realm. "Bari" means a radiant circular energy field that nurtures and sustains life. Together, the term represents the Holy Spirit, the Mind of the Atonement where the Christ stands revealed in the Golden Halo.',
       },
       {
+        id: "miracle-principles",
         question: "What are the 'Miracle Principles'?",
         answer:
           "The Miracle Principles are the foundation of our work — cognitive shifts that take you from body-identification (darkness/guilt) to soul-identification (light/peace). During our ceremonies, we use the amplifier of the sacred brew to see these principles in action. They are drawn from A Course in Miracles and represent the journey from the ego's thought system to the Holy Spirit's correction.",
       },
       {
+        id: "escape-from-darkness",
         question: "What is the 'Escape from Darkness'?",
         answer:
           'Most of us live on the "outer fringes" of physical perception, caught in a cycle of grievances and past-dwelling. "Escape from Darkness" is the process of moving back into non-differentiated light — recognizing that the source of light is within you, not the physical sun. As A Course in Miracles asks: "Do you not see that all your misery comes from the strange belief that you are powerless?"',
       },
       {
+        id: "flight-of-eagle-condor",
         question: "What is the Flight of the Eagle and the Condor?",
         answer:
           "This is the prophecy that the Western mind of Medicine (The Eagle — Jesus, A Course in Miracles) will one day join with the Indigenous mind of Plant Wisdom (The Condor) for the good of humanity. The two teachings now live in harmony to heal mankind. The symbol of this union is the Barn Owl — the two birds flying as one — representing Single-Mindedness and seraphic (angelic) teaching.",
       },
       {
+        id: "golden-halo",
         question: "What is the Golden Halo of Light?",
         answer:
           'The Golden Halo manifests around the head and bodies of everyone when the true Spiritual Eye opens. It is the Face of Christ and the Unified Mind of Light — a vision through the power of miracle forgiveness that ends the illusion of differences and offers the remembrance of the Sons of God who share our true Self.',
@@ -60,6 +65,7 @@ export const faqData: FAQCategory[] = [
           "Experiences vary widely: sweating, shaking, nausea, vomiting, strong emotions, visionary experiences, energetic sensations, crying, laughing, yawning, blissful feelings, and spiritual or personal insight. Purging is a natural part of the healing process — the body's way of letting go of old conditioning. In our community, we view this not as something to fear, but as a necessary correction to bring you back to peace.",
       },
       {
+        id: "icaros",
         question: "What are Icaros?",
         answer:
           "Ikaros are healing songs received by Curanderos during long periods of fasting and isolation working with master plants. They are living medicine encoded with the life force and energy of the plants and spirits. The ikaros are an essential part of the Shaman's craft — they provide shamanic plant-spirit healing, clearing negative energies and guiding the ceremony.",
@@ -101,6 +107,7 @@ export const faqData: FAQCategory[] = [
           "Banco Runa means becoming a 'bench' or bank of wisdom for the sacred brew. These are the most powerful Curanderos — those who have dedicated their lives to studying the plant traditions and carrying the lineage forward.",
       },
       {
+        id: "mariah-level",
         question: "What is the Mariah level?",
         answer:
           "Mariah is the level where an individual has regained control over physical reality. At this level, the mind recognizes no limits — shape-shifting, walking through walls, walking on water become possible. It represents the highest level because it means no limit on the mind. Jesus demonstrated this level in A Course in Miracles.",
@@ -208,6 +215,7 @@ export const faqData: FAQCategory[] = [
           "Preparation begins weeks before you arrive. We follow a specific Dieta that avoids pork, alcohol, processed foods, and stimulants. This is more than a physical detox — it is an agreement you make with the medicine to 'make peace with your pain' before the ceremony begins. We also recommend contemplative practices such as meditation or yoga. Reduce stimulants like caffeine, and abstain from sexual activity.",
       },
       {
+        id: "the-dieta",
         question: "What is the Dieta and why is it important?",
         answer:
           "The Dieta is a set of traditional dietary and lifestyle guidelines observed before, during, and after the retreat. It cleanses the body, reduces toxins, and opens sensitivity to the plant wisdom. Avoid pork, processed foods, alcohol, and caffeine. Abstain from sexual activity. Follow for at least 2 weeks before and 1 month after the retreat. Some choose longer.",
