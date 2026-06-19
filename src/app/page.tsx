@@ -11,6 +11,8 @@ import {
   Feather,
   ExternalLink,
   Globe,
+  MessageCircle,
+  Send,
 } from "lucide-react";
 import { TeachingModal, type TeachingPill } from "@/components/TeachingModal";
 
@@ -196,6 +198,89 @@ export default function Home() {
             <BookOpen className="h-4 w-4" />
             Read the FAQ
           </Link>
+        </motion.div>
+
+        {/* ── Agent Chat Field ── */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={3}
+          className="mt-8 w-full max-w-lg mx-auto"
+        >
+          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm shadow-sm">
+            {/* Input row */}
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-neutral-100 dark:border-neutral-800">
+              <MessageCircle className="h-4 w-4 text-amber-500 flex-shrink-0" />
+              <input
+                type="text"
+                placeholder="Ask about retreats, the medicine, preparation…"
+                className="flex-1 bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none"
+                readOnly
+                onClick={() => {
+                  // Future: activate live agent API
+                  // For now, suggest sample questions below
+                }}
+              />
+              <Send className="h-4 w-4 text-neutral-300 dark:text-neutral-600" />
+            </div>
+
+            {/* Sample questions — act as deep-link modals to FAQ/retreats */}
+            <div className="px-4 py-3">
+              <p className="text-[10px] uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-600 mb-2">
+                Popular questions
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                <Link
+                  href="/faq#miracle-principles"
+                  className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:text-amber-400 transition-all hover:bg-amber-100 dark:hover:bg-amber-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+                >
+                  <Sparkles className="h-2.5 w-2.5" />
+                  What are Miracle Principles?
+                </Link>
+                <Link
+                  href="/retreats"
+                  className="inline-flex items-center gap-1 rounded-full bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 px-2.5 py-1 text-[11px] font-medium text-emerald-700 dark:text-emerald-400 transition-all hover:bg-emerald-100 dark:hover:bg-emerald-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+                >
+                  <Mountain className="h-2.5 w-2.5" />
+                  When is the next retreat?
+                </Link>
+                <Link
+                  href="/faq#the-dieta"
+                  className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:text-amber-400 transition-all hover:bg-amber-100 dark:hover:bg-amber-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+                >
+                  <Sparkles className="h-2.5 w-2.5" />
+                  How do I prepare?
+                </Link>
+                <Link
+                  href="/faq#escape-from-darkness"
+                  className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:text-amber-400 transition-all hover:bg-amber-100 dark:hover:bg-amber-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+                >
+                  <Sparkles className="h-2.5 w-2.5" />
+                  Is it safe?
+                </Link>
+                <Link
+                  href="/faq#golden-halo"
+                  className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:text-amber-400 transition-all hover:bg-amber-100 dark:hover:bg-amber-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+                >
+                  <Sparkles className="h-2.5 w-2.5" />
+                  What is the Golden Halo?
+                </Link>
+                <a
+                  href="https://www.iamoneself.com/spirituallifecoaching"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 rounded-full bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-800 px-2.5 py-1 text-[11px] font-medium text-rose-700 dark:text-rose-400 transition-all hover:bg-rose-100 dark:hover:bg-rose-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+                >
+                  <Heart className="h-2.5 w-2.5" />
+                  Spiritual Life Coaching
+                </a>
+              </div>
+            </div>
+          </div>
+          <p className="mt-2 text-center text-[10px] text-neutral-400 dark:text-neutral-600">
+            AI agent concept — sample questions link to our knowledge base
+          </p>
         </motion.div>
 
         {/* Scroll indicator */}
