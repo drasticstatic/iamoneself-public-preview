@@ -168,7 +168,7 @@ export default function Home() {
           initial="hidden"
           animate="visible"
           custom={0}
-          className="relative max-w-3xl text-3xl font-semibold leading-snug tracking-tight sm:text-5xl sm:leading-tight text-neutral-900 dark:text-neutral-50"
+          className="relative max-w-4xl text-3xl font-semibold leading-snug tracking-tight sm:text-5xl sm:leading-tight text-neutral-900 dark:text-neutral-50"
         >
           <span className="text-amber-600 dark:text-amber-400">
             &ldquo;I am one Self, united with my Creator,

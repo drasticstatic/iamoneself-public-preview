@@ -40,10 +40,10 @@ const wixRoutes = [
   { href: "https://www.iamoneself.com/plantsandmiracles", label: "Plants & Miracles", icon: Leaf },
   { href: "https://www.iamoneself.com/letterstoself", label: "Letters to Self", icon: Feather },
   { href: "https://www.iamoneself.com/spirituallifecoaching", label: "Spiritual Life Coaching", icon: Heart },
-  { href: "https://www.iamoneself.com/about-the-speaker", label: "Contact", icon: Mail },
-  { href: "https://www.iamoneself.com/phsychedelicmysticteachings", label: "Mystic Teachings", icon: Flower2 },
+  { href: "https://www.iamoneself.com/phsychedelicmysticteachings", label: "Psychedelic Mystic Teachings", icon: Flower2 },
   { href: "https://www.iamoneself.com/voiceoftheonepodcast", label: "Voice of the One Podcast", icon: Mic },
   { href: "https://www.iamoneself.com/talks-on-youtube", label: "Talks on YouTube", icon: Play },
+  { href: "https://www.iamoneself.com/about-the-speaker", label: "Contact", icon: Mail },
 ];
 
 // ACIM source references — resource/accreditation
@@ -92,8 +92,8 @@ export default function NotFound() {
           never separate from you to begin with.
         </p>
 
-        {/* ── Dual Sitemap ── */}
-        <div className="mt-14 grid sm:grid-cols-2 gap-8 text-left">
+        {/* ── Dual Sitemap — centered max-w ── */}
+        <div className="mt-14 grid sm:grid-cols-2 gap-10 text-left max-w-2xl mx-auto">
           {/* Retreat Portal (gh-pages) routes */}
           <motion.div
             initial="hidden"
@@ -119,9 +119,9 @@ export default function NotFound() {
               ))}
 
               {/* Divider + ACIM Source References */}
-              <div className="my-3 h-px bg-neutral-200 dark:bg-neutral-800" />
-              <p className="px-3 py-1 text-[10px] uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-600">
-                Source References
+              <div className="my-4 h-px bg-neutral-200 dark:bg-neutral-800" />
+              <p className="px-3 py-1 text-[10px] uppercase tracking-wider font-semibold text-amber-600 dark:text-amber-400">
+                ACIM Source References
               </p>
               {acimLinks.map((r) => (
                 <li key={r.href}>

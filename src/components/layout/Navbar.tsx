@@ -18,6 +18,9 @@ import {
   Leaf,
   ChevronDown,
   Sparkles,
+  Mic,
+  Play,
+  Flower2,
 } from "lucide-react";
 
 // Internal nav links — shown in main navbar and hamburger
@@ -43,6 +46,12 @@ const siteLinks = [
     external: true,
   },
   {
+    href: "https://www.iamoneself.com/plantsandmiracles",
+    label: "Plants & Miracles",
+    icon: Leaf,
+    external: true,
+  },
+  {
     href: "https://www.iamoneself.com/letterstoself",
     label: "Letters to Self",
     icon: Feather,
@@ -52,6 +61,24 @@ const siteLinks = [
     href: "https://www.iamoneself.com/spirituallifecoaching",
     label: "Spiritual Life Coaching",
     icon: Heart,
+    external: true,
+  },
+  {
+    href: "https://www.iamoneself.com/phsychedelicmysticteachings",
+    label: "Psychedelic Mystic Teachings",
+    icon: Flower2,
+    external: true,
+  },
+  {
+    href: "https://www.iamoneself.com/voiceoftheonepodcast",
+    label: "Voice of the One Podcast",
+    icon: Mic,
+    external: true,
+  },
+  {
+    href: "https://www.iamoneself.com/talks-on-youtube",
+    label: "Talks on YouTube",
+    icon: Play,
     external: true,
   },
   {
@@ -122,8 +149,8 @@ export default function Navbar() {
           >
             <Home className="h-5 w-5 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
             <span className="drop-shadow-sm">Retreat Portal</span>
-            <span className="text-neutral-300 dark:text-neutral-700 mx-0.5">|</span>
-            <span className="drop-shadow-sm text-sm font-normal text-neutral-500 dark:text-neutral-500">Home</span>
+            <span className="text-neutral-300 dark:text-neutral-700 mx-0.5 group-hover:text-amber-400 dark:group-hover:text-amber-600 transition-colors">|</span>
+            <span className="drop-shadow-sm text-sm font-normal text-neutral-500 dark:text-neutral-500 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Home</span>
           </Link>
 
           {/* Desktop links — evenly spread */}
@@ -179,7 +206,7 @@ export default function Navbar() {
               </button>
 
               {siteMenuOpen && (
-                <div className="absolute right-0 top-full mt-1 w-64 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xl py-1 z-50">
+                <div className="absolute right-0 top-full mt-1 w-72 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xl py-1 z-50">
                   {siteLinks.map((link) => (
                     <a
                       key={link.href}

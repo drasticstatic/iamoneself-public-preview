@@ -9,6 +9,7 @@ import {
   ArrowDown,
   ExternalLink,
   Leaf,
+  Globe,
 } from "lucide-react";
 
 /**
@@ -70,7 +71,7 @@ export default function DisclaimerBadge() {
           <Info className="h-3 w-3 flex-shrink-0" />
           <span>
             Concept prototype & educational resource — not the official
-            iamoneself.com · Not licensed health professionals
+            iamoneself.com · Not licensed health professionals · Compliant with GitHub Pages ToS
           </span>
           <span className="text-[10px] text-amber-500 dark:text-amber-500 underline underline-offset-2 ml-1">
             full disclosure
@@ -153,16 +154,17 @@ export default function DisclaimerBadge() {
                     </p>
                   </div>
 
-                  {/* Official site + P&M buttons */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Official site + P&M buttons — centered */}
+                  <div className="flex flex-wrap justify-center gap-2">
                     <a
                       href="https://www.iamoneself.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400 text-sm font-medium transition-all hover:bg-amber-100 dark:hover:bg-amber-950/50 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
                     >
-                      <ExternalLink className="h-3.5 w-3.5" />
+                      <Globe className="h-3.5 w-3.5" />
                       iamoneself.com
+                      <ExternalLink className="h-3 w-3" />
                     </a>
                     <a
                       href="https://www.iamoneself.com/plantsandmiracles"
@@ -172,6 +174,7 @@ export default function DisclaimerBadge() {
                     >
                       <Leaf className="h-3.5 w-3.5" />
                       Plants & Miracles
+                      <ExternalLink className="h-3 w-3" />
                     </a>
                   </div>
 
@@ -269,6 +272,11 @@ export default function DisclaimerBadge() {
                       <li>
                         This site complies with GitHub Pages terms of service
                         as a public, non-commercial, educational demonstration
+                      </li>
+                      <li>
+                        Content is intended for informational and conceptual
+                        purposes only, consistent with GitHub's acceptable
+                        use and hosting policies
                       </li>
                       <li>
                         Hosted on GitHub Pages — content adheres to their
