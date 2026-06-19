@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   Sparkles,
@@ -139,6 +139,16 @@ const teachings: TeachingPill[] = [
 
 export default function Home() {
   const [activePill, setActivePill] = useState<TeachingPill | null>(null);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+  // Hide scroll indicator once user scrolls past hero
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 100) setShowScrollIndicator(false);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -283,13 +293,16 @@ export default function Home() {
           </p>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
-        >
+        {/* Scroll indicator — fixed to viewport bottom, fades out on scroll */}
+        <AnimatePresence>
+          {showScrollIndicator && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 1.2, duration: 0.4 }}
+              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none"
+            >
           <span className="text-neutral-400 dark:text-neutral-600 text-xs tracking-widest uppercase">
             Scroll
           </span>
@@ -298,7 +311,9 @@ export default function Home() {
             transition={{ duration: 1.5, repeat: Infinity }}
             className="w-px h-8 bg-gradient-to-b from-amber-400 to-transparent dark:from-amber-500"
           />
-        </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
       {/* ── Welcome ── */}

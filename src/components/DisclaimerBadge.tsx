@@ -1,48 +1,25 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Info, ArrowUp, ArrowDown, ExternalLink } from "lucide-react";
 
 /**
- * DisclaimerBadge — persistent banner under navbar.
- * Clicking opens a modal that discloses:
- *   - This site is a concept/prototype for an AI agent registration & FAQ helper
- *   - Built open-source as a community idea
- *   - The official site is iamoneself.com (Wix)
- *   - Webmaster remains anonymous per Kenney's public references
- *
- * Dismissed state persists in sessionStorage so it stays quiet
- * within a session after first dismiss, but reappears on refresh.
+ * DisclaimerBadge — persistent banner fixed below navbar.
+ * Always visible on refresh. Clicking opens disclosure modal.
+ * The banner cannot be dismissed — it's persistent per the
+ * requirement for global transparency.
  */
-
-const STORAGE_KEY = "iamoneself-disclaimer-dismissed";
 
 export default function DisclaimerBadge() {
   const [open, setOpen] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
   const [atBottom, setAtBottom] = useState(false);
-
-  // Don't auto-dismiss on mount — badge reappears on refresh (sessionStorage only for modal close)
-  useEffect(() => {
-    const wasDismissed = sessionStorage.getItem(STORAGE_KEY);
-    if (wasDismissed === "true") setDismissed(true);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setOpen(false);
-  }, []);
-
-  const handleDismiss = () => {
-    setDismissed(true);
-    sessionStorage.setItem(STORAGE_KEY, "true");
-  };
 
   // Escape to close modal
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
+      if (e.key === "Escape") setOpen(false);
     };
     if (open) {
       document.addEventListener("keydown", handleKey);
@@ -52,7 +29,7 @@ export default function DisclaimerBadge() {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
     };
-  }, [open, handleClose]);
+  }, [open]);
 
   // Reset scroll state when modal opens
   useEffect(() => {
@@ -75,12 +52,13 @@ export default function DisclaimerBadge() {
     });
   };
 
-  if (dismissed) return null;
+  // Badge is always visible — "persistent upon refresh"
+  // Modal "dismiss" just closes the modal; the banner stays globally
 
   return (
     <>
-      {/* ── Persistent banner ── */}
-      <div className="relative z-40 bg-amber-50 dark:bg-amber-950/30 border-b border-amber-200 dark:border-amber-900">
+      {/* ── Persistent banner — fixed below navbar ── */}
+      <div className="fixed top-16 inset-x-0 z-40 bg-amber-50 dark:bg-amber-950/30 border-b border-amber-200 dark:border-amber-900">
         <button
           onClick={() => setOpen(true)}
           className="w-full px-4 py-1.5 flex items-center justify-center gap-2 text-xs font-medium text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-colors"
@@ -110,7 +88,7 @@ export default function DisclaimerBadge() {
             {/* Backdrop */}
             <div
               className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm"
-              onClick={handleClose}
+              onClick={() => setOpen(false)}
             />
 
             {/* Modal card */}
@@ -130,7 +108,7 @@ export default function DisclaimerBadge() {
                   </h3>
                 </div>
                 <button
-                  onClick={handleClose}
+                  onClick={() => setOpen(false)}
                   className="p-1 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800"
                   aria-label="Close"
                 >
@@ -261,21 +239,12 @@ export default function DisclaimerBadge() {
 
                 <div className="flex-1" />
 
-                {/* Close + remember */}
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleDismiss}
-                    className="inline-flex items-center justify-center gap-1.5 rounded-full border border-neutral-300 dark:border-neutral-700 px-4 py-2 text-xs font-medium text-neutral-500 dark:text-neutral-400 transition-all hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
-                  >
-                    Dismiss for session
-                  </button>
-                  <button
-                    onClick={handleClose}
-                    className="inline-flex items-center justify-center gap-1.5 rounded-full bg-amber-600 px-4 py-2 text-xs font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5 dark:bg-amber-500 dark:shadow-amber-500/20 dark:hover:bg-amber-400"
-                  >
-                    Got it
-                  </button>
-                </div>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-amber-600 px-5 py-2 text-xs font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5 dark:bg-amber-500 dark:shadow-amber-500/20 dark:hover:bg-amber-400"
+                >
+                  Got it
+                </button>
               </div>
             </motion.div>
           </motion.div>
