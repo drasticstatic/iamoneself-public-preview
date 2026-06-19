@@ -136,6 +136,27 @@ const teachings: TeachingPill[] = [
     body: "Mariah is the level where an individual has regained control over physical reality. At this level, the mind recognizes no limits — shape-shifting, walking through walls, walking on water become possible. It represents the highest level because it means no limit on the mind. Jesus demonstrated this level in A Course in Miracles.",
     faqAnchor: "mariah-level",
   },
+  {
+    id: "sacred-silence",
+    label: "Sacred Silence",
+    title: "Sacred Silence — The Voice Beyond Words",
+    body: "In the stillness between thoughts, the Holy Spirit speaks — not in words, but in the gentle certainty of peace. Sacred Silence is the practice of turning inward, beyond the noise of the ego's constant commentary, to listen for the Voice that reminds you of who you truly are. In ceremony and in daily life, this silence is where the inner light reveals itself — the Golden Halo perceived in the quiet of a receptive mind.",
+    faqAnchor: "single-mindedness",
+  },
+  {
+    id: "unity-consciousness",
+    label: "Unity Consciousness",
+    title: "Unity Consciousness — The Recognition of Oneness",
+    body: "Unity Consciousness is the awareness that there is no separation — not between you and your Creator, not between you and your brother, not between the physical and the spiritual. The ego's world of differences dissolves when the Spiritual Eye opens, and what remains is a single, radiant light: the Face of Christ seen in everyone and everything. This is the goal of our teaching — Single-Mindedness, where two become one and the illusion of attack simply vanishes.",
+    faqAnchor: "face-of-christ",
+  },
+  {
+    id: "compassion",
+    label: "Compassion",
+    title: "Compassion — The Miracle of True Forgiveness",
+    body: "Compassion in our teaching is not pity — it is the recognition that the one who seems to attack you is calling for love in the only way they know how. The miracle of true forgiveness sees past the body's story to the guiltless Self that resides in everyone. When you respond with compassion instead of defense, you offer the miracle — and the inner light that shines from you illuminates both giver and receiver. This is the heart of A Course in Miracles.",
+    faqAnchor: "the-teaching-the-experience",
+  },
 ];
 
 export default function Home() {
@@ -435,7 +456,7 @@ export default function Home() {
           custom={1}
           className="mt-3 text-neutral-600 dark:text-neutral-400"
         >
-          Tap a teaching to learn more — each opens a window into the path.
+          Discover profound wisdom through our sacred teachings. Tap any topic to learn more about its transformative power — and discover the inner light within.
         </motion.p>
 
         <motion.div
