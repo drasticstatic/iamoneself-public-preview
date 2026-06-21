@@ -92,6 +92,7 @@ export default function FAQPage() {
 
   return (
     <>
+      <div data-pagefind-body>
       {/* Hero */}
       <section className="relative px-6 py-24 mx-auto max-w-4xl text-center">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white">
@@ -215,6 +216,7 @@ export default function FAQPage() {
           </div>
         </div>
       </section>
+      </div>
     </>
   );
 }

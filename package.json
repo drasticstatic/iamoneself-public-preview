@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npx pagefind --site out",
+    "build:only": "next build",
+    "index": "npx pagefind --site out",
     "start": "next start",
     "lint": "eslint"
   },

@@ -191,7 +191,7 @@ export default function Home() {
   }, [agentOpen]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" data-pagefind-body>
       {/* Teaching Modal Portal */}
       <TeachingModal pill={activePill} onClose={() => setActivePill(null)} />
 

@@ -21,11 +21,13 @@ import {
   Mic,
   Play,
   Flower2,
+  Search,
 } from "lucide-react";
 
 // Internal nav links — shown in main navbar and hamburger
 // P&M moved to iamoneself.com dropdown (no dedupe)
 const navLinks = [
+  { href: "/search", label: "Search", icon: Search, external: false },
   { href: "/retreats", label: "Retreats", icon: Mountain, external: false },
   { href: "/faq", label: "FAQ", icon: BookOpen, external: false },
   { href: "/404", label: "404", icon: Sparkles, external: false },

@@ -234,6 +234,7 @@ const colorMap: Record<string, { text: string; bg: string; border: string; icon:
 export default function RetreatsPage() {
   return (
     <>
+      <div data-pagefind-body>
       {/* ── Hero ── */}
       <section className="relative px-6 py-24 mx-auto max-w-4xl text-center">
         <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-4 py-1.5 text-sm text-amber-700 dark:text-amber-400 mb-6">
@@ -579,6 +580,7 @@ export default function RetreatsPage() {
           Do not book flights until your application is approved.
         </p>
       </section>
+      </div>
     </>
   );
 }
