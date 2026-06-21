@@ -3,7 +3,43 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { faqData } from "@/data/faq";
-import { Search, Mountain, ExternalLink as ExternalLinkIcon } from "lucide-react";
+import {
+  Search,
+  Mountain,
+  ExternalLink as ExternalLinkIcon,
+  BookOpen,
+  Crown,
+  Shield,
+  Leaf,
+  Scale,
+  Heart,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
+
+// Category color + icon mapping
+const categoryMeta: Record<string, { color: string; icon: LucideIcon }> = {
+  "The Teaching & The Experience": { color: "amber", icon: BookOpen },
+  "Shamanic Lineage & Levels": { color: "violet", icon: Crown },
+  "Health & Safety": { color: "rose", icon: Shield },
+  "Preparation & The Dieta": { color: "emerald", icon: Leaf },
+  "Logistics & Travel": { color: "sky", icon: Mountain },
+  "Integration & Aftercare": { color: "indigo", icon: Heart },
+  "Plant Medicines & Companion Plants": { color: "green", icon: Leaf },
+  "Legal & Cost": { color: "neutral", icon: Scale },
+  "First-Timer Concerns": { color: "amber", icon: Sparkles },
+};
+
+const colorClasses: Record<string, { text: string; bg: string; border: string }> = {
+  amber: { text: "text-amber-600 dark:text-amber-400", bg: "bg-amber-50 dark:bg-amber-950/30", border: "border-amber-200 dark:border-amber-800" },
+  violet: { text: "text-violet-600 dark:text-violet-400", bg: "bg-violet-50 dark:bg-violet-950/30", border: "border-violet-200 dark:border-violet-800" },
+  rose: { text: "text-rose-600 dark:text-rose-400", bg: "bg-rose-50 dark:bg-rose-950/30", border: "border-rose-200 dark:border-rose-800" },
+  emerald: { text: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-50 dark:bg-emerald-950/30", border: "border-emerald-200 dark:border-emerald-800" },
+  sky: { text: "text-sky-600 dark:text-sky-400", bg: "bg-sky-50 dark:bg-sky-950/30", border: "border-sky-200 dark:border-sky-800" },
+  indigo: { text: "text-indigo-600 dark:text-indigo-400", bg: "bg-indigo-50 dark:bg-indigo-950/30", border: "border-indigo-200 dark:border-indigo-800" },
+  green: { text: "text-green-600 dark:text-green-400", bg: "bg-green-50 dark:bg-green-950/30", border: "border-green-200 dark:border-green-800" },
+  neutral: { text: "text-neutral-600 dark:text-neutral-400", bg: "bg-neutral-50 dark:bg-neutral-800/50", border: "border-neutral-200 dark:border-neutral-800" },
+};
 
 export default function FAQPage() {
   const [search, setSearch] = useState("");
@@ -81,58 +117,66 @@ export default function FAQPage() {
 
       {/* FAQ Sections */}
       <section className="px-6 pb-24 mx-auto max-w-4xl space-y-16">
-        {filtered.map((category) => (
-          <div key={category.category} id={slug(category.category)}>
-            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-2">
-              {category.category}
-            </h2>
-            {category.description && (
-              <p className="text-neutral-600 dark:text-neutral-400 mb-8">
-                {category.description}
-              </p>
-            )}
-            <div className="space-y-4">
-              {category.items.map((item) => {
-                const key = `${category.category}-${item.question}`;
-                const isOpen = openIndex === key;
-                return (
-                  <div
-                    key={item.question}
-                    id={item.id || undefined}
-                    className={`rounded-xl border overflow-hidden transition-colors scroll-mt-20 ${
-                      highlightId === item.id
-                        ? "border-amber-400 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 shadow-md"
-                        : "border-neutral-100 dark:border-neutral-800 hover:border-amber-200 dark:hover:border-amber-900"
-                    }`}
-                  >
-                    <button
-                      onClick={() => setOpenIndex(isOpen ? null : key)}
-                      className="w-full text-left px-6 py-4 flex items-start gap-3"
-                    >
-                      <span
-                        className={`mt-0.5 text-amber-500 transition-transform duration-200 flex-shrink-0 ${
-                          isOpen ? "rotate-90" : ""
+        {filtered.map((category) => {
+          const meta = categoryMeta[category.category];
+          const colors = meta ? colorClasses[meta.color] : colorClasses.neutral;
+          const Icon = meta?.icon || BookOpen;
+            return (
+              <div key={category.category} id={slug(category.category)}>
+                <div className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 mb-3 ${colors.bg} ${colors.border} border`}>
+                  <Icon className={`h-4 w-4 ${colors.text}`} />
+                  <h2 className={`text-xl font-semibold ${colors.text}`}>
+                    {category.category}
+                  </h2>
+                </div>
+                {category.description && (
+                  <p className="text-neutral-600 dark:text-neutral-400 mb-8 ml-1">
+                    {category.description}
+                  </p>
+                )}
+                <div className="space-y-4">
+                  {category.items.map((item) => {
+                    const key = `${category.category}-${item.question}`;
+                    const isOpen = openIndex === key;
+                    return (
+                      <div
+                        key={item.question}
+                        id={item.id || undefined}
+                        className={`rounded-xl border overflow-hidden transition-colors scroll-mt-24 ${
+                          highlightId === item.id
+                            ? "border-amber-400 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 shadow-md"
+                            : "border-neutral-100 dark:border-neutral-800 hover:border-amber-200 dark:hover:border-amber-900"
                         }`}
                       >
-                        ▸
-                      </span>
-                      <span className="text-base font-medium text-neutral-900 dark:text-white">
-                        {item.question}
-                      </span>
-                    </button>
-                    {isOpen && (
-                      <div className="px-6 pb-5 pl-14">
-                        <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                          {item.answer}
-                        </p>
+                        <button
+                          onClick={() => setOpenIndex(isOpen ? null : key)}
+                          className="w-full text-left px-6 py-4 flex items-start gap-3"
+                        >
+                          <span
+                            className={`mt-0.5 text-amber-500 transition-transform duration-200 flex-shrink-0 ${
+                              isOpen ? "rotate-90" : ""
+                            }`}
+                          >
+                            ▸
+                          </span>
+                          <span className="text-base font-medium text-neutral-900 dark:text-white">
+                            {item.question}
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <div className="px-6 pb-5 pl-14">
+                            <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                              {item.answer}
+                            </p>
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
 
         {search && filtered.length === 0 && (
           <div className="text-center py-12 text-neutral-500 dark:text-neutral-400">

@@ -61,7 +61,7 @@ export default function RootLayout({
         <DisclaimerBadge />
         <PageScrollProgress />
         <ScrollProgress />
-        <main className="flex-1 pt-[88px]">{children}</main>
+        <main className="flex-1 pt-[92px]">{children}</main>
         <Footer />
       </body>
     </html>

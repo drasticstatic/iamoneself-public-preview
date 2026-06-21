@@ -21,7 +21,7 @@ export default function PageScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed top-[88px] inset-x-0 z-30 h-0.5 bg-neutral-100 dark:bg-neutral-900">
+    <div className="fixed top-[92px] inset-x-0 z-30 h-0.5 bg-neutral-100 dark:bg-neutral-900">
       <div
         className="h-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 transition-[width] duration-150 ease-out"
         style={{ width: `${progress * 100}%` }}

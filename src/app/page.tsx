@@ -14,6 +14,7 @@ import {
   MessageCircle,
   Send,
   Leaf,
+  X,
 } from "lucide-react";
 import { TeachingModal, type TeachingPill } from "@/components/TeachingModal";
 
@@ -155,12 +156,23 @@ const teachings: TeachingPill[] = [
     label: "Compassion",
     title: "Compassion — The Miracle of True Forgiveness",
     body: "Compassion in our teaching is not pity — it is the recognition that the one who seems to attack you is calling for love in the only way they know how. The miracle of true forgiveness sees past the body's story to the guiltless Self that resides in everyone. When you respond with compassion instead of defense, you offer the miracle — and the inner light that shines from you illuminates both giver and receiver. This is the heart of A Course in Miracles.",
-    faqAnchor: "the-teaching-the-experience",
+    faqAnchor: "what-makes-different",
   },
+];
+
+// Sample agent questions — color-coded deep-links
+const agentQuestions = [
+  { href: "/faq#miracle-principles", label: "What are Miracle Principles?", color: "amber" },
+  { href: "/retreats", label: "When is the next retreat?", color: "emerald" },
+  { href: "/faq#the-dieta", label: "How do I prepare?", color: "amber" },
+  { href: "/faq#escape-from-darkness", label: "Is it safe?", color: "amber" },
+  { href: "/faq#golden-halo", label: "What is the Golden Halo?", color: "amber" },
+  { href: "https://www.iamoneself.com/spirituallifecoaching", label: "Spiritual Life Coaching", color: "rose", external: true },
 ];
 
 export default function Home() {
   const [activePill, setActivePill] = useState<TeachingPill | null>(null);
+  const [agentOpen, setAgentOpen] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   // Hide scroll indicator once user scrolls past hero, reappear at top
@@ -172,10 +184,91 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when agent modal is open
+  useEffect(() => {
+    if (agentOpen) document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, [agentOpen]);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Teaching Modal Portal */}
       <TeachingModal pill={activePill} onClose={() => setActivePill(null)} />
+
+      {/* Agent Chat Modal */}
+      <AnimatePresence>
+        {agentOpen && (
+          <motion.div
+            key="agent-modal"
+            className="fixed inset-0 z-[70] flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm" onClick={() => setAgentOpen(false)} />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              transition={{ duration: 0.25, ease: "easeOut" as const }}
+              className="relative z-10 w-full max-w-md rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xl flex flex-col max-h-[80vh]"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-5 border-b border-neutral-100 dark:border-neutral-800 flex-shrink-0">
+                <div className="flex items-center gap-2">
+                  <MessageCircle className="h-5 w-5 text-amber-500" />
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50">Ask a Question</h3>
+                </div>
+                <button onClick={() => setAgentOpen(false)} className="p-1 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Close">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Input + sample questions */}
+              <div className="p-5 overflow-y-auto flex-1">
+                <div className="flex items-center gap-2 px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 mb-4">
+                  <MessageCircle className="h-4 w-4 text-amber-500 flex-shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Type your question…"
+                    className="flex-1 bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none"
+                  />
+                  <Send className="h-4 w-4 text-neutral-300 dark:text-neutral-600" />
+                </div>
+
+                <p className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-600 mb-3">
+                  Popular questions — tap to explore
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {agentQuestions.map((q) => {
+                    const isExternal = "external" in q && q.external;
+                    const colorClasses: Record<string, string> = {
+                      amber: "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-950/40",
+                      emerald: "bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950/40",
+                      rose: "bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950/40",
+                    };
+                    const cls = colorClasses[q.color] || colorClasses.amber;
+                    return isExternal ? (
+                      <a key={q.href} href={q.href} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs font-medium transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-md ${cls}`}>
+                        {q.label} <ExternalLink className="h-3 w-3" />
+                      </a>
+                    ) : (
+                      <Link key={q.href} href={q.href} onClick={() => setAgentOpen(false)} className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs font-medium transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-md ${cls}`}>
+                        {q.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                <p className="mt-4 text-[10px] text-neutral-400 dark:text-neutral-600 text-center">
+                  AI agent concept — questions link to our knowledge base. Future: live API connection for real-time answers and FAQ deep-links in chat.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* ── Hero ── */}
       <section className="relative flex flex-col items-center justify-center min-h-screen px-6 py-24 text-center overflow-hidden bg-gradient-to-b from-amber-50 via-white to-white dark:from-neutral-950 dark:via-neutral-950 dark:to-neutral-900">
         {/* Soft radial glow */}
@@ -189,14 +282,15 @@ export default function Home() {
           initial="hidden"
           animate="visible"
           custom={0}
-          className="relative max-w-4xl text-3xl font-semibold leading-snug tracking-tight sm:text-5xl sm:leading-tight text-neutral-900 dark:text-neutral-50"
+          className="relative max-w-4xl text-2xl font-semibold leading-relaxed tracking-tight sm:text-4xl sm:leading-snug md:text-5xl md:leading-tight text-neutral-900 dark:text-neutral-50"
         >
           <span className="text-amber-600 dark:text-amber-400">
-            &ldquo;I am one Self, united with my Creator,
-          </span>
-          <br />
-          at one with every aspect of creation,
-          <br />
+            &ldquo;I am one Self,
+          </span>{" "}
+          united with my Creator,{" "}
+          <br className="hidden md:block" />
+          at one with every aspect of creation,{" "}
+          <br className="hidden md:block" />
           and limitless in power and in peace.&rdquo;
         </motion.h1>
 
@@ -243,7 +337,7 @@ export default function Home() {
           </Link>
         </motion.div>
 
-        {/* ── Agent Chat Field ── */}
+        {/* ── Agent Chat — compact input row, click opens modal ── */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -251,76 +345,16 @@ export default function Home() {
           custom={3}
           className="mt-8 w-full max-w-lg mx-auto"
         >
-          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm shadow-sm">
-            {/* Input row */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-neutral-100 dark:border-neutral-800">
-              <MessageCircle className="h-4 w-4 text-amber-500 flex-shrink-0" />
-              <input
-                type="text"
-                placeholder="Ask about retreats, the medicine, preparation…"
-                className="flex-1 bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none"
-                readOnly
-                onClick={() => {
-                  // Future: activate live agent API
-                  // For now, suggest sample questions below
-                }}
-              />
-              <Send className="h-4 w-4 text-neutral-300 dark:text-neutral-600" />
-            </div>
-
-            {/* Sample questions — act as deep-link modals to FAQ/retreats */}
-            <div className="px-4 py-3">
-              <p className="text-[10px] uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-600 mb-2">
-                Popular questions
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                <Link
-                  href="/faq#miracle-principles"
-                  className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:text-amber-400 transition-all hover:bg-amber-100 dark:hover:bg-amber-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
-                >
-                  <Sparkles className="h-2.5 w-2.5" />
-                  What are Miracle Principles?
-                </Link>
-                <Link
-                  href="/retreats"
-                  className="inline-flex items-center gap-1 rounded-full bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 px-2.5 py-1 text-[11px] font-medium text-emerald-700 dark:text-emerald-400 transition-all hover:bg-emerald-100 dark:hover:bg-emerald-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
-                >
-                  <Mountain className="h-2.5 w-2.5" />
-                  When is the next retreat?
-                </Link>
-                <Link
-                  href="/faq#the-dieta"
-                  className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:text-amber-400 transition-all hover:bg-amber-100 dark:hover:bg-amber-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
-                >
-                  <Sparkles className="h-2.5 w-2.5" />
-                  How do I prepare?
-                </Link>
-                <Link
-                  href="/faq#escape-from-darkness"
-                  className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:text-amber-400 transition-all hover:bg-amber-100 dark:hover:bg-amber-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
-                >
-                  <Sparkles className="h-2.5 w-2.5" />
-                  Is it safe?
-                </Link>
-                <Link
-                  href="/faq#golden-halo"
-                  className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:text-amber-400 transition-all hover:bg-amber-100 dark:hover:bg-amber-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
-                >
-                  <Sparkles className="h-2.5 w-2.5" />
-                  What is the Golden Halo?
-                </Link>
-                <a
-                  href="https://www.iamoneself.com/spirituallifecoaching"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-800 px-2.5 py-1 text-[11px] font-medium text-rose-700 dark:text-rose-400 transition-all hover:bg-rose-100 dark:hover:bg-rose-950/40 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
-                >
-                  <Heart className="h-2.5 w-2.5" />
-                  Spiritual Life Coaching
-                </a>
-              </div>
-            </div>
-          </div>
+          <button
+            onClick={() => setAgentOpen(true)}
+            className="w-full rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-amber-300 dark:hover:border-amber-800 transition-all hover:-translate-y-0.5 flex items-center gap-2 px-5 py-3"
+          >
+            <MessageCircle className="h-4 w-4 text-amber-500 flex-shrink-0" />
+            <span className="flex-1 text-left text-sm text-neutral-400 dark:text-neutral-500">
+              Ask about retreats, the medicine, preparation…
+            </span>
+            <Send className="h-4 w-4 text-neutral-300 dark:text-neutral-600" />
+          </button>
           <p className="mt-2 text-center text-[10px] text-neutral-400 dark:text-neutral-600">
             AI agent concept — sample questions link to our knowledge base
           </p>
@@ -334,7 +368,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 1.2, duration: 0.4 }}
-              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none"
+              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 pointer-events-none"
             >
           <span className="text-neutral-400 dark:text-neutral-600 text-xs tracking-widest uppercase">
             Scroll
@@ -456,7 +490,7 @@ export default function Home() {
           custom={1}
           className="mt-3 text-neutral-600 dark:text-neutral-400"
         >
-          Discover profound wisdom through our sacred teachings. Tap any topic to learn more about its transformative power — and discover the inner light within.
+          Discover profound wisdom through our sacred teachings. Tap any topic to learn more about its transformative power.
         </motion.p>
 
         <motion.div
@@ -478,6 +512,17 @@ export default function Home() {
             </button>
           ))}
         </motion.div>
+
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+          custom={3}
+          className="mt-6 text-sm text-neutral-500 dark:text-neutral-500"
+        >
+          Each opens a window into the path — a modal will direct you to the related question in our FAQ — Discover the inner light within.
+        </motion.p>
       </section>
     </div>
   );

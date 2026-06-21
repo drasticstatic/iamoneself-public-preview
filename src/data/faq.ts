@@ -55,6 +55,7 @@ export const faqData: FAQCategory[] = [
           'The Golden Halo manifests around the head and bodies of everyone when the true Spiritual Eye opens. It is the Face of Christ and the Unified Mind of Light — a vision through the power of miracle forgiveness that ends the illusion of differences and offers the remembrance of the Sons of God who share our true Self.',
       },
       {
+        id: "what-makes-different",
         question: "What makes your teaching different from other retreat centers?",
         answer:
           "We do NOT promote the illusion of attack or a victim mentality. Our teaching is about regaining control of physical reality. We integrate the 76 Miracle Principles from A Course in Miracles with the shamanic plant wisdom tradition, creating a 'Plants and Miracles' curriculum that goes far beyond a typical retreat experience.",
@@ -71,6 +72,7 @@ export const faqData: FAQCategory[] = [
           "Ikaros are healing songs received by Curanderos during long periods of fasting and isolation working with master plants. They are living medicine encoded with the life force and energy of the plants and spirits. The ikaros are an essential part of the Shaman's craft — they provide shamanic plant-spirit healing, clearing negative energies and guiding the ceremony.",
       },
       {
+        id: "single-mindedness",
         question: "What is Single-Mindedness?",
         answer:
           "Single-Mindedness is the ultimate goal of our teaching — a mind that no longer oscillates between the ego's thought system of fear/guilt/attack and the Holy Spirit's correction of love/forgiveness/peace. The Barn Owl, our symbol, represents two birds flying as one — the Eagle and the Condor united in a single gaze. When you achieve Single-Mindedness, you see only the Face of Christ in everyone and everything.",
@@ -81,6 +83,7 @@ export const faqData: FAQCategory[] = [
           "A Course in Miracles (ACIM) is a self-study spiritual curriculum that describes a non-dualistic approach to forgiveness and healing. It teaches that the world we perceive is a projection of the ego's thought system — fear, guilt, and separation — and that the Holy Spirit offers an alternative perception based on love, innocence, and unity. Our teaching integrates the 76 Miracle Principles from ACIM with the shamanic plant wisdom tradition, giving you a cognitive framework that the sacred brew amplifies so you can experience these principles directly rather than merely understanding them intellectually.",
       },
       {
+        id: "face-of-christ",
         question: "What is the Face of Christ?",
         answer:
           "The Face of Christ is the vision of innocence that appears when the Spiritual Eye opens — seeing past the body and its illusions of difference to the radiant light that is the truth in everyone. It is not a physical face but a recognition: that every being you encounter is a Son of God, guiltless and whole. The Golden Halo is the energetic signature of this vision. When you see the Face of Christ, the illusion of attack dissolves and only love remains.",

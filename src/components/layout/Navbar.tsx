@@ -24,17 +24,11 @@ import {
 } from "lucide-react";
 
 // Internal nav links — shown in main navbar and hamburger
-// Order: Retreats, FAQ, 404, Plants & Miracles
+// P&M moved to iamoneself.com dropdown (no dedupe)
 const navLinks = [
   { href: "/retreats", label: "Retreats", icon: Mountain, external: false },
   { href: "/faq", label: "FAQ", icon: BookOpen, external: false },
   { href: "/404", label: "404", icon: Sparkles, external: false },
-  {
-    href: "https://www.iamoneself.com/plantsandmiracles",
-    label: "Plants & Miracles",
-    icon: Leaf,
-    external: true,
-  },
 ];
 
 // Dropdown items for the iamoneself.com menu
@@ -145,12 +139,12 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={handlePortalHomeClick}
-            className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 hover:text-amber-600 dark:hover:text-amber-400 transition-colors group flex-shrink-0"
+            className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 hover:text-amber-600 dark:hover:text-amber-400 transition-colors group min-h-[44px] min-w-[44px]"
           >
             <Home className="h-5 w-5 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
             <span className="drop-shadow-sm">Retreat Portal</span>
-            <span className="text-neutral-300 dark:text-neutral-700 mx-0.5 group-hover:text-amber-400 dark:group-hover:text-amber-600 transition-colors">|</span>
-            <span className="drop-shadow-sm text-sm font-normal text-neutral-500 dark:text-neutral-500 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Home</span>
+            <span className="hidden sm:inline text-neutral-300 dark:text-neutral-700 mx-0.5 group-hover:text-amber-400 dark:group-hover:text-amber-600 transition-colors">|</span>
+            <span className="hidden sm:inline drop-shadow-sm text-sm font-normal text-neutral-500 dark:text-neutral-500 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Home</span>
           </Link>
 
           {/* Desktop links — evenly spread */}
