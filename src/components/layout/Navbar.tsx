@@ -18,6 +18,7 @@ import {
   Leaf,
   ChevronDown,
   Mic,
+  Sparkles,
   Flower2,
   Phone,
 } from "lucide-react";
@@ -26,7 +27,7 @@ import {
 const navLinks = [
   { href: "/faq", label: "FAQ", icon: BookOpen, external: false },
   { href: "/retreats", label: "Retreats", icon: Mountain, external: false },
-  { href: "/404", label: "Sitemap", icon: Flower2, external: false },
+  { href: "/404", label: "Lost?", icon: Sparkles, external: false },
 ];
 
 // Dropdown items for the iamoneself.com menu — live/linked pages only

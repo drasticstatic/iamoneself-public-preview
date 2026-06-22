@@ -304,13 +304,13 @@ export default function NotFound() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mt-3 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800/50 text-sm text-neutral-600 dark:text-neutral-400 space-y-2 text-left"
+              className="mt-3 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800/50 text-sm text-neutral-600 dark:text-neutral-400 space-y-3 text-left"
             >
               <p className="font-medium text-neutral-700 dark:text-neutral-300">
-                How search works
+                How search works — a hidden gem for developers
               </p>
               <p>
-                This is a <strong>client-side search index</strong> powered by{" "}
+                This site uses{" "}
                 <a
                   href="https://pagefind.app"
                   target="_blank"
@@ -319,17 +319,52 @@ export default function NotFound() {
                 >
                   Pagefind
                 </a>
-                . The index is built at deploy time from all page content, so
-                it works offline and never sends your query to a server.
+                , a <strong>completely free, open-source</strong> static search
+                engine — no API keys, no server, no tracking. The index is
+                built from all page content at deploy time (run after
+                <code className="mx-0.5 text-xs">next build</code>), creating
+                a tiny WASM-powered index that lives in your browser.
+              </p>
+              <p>
+                <strong>Why it matters:</strong> Unlike Algolia or Google
+                Custom Search, Pagefind adds <em>zero</em> external
+                dependencies. Your queries never leave your device. It works
+                offline. It indexes everything — including teaching modals
+                and FAQ deep-links. The entire index is typically under 100KB
+                — smaller than a single hero image.
+              </p>
+              <p>
+                For developers building static sites (Next.js SSG, Astro,
+                Hugo, etc.), Pagefind is the developer's hidden gem:
+                zero-cost full-text search with fuzzy matching, snippet
+                highlighting, and sub-result grouping — all client-side.
               </p>
               <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500 font-mono">
                 <Terminal className="h-3 w-3" />
                 <span>
-                  Rebuild index:{" "}
-                  <code>
-                    npx next build && npx -y pagefind --site out
-                  </code>
+                  Build + index:{" "}
+                  <code>npx next build && npx pagefind --site out</code>
                 </span>
+              </div>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <a
+                  href="https://pagefind.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-medium text-amber-600 dark:text-amber-400 hover:underline"
+                >
+                  Pagefind Docs
+                  <ExternalLink className="h-2.5 w-2.5" />
+                </a>
+                <a
+                  href="https://github.com/CloudCannon/pagefind"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:underline"
+                >
+                  GitHub Source
+                  <ExternalLink className="h-2.5 w-2.5" />
+                </a>
               </div>
             </motion.div>
           )}
