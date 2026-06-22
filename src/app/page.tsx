@@ -39,7 +39,7 @@ const navCards = [
     external: true,
   },
   {
-    href: "https://www.iamoneself.com/plantsandmiracles",
+    href: "https://www.iamoneself.com/plants-and-miracles",
     title: "Plants & Miracles",
     description:
       "The Flight of the Eagle & Condor — where A Course in Miracles meets the ancient Amazonian healing tradition.",
@@ -63,7 +63,7 @@ const navCards = [
     external: false,
   },
   {
-    href: "https://www.iamoneself.com/letterstoself",
+    href: "https://www.iamoneself.com/letters-to-self",
     title: "Letters to Self",
     description:
       "Personal letters of spiritual insight, reflection, and the journey toward Single-Mindedness — written from the heart of the teaching.",
@@ -71,7 +71,7 @@ const navCards = [
     external: true,
   },
   {
-    href: "https://www.iamoneself.com/spirituallifecoaching",
+    href: "https://www.iamoneself.com/spiritual-life-coaching",
     title: "Spiritual Life Coaching",
     description:
       "One-on-one guidance in miracle forgiveness, ACIM study, Kundalini awakening, and the escape from darkness.",
@@ -168,7 +168,7 @@ const agentQuestions = [
   { href: "/faq#the-dieta", label: "How do I prepare?", color: "amber" },
   { href: "/faq#escape-from-darkness", label: "Is it safe?", color: "amber" },
   { href: "/faq#golden-halo", label: "What is the Golden Halo?", color: "amber" },
-  { href: "https://www.iamoneself.com/spirituallifecoaching", label: "Spiritual Life Coaching", color: "rose", external: true },
+  { href: "https://www.iamoneself.com/spiritual-life-coaching", label: "Spiritual Life Coaching", color: "rose", external: true },
 ];
 
 export default function Home() {
@@ -540,6 +540,22 @@ export default function Home() {
         >
           Each opens a window into the path — a modal will direct you to the related question in our FAQ — Discover the inner light within.
         </motion.p>
+
+        {/* External Wix teachings reference */}
+        <motion.a
+          href="https://www.iamoneself.com/psychedelic-mystic-teachings"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+          custom={4}
+          className="mt-4 inline-flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-600 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+        >
+          <ExternalLink className="h-3 w-3" />
+          Full teachings on iamoneself.com → Psychedelic Mystic Teachings
+        </motion.a>
       </section>
     </div>
   );

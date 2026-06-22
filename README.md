@@ -49,7 +49,7 @@ Build a robust back-end context engine and interactive FAQ/knowledge-base interf
 - **Home** — Hero with ACIM quote, welcome letter, 6 bento nav cards, 11 teaching pills with modal + FAQ deep-links, agent chat concept
 - **FAQ** — 98 questions across 9 color-coded categories, search, anchor-based deep-linking with auto-open + highlight
 - **Retreats** — Kenney's welcome, 3 partner centers, 3 healer bios, 18 Winged Sun teaching sections with ACIM quotes, retreat topics, Retreat Guru & Aya Advisors CTAs
-- **Custom 404** — Spiritual theme + dual sitemap
+- **Custom 404 / Sitemap** — Spiritual theme + integrated Pagefind search + full dual sitemap (live pages + in-development pages with EyeOff indicator)
 - **Disclaimer Badge** — Persistent amber banner + concept-prototype disclosure modal
 - **AI Agent Concept** — Chat field + modal with sample deep-link questions (prototype, not a live API)
 
@@ -101,17 +101,26 @@ src/
 
 The official Wix-hosted site at [iamoneself.com](https://www.iamoneself.com) includes:
 
+### Live — linked in site navigation
 | Page | URL |
 |------|-----|
 | Home | iamoneself.com |
-| Plants & Miracles | iamoneself.com/plantsandmiracles |
-| Retreats | iamoneself.com/retreats |
-| Letters to Self | iamoneself.com/letterstoself |
-| Spiritual Life Coaching | iamoneself.com/spirituallifecoaching |
-| Psychedelic Mystic Teachings | iamoneself.com/phsychedelicmysticteachings |
-| Voice of the One Podcast | iamoneself.com/voiceoftheonepodcast |
-| Talks on YouTube | iamoneself.com/talks-on-youtube |
+| Plants & Miracles | iamoneself.com/plants-and-miracles |
+| Letters to Self | iamoneself.com/letters-to-self |
+| Spiritual Life Coaching | iamoneself.com/spiritual-life-coaching |
+| Psychedelic Mystic Teachings | iamoneself.com/psychedelic-mystic-teachings |
+| Voice of the One Podcast | iamoneself.com/voice-of-the-one-podcast |
 | Contact | iamoneself.com/about-the-speaker |
+
+### Published — not linked in navigation (in development)
+| Page | URL | Note |
+|------|-----|------|
+| Contact (Legacy) | iamoneself.com/contact | Hidden page on Wix |
+| About the Foundation | iamoneself.com/about-the-foundation | |
+| Welcome Letter | iamoneself.com/welcome-letter | |
+| Talks on YouTube | iamoneself.com/talks-on-youtube | |
+| FAQ | iamoneself.com/faq | Wix FAQ — empty, ready for migration test |
+| Miracle Retreats | iamoneself.com/miracle-retreats | |
 
 > This dev portal points to the Wix site for all transactions (retreat bookings, coaching, contact). The Next.js layer serves as a technology showcase and context engine — not a replacement.
 

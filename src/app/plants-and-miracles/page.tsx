@@ -215,7 +215,7 @@ export default function PlantsAndMiraclesPage() {
             All Teachings
           </Link>
           <a
-            href="https://www.iamoneself.com/plantsandmiracles"
+            href="https://www.iamoneself.com/plants-and-miracles"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-neutral-200 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 font-medium transition-colors"

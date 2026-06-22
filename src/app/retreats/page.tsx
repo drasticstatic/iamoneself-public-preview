@@ -543,7 +543,7 @@ export default function RetreatsPage() {
             className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5 dark:bg-amber-500 dark:shadow-amber-500/20 dark:hover:bg-amber-400"
           >
             <Mountain className="h-4 w-4" />
-            Apply via Retreat Guru
+            Find us on Retreat Guru
           </a>
           <a
             href="https://www.ayaadvisors.org"
@@ -552,6 +552,16 @@ export default function RetreatsPage() {
             className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 dark:border-neutral-700 px-6 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 shadow-sm hover:shadow-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all hover:-translate-y-0.5"
           >
             Find us on Aya Advisors
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          <a
+            href="https://www.iamoneself.com/miracle-retreats"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 px-6 py-3 text-sm font-medium text-amber-700 dark:text-amber-300 shadow-sm hover:shadow-md hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-all hover:-translate-y-0.5"
+          >
+            <Sun className="h-4 w-4" />
+            Miracle Retreats
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -565,7 +575,17 @@ export default function RetreatsPage() {
             Read the FAQ
           </Link>
           <a
-            href="https://www.iamoneself.com/spirituallifecoaching"
+            href="https://www.iamoneself.com/plants-and-miracles"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 px-5 py-2.5 text-sm font-medium text-neutral-600 dark:text-neutral-400 shadow-sm hover:shadow-md hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all hover:-translate-y-0.5"
+          >
+            <Leaf className="h-4 w-4" />
+            Plants & Miracles
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          <a
+            href="https://www.iamoneself.com/spiritual-life-coaching"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 px-5 py-2.5 text-sm font-medium text-neutral-600 dark:text-neutral-400 shadow-sm hover:shadow-md hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all hover:-translate-y-0.5"

@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import DisclaimerBadge from "@/components/DisclaimerBadge";
 import ScrollProgress from "@/components/ScrollProgress";
 import PageScrollProgress from "@/components/PageScrollProgress";
+import ClientShell from "@/components/ClientShell";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -63,7 +64,7 @@ export default function RootLayout({
           <PageScrollProgress />
           <ScrollProgress />
         </div>
-        <main className="flex-1 pt-[92px]">{children}</main>
+        <main className="flex-1 pt-[92px]"><ClientShell>{children}</ClientShell></main>
         <div data-pagefind-ignore>
           <Footer />
         </div>

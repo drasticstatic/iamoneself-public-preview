@@ -17,24 +17,19 @@ import {
   Globe,
   Leaf,
   ChevronDown,
-  Sparkles,
   Mic,
-  Play,
   Flower2,
-  Search,
+  Phone,
 } from "lucide-react";
 
 // Internal nav links — shown in main navbar and hamburger
-// P&M moved to iamoneself.com dropdown (no dedupe)
 const navLinks = [
-  { href: "/search", label: "Search", icon: Search, external: false },
-  { href: "/retreats", label: "Retreats", icon: Mountain, external: false },
-  { href: "/teachings", label: "Teachings", icon: Sparkles, external: false },
-  { href: "/plants-and-miracles", label: "P&M", icon: Leaf, external: false },
   { href: "/faq", label: "FAQ", icon: BookOpen, external: false },
+  { href: "/retreats", label: "Retreats", icon: Mountain, external: false },
+  { href: "/404", label: "Sitemap", icon: Flower2, external: false },
 ];
 
-// Dropdown items for the iamoneself.com menu
+// Dropdown items for the iamoneself.com menu — live/linked pages only
 const siteLinks = [
   {
     href: "https://www.iamoneself.com",
@@ -43,45 +38,39 @@ const siteLinks = [
     external: true,
   },
   {
-    href: "https://www.iamoneself.com/plantsandmiracles",
+    href: "https://www.iamoneself.com/plants-and-miracles",
     label: "Plants & Miracles",
     icon: Leaf,
     external: true,
   },
   {
-    href: "https://www.iamoneself.com/letterstoself",
+    href: "https://www.iamoneself.com/letters-to-self",
     label: "Letters to Self",
     icon: Feather,
     external: true,
   },
   {
-    href: "https://www.iamoneself.com/spirituallifecoaching",
+    href: "https://www.iamoneself.com/spiritual-life-coaching",
     label: "Spiritual Life Coaching",
     icon: Heart,
     external: true,
   },
   {
-    href: "https://www.iamoneself.com/phsychedelicmysticteachings",
+    href: "https://www.iamoneself.com/psychedelic-mystic-teachings",
     label: "Psychedelic Mystic Teachings",
     icon: Flower2,
     external: true,
   },
   {
-    href: "https://www.iamoneself.com/voiceoftheonepodcast",
+    href: "https://www.iamoneself.com/voice-of-the-one-podcast",
     label: "Voice of the One Podcast",
     icon: Mic,
     external: true,
   },
   {
-    href: "https://www.iamoneself.com/talks-on-youtube",
-    label: "Talks on YouTube",
-    icon: Play,
-    external: true,
-  },
-  {
     href: "https://www.iamoneself.com/about-the-speaker",
     label: "Contact",
-    icon: Mail,
+    icon: Phone,
     external: true,
   },
 ];

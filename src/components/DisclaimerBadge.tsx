@@ -167,7 +167,7 @@ export default function DisclaimerBadge() {
                       <ExternalLink className="h-3 w-3" />
                     </a>
                     <a
-                      href="https://www.iamoneself.com/plantsandmiracles"
+                      href="https://www.iamoneself.com/plants-and-miracles"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-sm font-medium transition-all hover:bg-emerald-100 dark:hover:bg-emerald-950/50 hover:-translate-y-0.5 shadow-sm hover:shadow-md"

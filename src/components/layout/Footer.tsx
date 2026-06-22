@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ExternalLink, Code, Mail, Sparkles, Home } from "lucide-react";
+import { ExternalLink, Code, Phone, Sparkles, Home } from "lucide-react";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -33,7 +33,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 px-6 py-3 text-sm font-medium text-neutral-600 dark:text-neutral-400 transition-all shadow-sm hover:shadow-md hover:bg-neutral-50 dark:border-neutral-700 dark:hover:bg-neutral-800 hover:-translate-y-0.5"
           >
-            <Mail className="h-3.5 w-3.5" />
+            <Phone className="h-3.5 w-3.5" />
             Contact
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
@@ -77,7 +77,7 @@ export default function Footer() {
             </a>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <a
-              href="https://www.iamoneself.com/plantsandmiracles"
+              href="https://www.iamoneself.com/plants-and-miracles"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 transition-all hover:text-amber-600 dark:hover:text-amber-400 hover:-translate-y-0.5"
