@@ -17,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { TeachingModal, type TeachingPill } from "@/components/TeachingModal";
+import AdminPanel from "@/components/AdminPanel";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -173,6 +174,7 @@ const agentQuestions = [
 export default function Home() {
   const [activePill, setActivePill] = useState<TeachingPill | null>(null);
   const [agentOpen, setAgentOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   // Hide scroll indicator once user scrolls past hero, reappear at top
@@ -190,10 +192,25 @@ export default function Home() {
     return () => { document.body.style.overflow = ""; };
   }, [agentOpen]);
 
+  /* Keyboard shortcuts: Cmd+Shift+U → admin panel (Unlock — no browser conflict) */
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === "U") {
+        e.preventDefault();
+        setAdminOpen((v) => !v);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen" data-pagefind-body>
       {/* Teaching Modal Portal */}
       <TeachingModal pill={activePill} onClose={() => setActivePill(null)} />
+
+      {/* Admin Panel Modal */}
+      <AdminPanel open={adminOpen} onClose={() => setAdminOpen(false)} />
 
       {/* Agent Chat Modal */}
       <AnimatePresence>

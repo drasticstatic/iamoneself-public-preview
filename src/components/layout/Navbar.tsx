@@ -29,8 +29,9 @@ import {
 const navLinks = [
   { href: "/search", label: "Search", icon: Search, external: false },
   { href: "/retreats", label: "Retreats", icon: Mountain, external: false },
+  { href: "/teachings", label: "Teachings", icon: Sparkles, external: false },
+  { href: "/plants-and-miracles", label: "P&M", icon: Leaf, external: false },
   { href: "/faq", label: "FAQ", icon: BookOpen, external: false },
-  { href: "/404", label: "404", icon: Sparkles, external: false },
 ];
 
 // Dropdown items for the iamoneself.com menu

@@ -65,33 +65,37 @@ export default function SearchPage() {
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  /* Determine basePath for Pagefind — matches next.config.ts */
+  const basePath =
+    typeof window !== "undefined" &&
+    window.location.hostname !== "localhost" &&
+    !window.location.hostname.includes("127.0.0.1")
+      ? "/iamoneself-public-preview"
+      : "";
+
   /* Load Pagefind at mount */
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        if (typeof window !== "undefined" && (window as any).pagefind) {
-          const pf = await (window as any).pagefind.init();
-          if (!cancelled) setPagefind(pf);
-        } else {
-          // Dynamic import — Pagefind places /pagefind/pagefind.js in out/
-          const pfMod = await import(
-            /* @vite-ignore */
-            /* webpackIgnore: true */
-            "/pagefind/pagefind.js" as any
-          );
-          const pf = pfMod?.default || pfMod;
-          if (!cancelled) setPagefind(pf);
-        }
+        const pfUrl = `${basePath}/pagefind/pagefind.js`;
+        const pfMod = await import(
+          /* @vite-ignore */
+          /* webpackIgnore: true */
+          pfUrl as any
+        );
+        const pf = pfMod?.default || pfMod;
+        await pf?.init?.({ basePath: `${basePath}/pagefind` });
+        if (!cancelled) setPagefind(pf);
       } catch {
         if (!cancelled)
-          setError("Search index not available. Run `npm run build` first.");
+          setError("Search index not available yet. The index builds on deploy — try again shortly.");
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [basePath]);
 
   /* Debounced search */
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
