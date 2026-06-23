@@ -7,27 +7,29 @@ import {
   Search,
   Mountain,
   ExternalLink as ExternalLinkIcon,
-  BookOpen,
-  Crown,
-  Shield,
-  Leaf,
-  Scale,
-  Heart,
-  Sparkles,
+  Lightbulb,
+  GraduationCap,
+  Stethoscope,
+  HeartPulse,
+  Compass,
+  HeartHandshake,
+  Flower2,
+  HandHeart,
+  MessageCircleQuestion,
   type LucideIcon,
 } from "lucide-react";
 
-// Category color + icon mapping
+// Category color + icon mapping — semantically meaningful icons per category
 const categoryMeta: Record<string, { color: string; icon: LucideIcon }> = {
-  "The Teaching & The Experience": { color: "amber", icon: BookOpen },
-  "Shamanic Lineage & Levels": { color: "violet", icon: Crown },
-  "Health & Safety": { color: "rose", icon: Shield },
-  "Preparation & The Dieta": { color: "emerald", icon: Leaf },
-  "Logistics & Travel": { color: "sky", icon: Mountain },
-  "Integration & Aftercare": { color: "indigo", icon: Heart },
-  "Plant Medicines & Companion Plants": { color: "green", icon: Leaf },
-  "Legal & Cost": { color: "neutral", icon: Scale },
-  "First-Timer Concerns": { color: "amber", icon: Sparkles },
+  "The Teaching & The Experience": { color: "amber", icon: Lightbulb },
+  "Shamanic Lineage & Levels": { color: "violet", icon: GraduationCap },
+  "Health & Safety": { color: "rose", icon: HeartPulse },
+  "Preparation & The Dieta": { color: "emerald", icon: Stethoscope },
+  "Logistics & Travel": { color: "sky", icon: Compass },
+  "Integration & Aftercare": { color: "indigo", icon: HeartHandshake },
+  "Plant Medicines & Companion Plants": { color: "green", icon: Flower2 },
+  "Legal & Cost": { color: "neutral", icon: HandHeart },
+  "First-Timer Concerns": { color: "amber", icon: MessageCircleQuestion },
 };
 
 const colorClasses: Record<string, { text: string; bg: string; border: string }> = {
@@ -121,9 +123,9 @@ export default function FAQPage() {
         {filtered.map((category) => {
           const meta = categoryMeta[category.category];
           const colors = meta ? colorClasses[meta.color] : colorClasses.neutral;
-          const Icon = meta?.icon || BookOpen;
+          const Icon = meta?.icon || Lightbulb;
             return (
-              <div key={category.category} id={slug(category.category)}>
+              <div key={category.category} id={slug(category.category)} className="text-center">
                 <div className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 mb-3 ${colors.bg} ${colors.border} border`}>
                   <Icon className={`h-4 w-4 ${colors.text}`} />
                   <h2 className={`text-xl font-semibold ${colors.text}`}>
