@@ -186,7 +186,15 @@ export default function NotFound() {
     };
     script.onerror = () => {
       if (!cancelled) {
-        setSearchError("Search index not available. It builds on deploy — try again shortly.");
+        const isDevEnv =
+          typeof window !== "undefined" &&
+          (window.location.hostname === "localhost" ||
+            window.location.hostname.includes("127.0.0.1"));
+        setSearchError(
+          isDevEnv
+            ? "Search requires a production build. Run: npm run build && npx serve out"
+            : "Search index not available. It builds on deploy — try again shortly."
+        );
       }
     };
     document.head.appendChild(script);
@@ -329,9 +337,33 @@ export default function NotFound() {
                 <strong>Why it matters:</strong> Unlike Algolia or Google
                 Custom Search, Pagefind adds <em>zero</em> external
                 dependencies. Your queries never leave your device. It works
-                offline. It indexes everything — including teaching modals
-                and FAQ deep-links. The entire index is typically under 100KB
+                offline. The entire index is typically under 100KB
                 — smaller than a single hero image.
+              </p>
+              <p>
+                <strong>How modal content gets searched:</strong> Some of our richest
+                teaching content lives inside modals (Framer Motion AnimatePresence
+                overlays) — healer bios, the 18 Winged Sun teachings, the Plants &
+                Miracles curriculum, FAQ deep-links, and retreat package details.
+                Because these modals only render when opened, they don't exist in the
+                DOM at build time and Pagefind can't see them natively. Our solution:
+                each page with modals also includes a{" "}
+                <code className="text-xs">hidden</code> div tagged{" "}
+                <code className="text-xs">data-pagefind-body</code> containing
+                the same content as semantic HTML (heading + paragraph structure).
+                The content comes from shared data constants — so when you search for
+                "Chaiconi Bari", "Golden Halo", "dieta", or "forgiveness", Pagefind
+                finds the match in the hidden div, and the result link takes you to
+                the page where the modal lives. Update a modal's content once and both
+                the visual rendering and the search index stay in sync automatically.
+              </p>
+              <p>
+                <strong>Build flow:</strong>{" "}
+                <code className="text-xs">npm run build</code> runs{" "}
+                <code className="text-xs">next build</code> (generates static HTML){" "}
+                then <code className="text-xs">npx pagefind --site out</code> (indexes
+                all data-pagefind-body content). Search works immediately on deploy —
+                no extra steps needed.
               </p>
               <p>
                 For developers building static sites (Next.js SSG, Astro,
@@ -365,6 +397,35 @@ export default function NotFound() {
                   GitHub Source
                   <ExternalLink className="h-2.5 w-2.5" />
                 </a>
+              </div>
+              {/* CTA to explore the content */}
+              <div className="mt-3 pt-3 border-t border-neutral-200 dark:border-neutral-700">
+                <p className="text-neutral-500 dark:text-neutral-500 mb-2">
+                  Try searching for content from our modals:
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Chaiconi Bari", "Golden Halo", "dieta", "forgiveness", "Barn Owl", "Ayahuasca"].map((term) => (
+                    <button
+                      key={term}
+                      onClick={() => { setQuery(term); doSearch(term); inputRef.current?.focus(); }}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-xs font-medium text-amber-600 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-colors"
+                    >
+                      <Search className="h-2.5 w-2.5" />
+                      {term}
+                    </button>
+                  ))}
+                </div>
+                <p className="mt-3 text-neutral-500 dark:text-neutral-500 text-xs">
+                  These terms live inside modals on the{" "}
+                  <Link href="/retreats" className="text-amber-600 dark:text-amber-400 hover:underline font-medium">
+                    Retreats page
+                  </Link>{" "}
+                  and the{" "}
+                  <Link href="/faq" className="text-amber-600 dark:text-amber-400 hover:underline font-medium">
+                    FAQ
+                  </Link>
+                  {" "}— search reaches them through the hidden index pattern described above.
+                </p>
               </div>
             </motion.div>
           )}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUp, ArrowDown } from "lucide-react";
+import { X, ArrowUp, ArrowDown, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 export interface TeachingPill {
@@ -11,6 +11,8 @@ export interface TeachingPill {
   title: string;
   body: string;
   faqAnchor?: string;
+  pmLink?: string;
+  pmtLink?: string;
 }
 
 interface TeachingModalProps {
@@ -137,6 +139,32 @@ export function TeachingModal({ pill, onClose }: TeachingModalProps) {
               </button>
 
               <div className="flex-1" />
+
+              {/* External P&M / PMT links */}
+              {(pill.pmLink || pill.pmtLink) && (
+                <div className="flex items-center gap-2">
+                  {pill.pmLink && (
+                    <a
+                      href={pill.pmLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                    >
+                      P&M <ExternalLink className="h-2.5 w-2.5" />
+                    </a>
+                  )}
+                  {pill.pmtLink && (
+                    <a
+                      href={pill.pmtLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                    >
+                      PMT <ExternalLink className="h-2.5 w-2.5" />
+                    </a>
+                  )}
+                </div>
+              )}
 
               <Link
                 href={pill.faqAnchor ? `/faq#${pill.faqAnchor}` : "/faq"}

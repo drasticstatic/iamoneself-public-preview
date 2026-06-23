@@ -1,40 +1,38 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mountain,
   ArrowRight,
+  ArrowDown,
   CircleUserRound,
   Leaf,
   Feather,
-  Heart,
   Sparkles,
   Sun,
-  Eye,
-  Shield,
-  Scale,
-  Wind,
   Globe,
   ExternalLink,
   X,
   ArrowUp,
-  ArrowDown,
   Users,
   BookOpen,
+  ChevronDown,
+  Package,
+  Info,
 } from "lucide-react";
 
 /* ── Retreat Centers ── */
 const centers = [
   {
     name: "Sachamama",
-    desc: "Deep in the Amazon Jungle near Iquitos. Traditional Shipibo healing in a family-like setting.",
-    url: "https://sachamamalodge.org/en",
+    desc: "Ayahuasca healing center and shamanic school founded by Don Francisco Montes Shuña. Deep Amazon tradition.",
+    url: "http://sachamamalodge.org/en",
   },
   {
     name: "Inca Shipiba",
-    desc: "Sacred Valley location blending Andean and Shipibo traditions. Breathtaking mountain ceremonies.",
+    desc: "Indigenous Shipibo family center near Nauta. Led by Maestra Matilde with 50 years experience. 7–30 day dieta programs.",
     url: "https://www.incashipiba.com",
   },
   {
@@ -44,152 +42,58 @@ const centers = [
   },
 ];
 
-/* ── Teaching Sections ── */
-const teachings = [
-  {
-    id: "what-is-ayahuasca",
-    icon: Leaf,
-    color: "emerald",
-    title: "What is Ayahuasca?",
-    body: "Ayahuasca is a sacred brew prepared from the Ayahuasca vine (Banisteriopsis caapi) and the Chakruna leaf (Psychotria viridis), following a 7-generation Shipibo-Conibo lineage recipe. The vine contains harmala alkaloids that act as MAO inhibitors; the leaf contains N,N-DMT — the visionary compound. Some lineages also include Chaliponga leaf, which contains 5-MeO-DMT, known for its intensely mystical quality. Small amounts of Nicotina Rustica — a native Amazonian tobacco — are traditionally cooked into the brew to aid purging. These proportions are not arbitrary — they are the result of centuries of indigenous empirical wisdom.",
-    quote: undefined,
-  },
-  {
-    id: "the-compound",
-    icon: Sparkles,
-    color: "amber",
-    title: "The Compound — A Magic Principle",
-    body: 'In our teaching, Ayahuasca is a "Magic Principle" — an outside substance used by the Holy Spirit to provide temporary healing power and insight. It amplifies the content of the mind, bringing conditioning and "level confusion" into awareness so that healing can occur. As Pablo Amaringo said: "From experience, I came to learn that ayahuasca bestows upon the user knowledge about a variety of topics, not only consciousness and perception, but also leads one to realize that what we perceive is an illusion."',
-    quote: '"Physical medications are forms of \'spells,\' but if you are afraid to use the mind to heal, you should not attempt to do so… Sometimes the illness has a sufficiently strong hold over the mind to render a person temporarily inaccessible to the Atonement. In this case it may be wise to utilize a compromise approach to mind and body, in which something from the outside is temporarily given healing belief." — ACIM, T-2.V.2:1-6',
-  },
-  {
-    id: "the-teacher",
-    icon: BookOpen,
-    color: "violet",
-    title: "The Teacher — Resurrection of Ayahuasca",
-    body: "Ayahuasca is not merely a substance — it is a Teacher. The Spirit of Ayahuasca, known as the Vine of the Soul and Cosmic Serpent, is the Condor in our teaching. The Eagle is the resurrected one who wrote A Course in Miracles — the Spirit of Yeshua. Together they fly as one on the Wings of the Spirit of Immortal Light, bringing a teaching where differences come to an end. Together they fly as one bird shining in the oneness of the Golden Halo, the Face of Christ, helping us uncover the Great Peace of God.",
-    quote: undefined,
-  },
-  {
-    id: "plants-and-miracles",
-    icon: Leaf,
-    color: "green",
-    title: "Plants & Miracles",
-    body: 'Our "Plants & Miracles" curriculum integrates the 76 Miracle Principles from A Course in Miracles with the shamanic plant wisdom tradition. The course does not aim at teaching the meaning of love, for that is beyond what can be taught. It does aim, however, at removing the blocks to the awareness of love\'s Presence, Which is your natural inheritance. During ceremony, the sacred brew amplifies these principles so you can experience them directly — cognitive shifts that take you from body-identification (darkness/guilt) to soul-identification (light/peace).',
-    quote: '"Nothing real can be threatened. Nothing unreal exists. Herein lies the Peace of God." — ACIM, Introduction',
-  },
-  {
-    id: "eagle-and-condor",
-    icon: Feather,
-    color: "sky",
-    title: "The Flight of the Eagle & Condor",
-    body: "This is the prophecy that the Western mind of Medicine (The Eagle — Jesus, A Course in Miracles) will one day join with the Indigenous mind of Plant Wisdom (The Condor) for the good of humanity. The two teachings now live in harmony to heal mankind. The symbol of this union is the Barn Owl — the two birds flying as one — representing Single-Mindedness and seraphic (angelic) teaching. When the Eagle and Condor fly together, the illusion of attack dissolves and only love remains.",
-    quote: undefined,
-  },
-  {
-    id: "the-dieta",
-    icon: Shield,
-    color: "emerald",
-    title: "The Dieta — Sacred Preparation",
-    body: "The Dieta is a set of traditional dietary and lifestyle guidelines observed before, during, and after the retreat. It cleanses the body, reduces toxins, and opens sensitivity to the plant wisdom. Avoid pork, processed foods, alcohol, and caffeine. Abstain from sexual activity. Follow for at least 2 weeks before and 1 month after the retreat — some choose longer. The Dieta is more than a physical detox — it is an agreement you make with the medicine to make peace with your pain before the ceremony begins.",
-    quote: undefined,
-  },
-  {
-    id: "fallen-angels",
-    icon: Wind,
-    color: "rose",
-    title: "The Fallen Angels of Humanity",
-    body: 'A Course in Miracles teaches: "The Atonement is the knowledge that the belief that angels can fall is false." The fallen angels represent the ego\'s thought system — the belief that separation from God is real, that attack is possible, and that guilt is justified. When you believe you have fallen from grace, you project that belief onto everyone you see, creating a world of fear and judgment. The teaching of the Winged Sun reveals the truth: the fall never happened. You remain as God created you — guiltless, whole, and one with your Creator.',
+/* ── Plants & Miracles content (shared for modal + Pagefind) ── */
+const plantsAndMiracles = {
+  chaiconiBari: {
+    heading: "About Chaiconi Bari",
+    body: "Chaiconi Bari is Shipibo-Conibo in origin. Chaiconi speaks to the wisdom Spirits that are invisible to human eyeballs but can be seen when the physical Third Eye or pineal is activated with DMT and through the non-physical Spiritual Eye of the Holy Spirit, the Eye of Light. These are Spirits of the plants and angels — Spirits of our ancestors and shamans who have crossed over and now watch over this great tradition from a higher realm. They all work together as Love's messengers for the Lord of Wisdom, the Great Chiaconi, Whose mighty Wings we all fly on.",
+    body2: "Bari means a radiant circular energy field that nurtures and sustains life. Used without Chaiconi it means the physical sun. Used alongside it, it stands for the Holy Spirit, the Mind of the Atonement where the Christ stands revealed in the Halo. The Holy One extends the Light of God onto us unveiling the Golden Halo as the Face of Christ and Unified Mind of Light.",
     quote: '"The Atonement is the knowledge that the belief that angels can fall is false." — Jesus, ACIM T-1.35.7:6',
+    closing: "This teaching has been symbolized in the ancient works of priests and priestesses as the teaching of the Winged Sun for at least 3,500 years. We now offer it to you as the Plants & Miracles — Flight of Eagle and Condor teaching.",
   },
-  {
-    id: "two-thought-systems",
-    icon: Scale,
-    color: "violet",
-    title: "The 2 Thought Systems, 3 Worlds & 3 Levels of Consciousness",
-    body: 'There are only two thought systems: the ego\'s (fear, guilt, attack, separation) and the Holy Spirit\'s (love, forgiveness, peace, unity). You cannot serve two masters. The ego\'s thought system produces the physical world of perception. The Holy Spirit\'s correction reveals the real world — the world seen through the Spiritual Eye. The three levels of consciousness map to these systems: body-identification (the ego\'s domain), soul-identification (the bridge of the Holy Spirit), and spirit-identification (the Christ-Mind, where the Golden Halo is perceived and Single-Mindedness is achieved). As the Course asks: "Do you not see that all your misery comes from the strange belief that you are powerless?"',
-    quote: undefined,
+  eagle: {
+    title: "The Eagle",
+    subtitle: "Western Mind of Medicine",
+    body: "The Eagle represents the resurrected one who wrote A Course in Miracles — the Spirit of Yeshua. The Course is a self-study spiritual thought system that teaches that the way to universal love and peace is by undoing guilt through forgiving others. Its 76 Miracle Principles form the cognitive backbone of our teaching.",
   },
-  {
-    id: "project-vs-extension",
-    icon: Eye,
-    color: "amber",
-    title: "Project vs Extension",
-    body: "The ego projects — it casts outward from a mind that believes in separation, creating a world of attack, defense, and fear. The Holy Spirit extends — it radiates outward from the Christ-Mind, creating in the likeness of God: love, innocence, and unity. Projection makes the physical world you see. Extension creates the real world the Spiritual Eye reveals. When you shift from projecting to extending, you change what you perceive. This is the miracle: not that the world changes, but that your perception of it does. From a world of guilt to a world of grace.",
-    quote: undefined,
+  condor: {
+    title: "The Condor",
+    subtitle: "Indigenous Mind of Plant Wisdom",
+    body: "The Condor is the Spirit of Ayahuasca, known as the Vine of the Soul and Cosmic Serpent. A great teacher of the Sacred Manuscript of Nature and the Jungle Book. For thousands of years, indigenous healers have worked with master plants as sacred allies in the healing of the mind and spirit.",
   },
-  {
-    id: "how-reality-is-built",
-    icon: Sun,
-    color: "amber",
-    title: "How Reality is Built",
-    body: 'What you see reflects what you believe. The world you perceive is a mental projection — the outer picture of an inner condition. Change the cause (the mind) and the effect (the world) must change. This is why the ego works so hard to convince you that the world acts upon you — because that keeps the cause hidden in your own mind, where the ego rules. The Holy Spirit\'s teaching reverses this: you are the cause, not the effect. "What happens is what I desire. What does not occur is what I do not want to happen." When you accept this, you reclaim your power as the Son of God.',
-    quote: '"It is impossible that anything should come to me unbidden by myself. Even in this world, it is I who rule my destiny." — ACIM, Lesson 253',
+  barnOwl: {
+    heading: "The Barn Owl — The Two Become One",
+    body: "When the Eagle and the Condor fly together, they become the Barn Owl — symbolizing Single-Mindedness and seraphic (angelic) teaching. The two teachings now live in harmony to heal mankind. When the Eagle and Condor fly together, the illusion of attack dissolves and only love remains.",
+    closing: "Together they fly as one bird shining in the oneness of the Golden Halo.",
   },
-  {
-    id: "reinterpretation-of-defenses",
-    icon: Shield,
-    color: "rose",
-    title: "Reinterpretation of Defenses",
-    body: 'The "re-interpretation of defenses" is necessary for the inner light to break out into the mind and the true Spiritual Eye of Light to awaken. Most of us live with all our defenses pointed towards protecting a private mind — perceiving ourselves as different from others, managing our lives to achieve worldly thrills. The Atonement means placing your mind under Guidance in defense of reintegrating back into the Christ-Mind of the Holy Spirit. It requires the willingness to let go of all things that don\'t serve you — and the courage to head towards the Light in the escape from darkness.',
-    quote: undefined,
-  },
-  {
-    id: "grievances-and-guilt",
-    icon: Scale,
-    color: "rose",
-    title: "Grievances & The Problem of Guilt",
-    body: 'Grievances are what keep the mind sick and shackled to the body. When you hold a grievance against anyone, you are holding a judgment that says: "You are guilty and I am innocent." But guilt is never real — it is the ego\'s primary weapon for maintaining the illusion of separation. The Holy Spirit teaches that guilt has no cause, because what the ego says you did never happened in truth. Let go of grievances and you can enter other dimensions of existence beyond the physical world. The master plant Chuchuhuasi amplifies grievances — forcing you to face what is buried. Ayahuma strips away every rationalization, bringing the raw content of the unconscious into awareness.',
-    quote: undefined,
-  },
-  {
-    id: "forgiveness-and-innocence",
-    icon: Heart,
-    color: "amber",
-    title: "Forgiveness & Innocent Perception",
-    body: 'True forgiveness is not pardoning someone for what they did — it is the recognition that what the ego says happened never occurred in truth. The ego\'s forgiveness says: "You did wrong, but I forgive you." The Holy Spirit\'s forgiveness says: "You are guiltless, because what you seemed to do in the dream never really happened." This is the miracle — the shift from perceiving attack to perceiving innocence. When you see the Face of Christ in your brother, the illusion of guilt dissolves. Only love remains. This is the heart of A Course in Miracles and the goal of our teaching.',
-    quote: undefined,
-  },
-  {
-    id: "defend-yourself-attacked",
-    icon: Shield,
-    color: "rose",
-    title: "If You Defend Yourself, You Are Attacked",
-    body: 'This is one of the most radical teachings in A Course in Miracles. Defense is the ego\'s primary strategy — it says: "I must protect myself from attack." But defense affirms the reality of attack, and what you affirm as real becomes real for you. When you defend, you are saying: "Attack is real, and I am vulnerable to it." The Holy Spirit teaches the opposite: attack has no cause because guilt is not real. When you drop your defenses, the attack you feared dissolves — because it was always a projection of your own mind. The master plants reinforce this teaching directly: they show you that the source of fear is within you, and so is its release.',
-    quote: '"In every difficulty, all distress, and each perplexity you face Christ calls to you, and gently says, \'My brother, choose again.\'" — ACIM T-31',
-  },
-  {
-    id: "two-step-four-step",
-    icon: BookOpen,
-    color: "violet",
-    title: "The 2-Step and the 4-Step to Heaven",
-    body: 'The Course teaches a simple 2-step: (1) recognize that the ego\'s thought system of fear and guilt is not who you are, and (2) choose the Holy Spirit\'s correction instead. The 4-step expands this into practice: (1) notice when you are perceiving through the ego\'s lens of attack, (2) pause and ask for the Holy Spirit\'s interpretation, (3) accept the correction that what you see is a projection of your own mind, and (4) respond with love instead of defense. This is the practical application of miracle forgiveness — the path from darkness to light, from the ego\'s world to the real world.',
-    quote: undefined,
-  },
-  {
-    id: "miracle-principles-with-ayahuasca",
-    icon: Sparkles,
-    color: "amber",
-    title: "Miracle Principles with Ayahuasca",
-    body: 'The 76 Miracle Principles from A Course in Miracles form the cognitive backbone of our teaching. During ceremony, the sacred brew amplifies these principles so you can experience them directly rather than merely understanding them intellectually. A few key principles: Miracles are expressions of love. Miracles are natural. Miracles dissolve error. Miracles honor everyone. Miracles are thought-creations. The sacred brew does not create the miracle — your willingness to see differently does. The medicine simply amplifies your willingness so the shift can happen more rapidly.',
-    quote: undefined,
-  },
-  {
-    id: "golden-halo-of-light",
-    icon: Sun,
-    color: "amber",
-    title: "The Golden Halo of Light",
-    body: 'The Golden Halo manifests around the head and bodies of everyone when the true Spiritual Eye opens. It is the Face of Christ and the Unified Mind of Light — a vision through the power of miracle forgiveness that ends the illusion of differences and offers the remembrance of the Sons of God who share our true Self. This is not a physical light but a recognition: that every being you encounter is guiltless and whole. The Golden Halo is the energetic signature of this vision — the symbol of the "great and shining circle" spoken of in ACIM T-21.I.10:1.',
-    quote: undefined,
-  },
-  {
-    id: "escape-from-darkness",
-    icon: Eye,
-    color: "violet",
-    title: "Escape from Darkness",
-    body: 'Most of us live on the "outer fringes" of physical perception, caught in a cycle of grievances and past-dwelling. Escape from Darkness is the process of moving back into non-differentiated light — recognizing that the source of light is within you, not the physical sun. The ego\'s world is a world of darkness: fear, guilt, separation, and the belief that you are a body vulnerable to attack. The Holy Spirit\'s correction is the light: love, innocence, unity, and the recognition that you are a creation of Spirit, limitless and free. The master plants facilitate this escape by illuminating the dark corners of the mind.',
-    quote: '"Do you not see that all your misery comes from the strange belief that you are powerless?" — ACIM, Ch. 21.VII',
-  },
+  whatThePlantsTeach: [
+    { teaching: "The addiction to self-centered thought — the ego's thought system.", plant: "Ayahuasca" },
+    { teaching: "Looking at the world with an open mind and heart with the curiosity of a child.", plant: "LSD" },
+    { teaching: "The authority problem — using time to make a false image of yourself and others.", plant: "MDMA" },
+    { teaching: "Miracle or true forgiveness is the answer to healing your most challenging problems.", plant: "All medicines" },
+    { teaching: "When you turn away from your belief in physical sight, you begin to live with spiritual sight.", plant: "All medicines" },
+    { teaching: "Everyone has a song in their heart they have to play.", plant: "Ayahuasca" },
+    { teaching: "Separation is not a solution — it's a delusion.", plant: "Ayahuasca" },
+    { teaching: "If you defend yourself, you are attacked.", plant: "Ayahuasca" },
+    { teaching: "You as silence and stillness are immeasurable and limitless peace.", plant: "Ayahuasca & Psilocybin" },
+    { teaching: "The nature of Reality, God, and Self is Light.", plant: "Iboga, Ayahuasca, Psilocybin, LSD" },
+    { teaching: "Grievances are what keep the mind sick and shackled to the body.", plant: "Ayahuasca, Psilocybin" },
+    { teaching: "If you step back by dropping your own judgment, the Spirit will guide your thoughts with inspiration.", plant: "Psilocybin" },
+  ],
+};
+
+/* ── Retreat Topics with teaching content (from /teachings page) ── */
+const retreatTopics = [
+  { label: "Miracle or True Forgiveness", color: "rose" },
+  { label: "Real Intimacy", color: "amber" },
+  { label: "Spiritual Sexuality", color: "violet" },
+  { label: "Life Can Be SO Challenging", color: "rose" },
+  { label: "The Addiction to Thinking", color: "amber" },
+  { label: "A Course In Miracles & Helpful Magic", color: "violet" },
+  { label: "A Journey Through Spiritual Principles", color: "sky" },
+  { label: "Real Spiritual Life Manifestation", color: "emerald" },
+  { label: "The Nature of Addiction", color: "rose" },
+  { label: "The Beginning of the End of Division", color: "amber" },
 ];
 
 /* ── Color mapping for section accents ── */
@@ -235,37 +139,77 @@ const colorMap: Record<string, { text: string; bg: string; border: string; icon:
 export default function RetreatsPage() {
   /* ── Modal state ── */
   const [healersOpen, setHealersOpen] = useState(false);
-  const [teachingsOpen, setTeachingsOpen] = useState(false);
+  const [plantsMiraclesOpen, setPlantsMiraclesOpen] = useState(false);
+  const [standardOpen, setStandardOpen] = useState(false);
+  const [extendedOpen, setExtendedOpen] = useState(false);
+  const [masterOpen, setMasterOpen] = useState(false);
   const [healersAtBottom, setHealersAtBottom] = useState(false);
-  const [teachingsAtBottom, setTeachingsAtBottom] = useState(false);
+  const [plantsMiraclesAtBottom, setPlantsMiraclesAtBottom] = useState(false);
   const healersScrollRef = useRef<HTMLDivElement>(null);
-  const teachingsScrollRef = useRef<HTMLDivElement>(null);
+  const plantsMiraclesScrollRef = useRef<HTMLDivElement>(null);
 
   const handleHealersScroll = () => {
     const el = healersScrollRef.current;
     if (el) setHealersAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 24);
   };
-  const handleTeachingsScroll = () => {
-    const el = teachingsScrollRef.current;
-    if (el) setTeachingsAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 24);
+  const handlePlantsMiraclesScroll = () => {
+    const el = plantsMiraclesScrollRef.current;
+    if (el) setPlantsMiraclesAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 24);
   };
 
   // Lock body scroll + escape key for open modals
   useEffect(() => {
-    if (healersOpen || teachingsOpen) {
+    const anyOpen = healersOpen || plantsMiraclesOpen || standardOpen || extendedOpen || masterOpen;
+    if (anyOpen) {
       document.body.style.overflow = "hidden";
       const handler = (e: KeyboardEvent) => {
-        if (e.key === "Escape") { setHealersOpen(false); setTeachingsOpen(false); }
+        if (e.key === "Escape") { setHealersOpen(false); setPlantsMiraclesOpen(false); setStandardOpen(false); setExtendedOpen(false); setMasterOpen(false); }
       };
       document.addEventListener("keydown", handler);
       return () => { document.body.style.overflow = ""; document.removeEventListener("keydown", handler); };
     }
     return () => { document.body.style.overflow = ""; };
-  }, [healersOpen, teachingsOpen]);
+  }, [healersOpen, plantsMiraclesOpen, standardOpen, extendedOpen, masterOpen]);
 
   return (
     <>
       <div data-pagefind-body>
+      {/* ── Pagefind-indexable hidden content (modals aren't in DOM at build time) ── */}
+      <div className="hidden" data-pagefind-body aria-hidden>
+        <h2>Our Team of Healers</h2>
+        <h3>Maestro Isaiah Kenney — Founder & Retreat Leader</h3>
+        <p>Isaiah has been working as an Ayahuasquero for 11 years. He was introduced to it by the Great Spirit after a Kundalini awakening, which led to the awakening of the true Spiritual Eye of Light and the Golden Halo. He has studied with 5 different families in the Amazon from various tribes, including the Amaringo-Shuña lineage and the Shipibo. A Sufi under the guidance of Inayat Khan & Jesus, specializing in Christian Mysticism. Also practices Vedanta and works in the Order of Melchizedek Priests.</p>
+        <h3>Maestro Alex Wexukapi — Shipibo Curandero</h3>
+        <p>Alex has over 15 years working with Ayahuasca. He completed a year-long apprenticeship dieting on many master plants with Shipibo Master Alfredo Sinamano Cairuna. He has trained many teachers and worked in Brazil, receiving the Spirit Warrior initiation from the Shawãdawa people. His wider spiritual background includes Buddhism, Japanese Shamanism, Jungian psychology, and Hermetic studies.</p>
+        <h3>Maestro David Amaringo — Ayahuasca Visionary Artist & Co-founder</h3>
+        <p>David is a master Ayahuasca visionary artist trained by his uncle, the legendary Pablo Cesar Amaringo Shuña. He began training at 14 at the USKO-AYAR Amazonian School of Painting. His work has been displayed worldwide, including the Museum of Children's Art in Oslo, Norway. He is an exceptional guide of the upper Amazon basin, skilled English translator, and masterful ceremonial facilitator.</p>
+        <h2>Plants & Miracles — Flight of Eagle and Condor</h2>
+        <h3>{plantsAndMiracles.chaiconiBari.heading}</h3>
+        <p>{plantsAndMiracles.chaiconiBari.body}</p>
+        <p>{plantsAndMiracles.chaiconiBari.body2}</p>
+        <blockquote>{plantsAndMiracles.chaiconiBari.quote}</blockquote>
+        <p>{plantsAndMiracles.chaiconiBari.closing}</p>
+        <h3>The Eagle — Western Mind of Medicine</h3>
+        <p>{plantsAndMiracles.eagle.body}</p>
+        <h3>The Condor — Indigenous Mind of Plant Wisdom</h3>
+        <p>{plantsAndMiracles.condor.body}</p>
+        <h3>{plantsAndMiracles.barnOwl.heading}</h3>
+        <p>{plantsAndMiracles.barnOwl.body}</p>
+        <p>{plantsAndMiracles.barnOwl.closing}</p>
+        <h3>What the Plants Teach</h3>
+        {plantsAndMiracles.whatThePlantsTeach.map((item, i) => (
+          <p key={i}>{item.teaching} — {item.plant}</p>
+        ))}
+        <h2>What's Included</h2>
+        <h3>Standard Retreat</h3>
+        <p>Multiple ceremony nights, shared accommodation, all dieta-compliant meals, group sharing circles, integration support, 3-month post-retreat integration program.</p>
+        <h3>Extended Program</h3>
+        <p>12-day immersion with additional ceremony nights, master plant introduction, extended dieta, deeper one-on-one time with curanderos.</p>
+        <h3>Master Plant Dieta</h3>
+        <p>7–30 day programs in isolation with specific master plants, daily guidance from curanderos, all meals, accommodation, and ceremony inclusions, profound integration support.</p>
+        <h2>Ready to Apply</h2>
+        <p>If you found us through Retreat Guru, Aya Advisors, or one of our partner listings, please indicate the referral source on your application so we can honor them appropriately.</p>
+      </div>
       {/* ── Hero ── */}
       <section className="relative px-6 py-24 mx-auto max-w-4xl text-center">
         <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-4 py-1.5 text-sm text-amber-700 dark:text-amber-400 mb-6">
@@ -281,6 +225,15 @@ export default function RetreatsPage() {
           Plants & Miracles teaching.
         </p>
         <div className="mt-6 h-px w-24 mx-auto bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
+
+        {/* Jump to What's Included */}
+        <button
+          onClick={() => document.getElementById("whats-included")?.scrollIntoView({ behavior: "smooth" })}
+          className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 px-5 py-2.5 text-sm font-medium text-amber-700 dark:text-amber-300 shadow-sm hover:shadow-md hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-all hover:-translate-y-0.5"
+        >
+          <ChevronDown className="h-4 w-4" />
+          See What's Included
+        </button>
 
         {/* Kenney's welcome */}
         <div className="mt-10 max-w-3xl mx-auto text-left">
@@ -458,23 +411,20 @@ export default function RetreatsPage() {
         )}
       </AnimatePresence>
 
-      {/* ── The Teaching of the Winged Sun — Modal Trigger ── */}
+      {/* ── Plants & Miracles — Modal Trigger ── */}
       <section className="px-6 py-16 mx-auto max-w-4xl text-center">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-50">
-          The Teaching of the Winged Sun
+        <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-2">
+          Plants & Miracles
         </h2>
-        <p className="mt-3 text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-          The teachings offered at Chaiconi Bari as part of the Plants & Miracles curriculum.
-          Each section is a gateway to the Escape from Darkness and the remembrance of who you
-          truly are.
+        <p className="text-neutral-500 dark:text-neutral-500 mb-6">
+          The Flight of the Eagle & Condor — Chaiconi Bari, the Barn Owl, and what the plants teach.
         </p>
-        <div className="mt-6 h-px w-24 mx-auto bg-gradient-to-r from-transparent via-amber-500 to-transparent" />
         <button
-          onClick={() => setTeachingsOpen(true)}
-          className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5 dark:bg-amber-500 dark:shadow-amber-500/20 dark:hover:bg-amber-400"
+          onClick={() => setPlantsMiraclesOpen(true)}
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-950/30 px-6 py-3 text-sm font-medium text-emerald-700 dark:text-emerald-300 shadow-sm hover:shadow-md hover:bg-emerald-100 dark:hover:bg-emerald-950/50 transition-all hover:-translate-y-0.5"
         >
-          <BookOpen className="h-4 w-4" />
-          Explore the 18 Teachings
+          <Leaf className="h-4 w-4" />
+          Explore Plants & Miracles
         </button>
         <p className="mt-3 text-xs text-neutral-400 dark:text-neutral-500">
           Also on{" "}
@@ -489,16 +439,16 @@ export default function RetreatsPage() {
         </p>
       </section>
 
-      {/* ── Teachings Modal ── */}
+      {/* ── Plants & Miracles Modal ── */}
       <AnimatePresence>
-        {teachingsOpen && (
+        {plantsMiraclesOpen && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm" onClick={() => setTeachingsOpen(false)} />
+            <div className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm" onClick={() => setPlantsMiraclesOpen(false)} />
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -506,49 +456,86 @@ export default function RetreatsPage() {
               className="relative z-10 w-full max-w-3xl rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xl flex flex-col max-h-[85vh]"
             >
               <div className="flex items-center justify-between p-6 pb-2 flex-shrink-0">
-                <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">The Teaching of the Winged Sun</h3>
-                <button onClick={() => setTeachingsOpen(false)} className="p-1 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors" aria-label="Close"><X className="h-5 w-5" /></button>
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">Plants & Miracles — Flight of Eagle & Condor</h3>
+                <button onClick={() => setPlantsMiraclesOpen(false)} className="p-1 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors" aria-label="Close"><X className="h-5 w-5" /></button>
               </div>
               <div
-                ref={teachingsScrollRef}
-                onScroll={handleTeachingsScroll}
+                ref={plantsMiraclesScrollRef}
+                onScroll={handlePlantsMiraclesScroll}
                 className="px-6 pb-4 overflow-y-auto scroll-smooth flex-1"
                 style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(217,119,6,0.3) transparent" }}
               >
                 <div className="space-y-6">
-                  {teachings.map((t) => {
-                    const Icon = t.icon;
-                    const colors = colorMap[t.color] || colorMap.amber;
-                    return (
-                      <div key={t.id} id={t.id} className="scroll-mt-24 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden">
-                        <div className={`px-5 py-3 ${colors.bg} ${colors.border} border-b flex items-center gap-2`}>
-                          <Icon className={`h-4 w-4 ${colors.icon}`} />
-                          <h4 className={`text-base font-semibold ${colors.text}`}>{t.title}</h4>
+                  {/* Chaiconi Bari */}
+                  <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5">
+                    <h4 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-3">{plantsAndMiracles.chaiconiBari.heading}</h4>
+                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">{plantsAndMiracles.chaiconiBari.body}</p>
+                    <p className="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">{plantsAndMiracles.chaiconiBari.body2}</p>
+                    <blockquote className="mt-4 pl-3 border-l-2 border-amber-300 dark:border-amber-700">
+                      <p className="text-xs text-neutral-500 dark:text-neutral-500 italic leading-relaxed">{plantsAndMiracles.chaiconiBari.quote}</p>
+                    </blockquote>
+                    <p className="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">{plantsAndMiracles.chaiconiBari.closing}</p>
+                  </div>
+
+                  {/* Eagle & Condor */}
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20 p-5">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 rounded-xl bg-amber-100 dark:bg-amber-950/40">
+                          <BookOpen className="h-5 w-5 text-amber-600 dark:text-amber-400" />
                         </div>
-                        <div className="px-5 py-4">
-                          <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">{t.body}</p>
-                          {t.quote && (
-                            <blockquote className="mt-4 pl-3 border-l-2 border-amber-300 dark:border-amber-700">
-                              <p className="text-xs text-neutral-500 dark:text-neutral-500 italic leading-relaxed">{t.quote}</p>
-                            </blockquote>
-                          )}
-                          <div className="mt-3 flex justify-end">
-                            <Link href="/faq" className="inline-flex items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400 hover:underline transition-colors">
-                              Read more in the FAQ <ArrowRight className="h-2.5 w-2.5" />
-                            </Link>
-                          </div>
+                        <div>
+                          <h4 className="text-base font-semibold text-amber-600 dark:text-amber-400">{plantsAndMiracles.eagle.title}</h4>
+                          <p className="text-xs text-neutral-500">{plantsAndMiracles.eagle.subtitle}</p>
                         </div>
                       </div>
-                    );
-                  })}
+                      <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">{plantsAndMiracles.eagle.body}</p>
+                    </div>
+                    <div className="rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-950/20 p-5">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-950/40">
+                          <Feather className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-base font-semibold text-emerald-600 dark:text-emerald-400">{plantsAndMiracles.condor.title}</h4>
+                          <p className="text-xs text-neutral-500">{plantsAndMiracles.condor.subtitle}</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">{plantsAndMiracles.condor.body}</p>
+                    </div>
+                  </div>
+
+                  {/* Barn Owl */}
+                  <div className="rounded-xl border border-violet-200 dark:border-violet-800 bg-gradient-to-br from-amber-50/50 to-violet-50/50 dark:from-amber-950/20 dark:to-violet-950/20 p-6 text-center">
+                    <Sun className="h-8 w-8 text-amber-500 mx-auto mb-3" />
+                    <h4 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">{plantsAndMiracles.barnOwl.heading}</h4>
+                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">{plantsAndMiracles.barnOwl.body}</p>
+                    <p className="mt-3 text-sm font-medium text-violet-600 dark:text-violet-400 italic">{plantsAndMiracles.barnOwl.closing}</p>
+                  </div>
+
+                  {/* What the Plants Teach */}
+                  <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5">
+                    <h4 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">What the Plants Teach</h4>
+                    <ul className="space-y-3">
+                      {plantsAndMiracles.whatThePlantsTeach.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-100 dark:border-neutral-800/50">
+                          <Sparkles className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">{item.teaching}</p>
+                            <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1">— {item.plant}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-3 px-6 pb-6 pt-2 flex-shrink-0">
-                <button onClick={() => { const el = teachingsScrollRef.current; if (el) el.scrollTo({ top: teachingsAtBottom ? 0 : el.scrollHeight, behavior: "smooth" }); }} className="inline-flex items-center gap-1 text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors">
-                  {teachingsAtBottom ? <><ArrowUp className="h-3 w-3" /> Top</> : <><ArrowDown className="h-3 w-3" /> Bottom</>}
+                <button onClick={() => { const el = plantsMiraclesScrollRef.current; if (el) el.scrollTo({ top: plantsMiraclesAtBottom ? 0 : el.scrollHeight, behavior: "smooth" }); }} className="inline-flex items-center gap-1 text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors">
+                  {plantsMiraclesAtBottom ? <><ArrowUp className="h-3 w-3" /> Top</> : <><ArrowDown className="h-3 w-3" /> Bottom</>}
                 </button>
                 <div className="flex-1" />
-                <a href="https://www.iamoneself.com/plants-and-miracles" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-5 py-2 text-sm font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5 dark:bg-amber-500 dark:hover:bg-amber-400">
+                <a href="https://www.iamoneself.com/plants-and-miracles" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 py-2 text-sm font-medium text-white shadow-lg shadow-emerald-600/25 transition-all hover:bg-emerald-700 hover:-translate-y-0.5 dark:bg-emerald-500 dark:hover:bg-emerald-400">
                   View on Wix <ExternalLink className="h-3 w-3" />
                 </a>
               </div>
@@ -558,36 +545,60 @@ export default function RetreatsPage() {
       </AnimatePresence>
 
       {/* ── Retreat Topics ── */}
-      <section className="px-6 py-16 mx-auto max-w-4xl">
-        <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-8 text-center">
+      <section className="px-6 py-16 mx-auto max-w-4xl text-center">
+        <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-2">
           Retreat Topics
         </h2>
+        <p className="text-neutral-500 dark:text-neutral-500 mb-6">
+          The teaching themes explored during ceremony and integration at Chaiconi Bari.
+        </p>
         <div className="flex flex-wrap justify-center gap-3">
-          {[
-            "Miracle or True Forgiveness",
-            "Real Intimacy",
-            "Spiritual Sexuality",
-            "Life Can Be SO Challenging",
-            "The Addiction to Thinking",
-            "A Course In Miracles & Helpful Magic",
-            "A Journey Through Spiritual Principles",
-            "Real Spiritual Life Manifestation",
-            "The Nature of Addiction",
-            "The Beginning of the End of Division",
-          ].map((topic) => (
+          {retreatTopics.map((topic) => (
             <span
-              key={topic}
-              className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 px-4 py-2 text-sm font-medium text-amber-700 dark:text-amber-300"
+              key={topic.label}
+              className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium ${
+                colorMap[topic.color]
+                  ? `${colorMap[topic.color].bg} ${colorMap[topic.color].border} ${colorMap[topic.color].text}`
+                  : "border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300"
+              }`}
             >
               <Sparkles className="h-3.5 w-3.5" />
-              {topic}
+              {topic.label}
             </span>
           ))}
         </div>
+        <p className="mt-6 text-xs text-neutral-400 dark:text-neutral-500">
+          Full teachings on{" "}
+          <Link href="/" className="text-amber-600 dark:text-amber-400 hover:underline">
+            iamoneself.dev → Explore the Teachings
+          </Link>
+          {" · "}
+          <a
+            href="https://www.iamoneself.com/psychedelic-mystic-teachings"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-amber-600 dark:text-amber-400 hover:underline"
+          >
+            iamoneself.com → Psychedelic Mystic Teachings
+            <ExternalLink className="h-2.5 w-2.5 inline ml-0.5" />
+          </a>
+        </p>
+        {/* COL Fellowship placeholder */}
+        <p className="mt-2 text-xs text-neutral-400 dark:text-neutral-500">
+          <a
+            href="https://www.iamoneself.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-400 dark:text-neutral-600 hover:text-amber-600 dark:hover:text-amber-400 transition-colors italic"
+          >
+            Circle of Light Fellowship → more info coming soon
+            <ExternalLink className="h-2.5 w-2.5 inline ml-0.5" />
+          </a>
+        </p>
       </section>
 
       {/* ── What's Included ── */}
-      <section className="px-6 py-16 bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
+      <section id="whats-included" className="px-6 py-16 bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">
             What's Included
@@ -598,44 +609,49 @@ export default function RetreatsPage() {
           </p>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3 max-w-3xl mx-auto">
-            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 text-center shadow-sm">
+            <button
+              onClick={() => setStandardOpen(true)}
+              className="group rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 text-center shadow-sm hover:shadow-md hover:border-amber-300 dark:hover:border-amber-700 transition-all hover:-translate-y-0.5"
+            >
               <p className="text-sm text-neutral-500 dark:text-neutral-500 uppercase tracking-wider font-medium">
                 Standard Retreat
               </p>
               <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
                 Multiple ceremony nights, shared accommodation, all meals, integration support
               </p>
-              <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
-                Apply for details
+              <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium group-hover:underline">
+                Click for details
               </p>
-            </div>
-            <div className="rounded-2xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 p-6 text-center shadow-sm">
+            </button>
+            <button
+              onClick={() => setExtendedOpen(true)}
+              className="group rounded-2xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 p-6 text-center shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
+            >
               <p className="text-sm text-amber-600 dark:text-amber-400 uppercase tracking-wider font-medium">
                 Extended Program
               </p>
               <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
                 12-day immersion with additional ceremonies, master plant introduction, extended dieta
               </p>
-              <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
-                Apply via Retreat Guru
+              <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium group-hover:underline">
+                Click for details
               </p>
-            </div>
-            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 text-center shadow-sm">
+            </button>
+            <button
+              onClick={() => setMasterOpen(true)}
+              className="group rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 text-center shadow-sm hover:shadow-md hover:border-amber-300 dark:hover:border-amber-700 transition-all hover:-translate-y-0.5"
+            >
               <p className="text-sm text-neutral-500 dark:text-neutral-500 uppercase tracking-wider font-medium">
                 Master Plant Dieta
               </p>
               <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
                 7–30 day programs in isolation with specific master plants — for those called deeper
               </p>
-              <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
-                Apply for details
+              <p className="mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium group-hover:underline">
+                Click for details
               </p>
-            </div>
+            </button>
           </div>
-
-          <p className="mt-6 text-sm text-neutral-500 dark:text-neutral-500">
-            For pricing, program details, and financial assistance inquiries, please contact our listing partners directly through their official sites (this GitHub dev portal does not process inquiries).
-          </p>
         </div>
       </section>
 
@@ -647,12 +663,24 @@ export default function RetreatsPage() {
         <p className="mt-2 text-neutral-600 dark:text-neutral-400">
           Complete your application through our listing partners. Each application is reviewed by our team and medical advisor.
         </p>
+
+        {/* Primary booking: Miracle Retreats (orange) first */}
         <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="https://www.iamoneself.com/miracle-retreats"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-orange-600/25 transition-all hover:bg-orange-700 hover:-translate-y-0.5 dark:bg-orange-500 dark:shadow-orange-500/20 dark:hover:bg-orange-400"
+          >
+            <Sun className="h-4 w-4" />
+            Miracle Retreats
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
           <a
             href="https://iamoneself.retreat.guru"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-amber-600/25 transition-all hover:bg-amber-700 hover:-translate-y-0.5 dark:bg-amber-500 dark:shadow-amber-500/20 dark:hover:bg-amber-400"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 px-6 py-3 text-sm font-medium text-amber-700 dark:text-amber-300 shadow-sm hover:shadow-md hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-all hover:-translate-y-0.5"
           >
             <Mountain className="h-4 w-4" />
             Find us on Retreat Guru
@@ -666,19 +694,15 @@ export default function RetreatsPage() {
             Find us on Aya Advisors
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
-          <a
-            href="https://www.iamoneself.com/miracle-retreats"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 px-6 py-3 text-sm font-medium text-amber-700 dark:text-amber-300 shadow-sm hover:shadow-md hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-all hover:-translate-y-0.5"
-          >
-            <Sun className="h-4 w-4" />
-            Miracle Retreats
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        {/* Pricing/contact bridge */}
+        <p className="mt-6 text-sm text-neutral-500 dark:text-neutral-500 max-w-xl mx-auto">
+          For pricing, program details, and financial assistance inquiries, please contact our listing partners directly through their official sites.
+        </p>
+
+        {/* Secondary links */}
+        <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/faq"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 px-5 py-2.5 text-sm font-medium text-neutral-600 dark:text-neutral-400 shadow-sm hover:shadow-md hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all hover:-translate-y-0.5"
@@ -708,10 +732,155 @@ export default function RetreatsPage() {
           </a>
         </div>
 
+        {/* Referral attribution */}
+        <p className="mt-6 text-sm text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto">
+          If you found us through Retreat Guru, Aya Advisors, or one of our partner listings, please indicate the referral
+          source on your application so we can honor them appropriately.
+        </p>
+
         <p className="mt-6 text-sm text-neutral-500 dark:text-neutral-500">
           Do not book flights until your application is approved.
         </p>
+
+        {/* Subtle TOS-friendly disclaimer */}
+        <p className="mt-4 text-xs text-neutral-400 dark:text-neutral-600 max-w-md mx-auto flex items-center justify-center gap-1.5">
+          <Info className="h-3 w-3 flex-shrink-0" />
+          This dev portal provides information only — applications and transactions are processed through our listing partners above.
+        </p>
       </section>
+
+      {/* ── Standard Retreat Package Modal ── */}
+      <AnimatePresence>
+        {standardOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm" onClick={() => setStandardOpen(false)} />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              className="relative z-10 w-full max-w-lg rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xl"
+            >
+              <div className="flex items-center justify-between p-6 pb-2">
+                <div className="flex items-center gap-2">
+                  <Package className="h-5 w-5 text-amber-500" />
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">Standard Retreat</h3>
+                </div>
+                <button onClick={() => setStandardOpen(false)} className="p-1 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors" aria-label="Close"><X className="h-5 w-5" /></button>
+              </div>
+              <div className="px-6 pb-6 space-y-4">
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  The Standard Retreat is our foundational offering — a powerful introduction to the Plants & Miracles
+                  teaching in an intimate group setting with traditional Shipibo curanderos.
+                </p>
+                <ul className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Multiple ceremony nights</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Shared accommodation at our partner centers</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> All dieta-compliant meals</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Group sharing circles & integration support</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> 3-month post-retreat integration program</li>
+                </ul>
+                <p className="text-xs text-neutral-400 dark:text-neutral-500 italic">
+                  Detailed pricing and availability available through our listing partners.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Extended Program Package Modal ── */}
+      <AnimatePresence>
+        {extendedOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm" onClick={() => setExtendedOpen(false)} />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              className="relative z-10 w-full max-w-lg rounded-2xl bg-white dark:bg-neutral-900 border border-amber-200 dark:border-amber-800 shadow-2xl"
+            >
+              <div className="flex items-center justify-between p-6 pb-2">
+                <div className="flex items-center gap-2">
+                  <Package className="h-5 w-5 text-amber-500" />
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">Extended Program</h3>
+                </div>
+                <button onClick={() => setExtendedOpen(false)} className="p-1 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors" aria-label="Close"><X className="h-5 w-5" /></button>
+              </div>
+              <div className="px-6 pb-6 space-y-4">
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  The Extended Program is a 12-day immersion for those who feel called deeper. It includes
+                  additional ceremonies, a master plant introduction, and an extended dieta for amplified healing.
+                </p>
+                <ul className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> All Standard Retreat inclusions</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Extended 12-day stay with additional ceremony nights</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Master plant introduction ceremony</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Extended dieta program</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Deeper one-on-one time with curanderos</li>
+                </ul>
+                <p className="text-xs text-neutral-400 dark:text-neutral-500 italic">
+                  Detailed pricing and availability available through our listing partners.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Master Plant Dieta Package Modal ── */}
+      <AnimatePresence>
+        {masterOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm" onClick={() => setMasterOpen(false)} />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 12 }}
+              className="relative z-10 w-full max-w-lg rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xl"
+            >
+              <div className="flex items-center justify-between p-6 pb-2">
+                <div className="flex items-center gap-2">
+                  <Package className="h-5 w-5 text-amber-500" />
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50">Master Plant Dieta</h3>
+                </div>
+                <button onClick={() => setMasterOpen(false)} className="p-1 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors" aria-label="Close"><X className="h-5 w-5" /></button>
+              </div>
+              <div className="px-6 pb-6 space-y-4">
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  The Master Plant Dieta is for those who feel a deep calling to work with specific master plants
+                  in isolation — the traditional shamanic path of receiving plant teachings directly.
+                </p>
+                <ul className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> 7–30 day programs tailored to your calling</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Isolation dieta with a specific master plant</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Daily guidance from curanderos</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> All meals, accommodation, and ceremony inclusions</li>
+                  <li className="flex items-start gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-500 mt-0.5 flex-shrink-0" /> Profound integration support for extended journeys</li>
+                </ul>
+                <p className="text-xs text-neutral-400 dark:text-neutral-500 italic">
+                  Detailed pricing and availability available through our listing partners.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       </div>
     </>
   );
