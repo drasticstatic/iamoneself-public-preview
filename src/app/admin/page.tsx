@@ -1,4 +1,4 @@
-import { Wrench, Shield } from "lucide-react";
+import { Wrench, Shield, UserRoundKey, ExternalLink } from "lucide-react";
 
 export const metadata = {
   title: "Admin — I Am One Self",
@@ -35,7 +35,19 @@ export default function AdminPage() {
             </p>
           </div>
 
-          <p className="mt-10 text-sm text-neutral-400 dark:text-neutral-500 italic">
+          {/* ACIM Lesson 155 — stepping back and letting Him lead */}
+          <a
+            href="https://acim.org/acim/lesson-155/i-will-step-back-and-let-him-lead-the-way/en/s/561"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-flex items-center gap-2 text-sm text-neutral-400 dark:text-neutral-500 hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
+          >
+            <UserRoundKey className="h-4 w-4" />
+            &ldquo;I will step back and let Him lead the way&rdquo; — ACIM, Lesson 155
+            <ExternalLink className="h-3 w-3" />
+          </a>
+
+          <p className="mt-6 text-sm text-neutral-400 dark:text-neutral-500 italic">
             Return to the{" "}
             <a href="/" className="text-amber-600 dark:text-amber-400 hover:underline">
               retreat portal

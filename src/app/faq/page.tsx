@@ -16,6 +16,7 @@ import {
   Flower2,
   HandHeart,
   MessageCircleQuestion,
+  CircleArrowDown,
   type LucideIcon,
 } from "lucide-react";
 
@@ -47,6 +48,10 @@ export default function FAQPage() {
   const [search, setSearch] = useState("");
   const [openIndex, setOpenIndex] = useState<string | null>(null);
   const [highlightId, setHighlightId] = useState<string | null>(null);
+  const [showExamples, setShowExamples] = useState(false);
+
+  // Example search terms for dropdown
+  const exampleTerms = ["dieta", "forgiveness", "Golden Halo", "Chaiconi Bari", "safety", "integration", "Barn Owl", "application"];
 
   const lc = search.toLowerCase();
 
@@ -113,8 +118,50 @@ export default function FAQPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search questions..."
-            className="w-full rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 pl-10 pr-4 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 focus:border-amber-400 transition"
+            className="w-full rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 pl-10 pr-10 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-amber-500/40 focus:border-amber-400 transition"
           />
+          <button
+            onClick={() => setShowExamples(!showExamples)}
+            className={`absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full transition-colors ${showExamples ? "text-amber-500 bg-amber-50 dark:bg-amber-950/30" : "text-neutral-400 hover:text-amber-500"}`}
+            aria-label="Show search examples"
+          >
+            <CircleArrowDown className={`h-4 w-4 transition-transform ${showExamples ? "rotate-180" : ""}`} />
+          </button>
+
+          {/* Example terms dropdown */}
+          {showExamples && (
+            <div className="absolute top-full mt-2 left-0 right-0 p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-lg z-10">
+              <p className="text-xs font-medium text-neutral-400 dark:text-neutral-500 mb-2 uppercase tracking-wider">Try searching</p>
+              <div className="flex flex-wrap gap-1.5">
+                {exampleTerms.map((term) => (
+                  <button
+                    key={term}
+                    onClick={() => { setSearch(term); setShowExamples(false); }}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-xs font-medium text-amber-600 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-colors"
+                  >
+                    <Search className="h-2.5 w-2.5" />
+                    {term}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Cross-links to deeper search modes */}
+          <p className="mt-2 text-center text-[10px] text-neutral-400 dark:text-neutral-600">
+            Also try our{" "}
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event("open-guide-modal")); }}
+              className="text-violet-500 dark:text-violet-400 hover:underline"
+            >
+              agentic search
+            </a>
+            {" "}or the{" "}
+            <Link href="/404" className="text-violet-500 dark:text-violet-400 hover:underline">
+              full-site deep search
+            </Link>
+          </p>
         </div>
       </section>
 

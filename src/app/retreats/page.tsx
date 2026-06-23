@@ -22,6 +22,8 @@ import {
   Package,
   Info,
   Ghost,
+  VenetianMask,
+  Footprints,
 } from "lucide-react";
 
 /* ── Retreat Centers ── */
@@ -412,6 +414,15 @@ export default function RetreatsPage() {
                 <Ghost className="h-3 w-3 flex-shrink-0" />
                 Healer identities and personal details are shared with respect and consent. What is revealed in ceremony is held in confidence.
               </p>
+              <a
+                href="https://acim.org/acim/lesson-154/i-am-among-the-ministers-of-god/en/s/560"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-6 mb-4 flex items-start gap-1.5 text-xs text-neutral-400 dark:text-neutral-500 hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
+              >
+                <VenetianMask className="h-3 w-3 flex-shrink-0 mt-0.5" />
+                <span>&ldquo;I am among the ministers of God&rdquo; — ACIM, Lesson 154. In truth there is one Name beyond ego identification; Jesus and the Holy Spirit are the healers, and we are anonymous ministers under that one Name.</span>
+              </a>
             </motion.div>
           </motion.div>
         )}
@@ -604,7 +615,7 @@ export default function RetreatsPage() {
       </section>
 
       {/* ── What's Included ── */}
-      <section id="whats-included" className="px-6 py-16 bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
+      <section id="whats-included" className="scroll-mt-28 px-6 py-16 bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">
             What's Included
@@ -670,18 +681,19 @@ export default function RetreatsPage() {
           Complete your application through our listing partners. Each application is reviewed by our team and medical advisor.
         </p>
 
-        {/* Primary booking: Miracle Retreats (orange) first */}
-        <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://www.iamoneself.com/miracle-retreats"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-orange-600/25 transition-all hover:bg-orange-700 hover:-translate-y-0.5 dark:bg-orange-500 dark:shadow-orange-500/20 dark:hover:bg-orange-400"
+        {/* Primary CTA — big /apply button with Footprints */}
+        <div className="mt-8">
+          <Link
+            href="/apply"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-orange-600/25 transition-all hover:bg-orange-700 hover:-translate-y-1 hover:shadow-xl dark:bg-orange-500 dark:shadow-orange-500/20 dark:hover:bg-orange-400"
           >
-            <Sun className="h-4 w-4" />
-            Miracle Retreats
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
+            <Footprints className="h-5 w-5" />
+            Next Steps
+          </Link>
+        </div>
+
+        {/* Listing partners: Retreat Guru (amber border), Aya Advisors (amber border), Miracle Retreats (orange) */}
+        <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="https://iamoneself.retreat.guru"
             target="_blank"
@@ -695,9 +707,19 @@ export default function RetreatsPage() {
             href="https://www.ayaadvisors.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-300 dark:border-neutral-700 px-6 py-3 text-sm font-medium text-neutral-700 dark:text-neutral-300 shadow-sm hover:shadow-md hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 px-6 py-3 text-sm font-medium text-amber-700 dark:text-amber-300 shadow-sm hover:shadow-md hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-all hover:-translate-y-0.5"
           >
             Find us on Aya Advisors
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          <a
+            href="https://www.iamoneself.com/miracle-retreats"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-orange-600/25 transition-all hover:bg-orange-700 hover:-translate-y-0.5 dark:bg-orange-500 dark:shadow-orange-500/20 dark:hover:bg-orange-400"
+          >
+            <Sun className="h-4 w-4" />
+            Miracle Retreats
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
         </div>

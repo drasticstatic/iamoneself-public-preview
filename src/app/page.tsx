@@ -11,10 +11,10 @@ import {
   Feather,
   ExternalLink,
   Globe,
-  MessageCircle,
   Send,
   Leaf,
   X,
+  BotMessageSquare,
 } from "lucide-react";
 import { TeachingModal, type TeachingPill } from "@/components/TeachingModal";
 import AdminPanel from "@/components/AdminPanel";
@@ -253,19 +253,19 @@ const teachings: TeachingPill[] = [
   },
 ];
 
-// Sample agent questions — color-coded deep-links
+
+// Agent questions — reused in Guide modal prompts (kept for future AI integration)
 const agentQuestions = [
-  { href: "/faq#miracle-principles", label: "What are Miracle Principles?", color: "amber" },
-  { href: "/retreats", label: "When is the next retreat?", color: "emerald" },
-  { href: "/faq#the-dieta", label: "How do I prepare?", color: "amber" },
-  { href: "/faq#escape-from-darkness", label: "Is it safe?", color: "amber" },
-  { href: "/faq#golden-halo", label: "What is the Golden Halo?", color: "amber" },
-  { href: "https://www.iamoneself.com/spiritual-life-coaching", label: "Spiritual Life Coaching", color: "rose", external: true },
+  { label: "What are Miracle Principles?", color: "amber" },
+  { label: "Which retreat program is right for me?", color: "emerald" },
+  { label: "How do I prepare for ceremony?", color: "amber" },
+  { label: "Is participating safe?", color: "amber" },
+  { label: "What is the Golden Halo of Light?", color: "amber" },
+  { label: "What happens after the retreat?", color: "rose" },
 ];
 
 export default function Home() {
   const [activePill, setActivePill] = useState<TeachingPill | null>(null);
-  const [agentOpen, setAgentOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
@@ -277,12 +277,6 @@ export default function Home() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Lock body scroll when agent modal is open
-  useEffect(() => {
-    if (agentOpen) document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, [agentOpen]);
 
   /* Keyboard shortcuts: Cmd+Shift+U → admin panel (Unlock — no browser conflict) */
   useEffect(() => {
@@ -304,80 +298,8 @@ export default function Home() {
       {/* Admin Panel Modal */}
       <AdminPanel open={adminOpen} onClose={() => setAdminOpen(false)} />
 
-      {/* Agent Chat Modal */}
-      <AnimatePresence>
-        {agentOpen && (
-          <motion.div
-            key="agent-modal"
-            className="fixed inset-0 z-[70] flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm" onClick={() => setAgentOpen(false)} />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 12 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 12 }}
-              transition={{ duration: 0.25, ease: "easeOut" as const }}
-              className="relative z-10 w-full max-w-md rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xl flex flex-col max-h-[80vh]"
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between p-5 border-b border-neutral-100 dark:border-neutral-800 flex-shrink-0">
-                <div className="flex items-center gap-2">
-                  <MessageCircle className="h-5 w-5 text-amber-500" />
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50">Ask a Question</h3>
-                </div>
-                <button onClick={() => setAgentOpen(false)} className="p-1 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Close">
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+      {/* Guide Modal is now in Navbar — accessible from any page */}
 
-              {/* Input + sample questions */}
-              <div className="p-5 overflow-y-auto flex-1">
-                <div className="flex items-center gap-2 px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 mb-4">
-                  <MessageCircle className="h-4 w-4 text-amber-500 flex-shrink-0" />
-                  <input
-                    type="text"
-                    placeholder="Type your question…"
-                    className="flex-1 bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:outline-none"
-                  />
-                  <Send className="h-4 w-4 text-neutral-300 dark:text-neutral-600" />
-                </div>
-
-                <p className="text-xs uppercase tracking-wider font-medium text-neutral-400 dark:text-neutral-600 mb-3">
-                  Popular questions — tap to explore
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {agentQuestions.map((q) => {
-                    const isExternal = "external" in q && q.external;
-                    const colorClasses: Record<string, string> = {
-                      amber: "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-950/40",
-                      emerald: "bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950/40",
-                      rose: "bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950/40",
-                    };
-                    const cls = colorClasses[q.color] || colorClasses.amber;
-                    return isExternal ? (
-                      <a key={q.href} href={q.href} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs font-medium transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-md ${cls}`}>
-                        {q.label} <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ) : (
-                      <Link key={q.href} href={q.href} onClick={() => setAgentOpen(false)} className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs font-medium transition-all hover:-translate-y-0.5 shadow-sm hover:shadow-md ${cls}`}>
-                        {q.label}
-                      </Link>
-                    );
-                  })}
-                </div>
-
-                <p className="mt-4 text-[10px] text-neutral-400 dark:text-neutral-600 text-center">
-                  AI agent concept — questions link to our knowledge base. Future: live API connection for real-time answers and FAQ deep-links in chat.
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
       {/* ── Hero ── */}
       <section className="relative flex flex-col items-center justify-center min-h-screen px-6 py-24 text-center overflow-hidden bg-gradient-to-b from-amber-50 via-white to-white dark:from-neutral-950 dark:via-neutral-950 dark:to-neutral-900">
         {/* Soft radial glow */}
@@ -446,7 +368,7 @@ export default function Home() {
           </Link>
         </motion.div>
 
-        {/* ── Agent Chat — compact input row, click opens modal ── */}
+        {/* ── Guide Chat — compact input row, click opens Guide modal ── */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -455,17 +377,17 @@ export default function Home() {
           className="mt-8 w-full max-w-lg mx-auto"
         >
           <button
-            onClick={() => setAgentOpen(true)}
-            className="w-full rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-amber-300 dark:hover:border-amber-800 transition-all hover:-translate-y-0.5 flex items-center gap-2 px-5 py-3"
+            onClick={() => window.dispatchEvent(new Event("open-guide-modal"))}
+            className="w-full rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-violet-300 dark:hover:border-violet-800 transition-all hover:-translate-y-0.5 flex items-center gap-2 px-5 py-3"
           >
-            <MessageCircle className="h-4 w-4 text-amber-500 flex-shrink-0" />
+            <BotMessageSquare className="h-4 w-4 text-violet-500 flex-shrink-0" />
             <span className="flex-1 text-left text-sm text-neutral-400 dark:text-neutral-500">
               Ask about retreats, the medicine, preparation…
             </span>
             <Send className="h-4 w-4 text-neutral-300 dark:text-neutral-600" />
           </button>
           <p className="mt-2 text-center text-[10px] text-neutral-400 dark:text-neutral-600">
-            AI agent concept — sample questions link to our knowledge base
+            AI guide — sample prompts help you explore our teachings
           </p>
         </motion.div>
 

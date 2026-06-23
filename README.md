@@ -46,12 +46,13 @@ Build a robust back-end context engine and interactive FAQ/knowledge-base interf
 ## 🚀 Capabilities
 
 ### Core Features
-- **Home** — Hero with ACIM quote, welcome letter, 6 bento nav cards, 11 teaching pills with modal + FAQ deep-links, agent chat concept
-- **FAQ** — 98 questions across 9 color-coded categories, search, anchor-based deep-linking with auto-open + highlight
-- **Retreats** — Kenney's welcome, 3 partner centers, 3 healer bios, 18 Winged Sun teaching sections with ACIM quotes, retreat topics, Retreat Guru & Aya Advisors CTAs
-- **Custom 404 / Sitemap** — Spiritual theme + integrated Pagefind search + full dual sitemap (live pages + in-development pages with EyeOff indicator)
+- **Home** — Hero with ACIM quote, welcome letter, 6 bento nav cards, 11 teaching pills with modal + FAQ deep-links, AI Guide chat field
+- **FAQ** — 98 questions across 9 color-coded categories, search with example terms dropdown, cross-links to AI Guide + deep search
+- **Retreats** — Kenney's welcome, 3 partner centers, 3 healer bios, 18 Winged Sun teaching sections with ACIM quotes, retreat topics, Retreat Guru & Aya Advisors CTAs, Ready to Apply section
+- **Next Steps (/apply)** — Application portal linking to Retreat Guru, Aya Advisors, Miracle Retreats
+- **AI Guide (modal)** — Pagefind-powered search accessible from any page via navbar, with example prompts — no page navigation needed
+- **Custom 404 / Sitemap** — Spiritual theme + integrated Pagefind search + full dual sitemap (live pages + in-development pages with EyeOff indicator) + AI Guide + Next Steps links
 - **Disclaimer Badge** — Persistent amber banner + concept-prototype disclosure modal
-- **AI Agent Concept** — Chat field + modal with sample deep-link questions (prototype, not a live API)
 
 ### Technical
 - Next.js 16 (App Router) — Static Site Generation (`output: 'export'`)
@@ -81,10 +82,12 @@ src/
 │   ├── page.tsx              → Home / Landing
 │   ├── faq/                  → FAQ — 98 questions, 9 categories, deep-links
 │   ├── retreats/             → Chaiconi Bari — teachings, healers, booking
-│   ├── not-found.tsx         → Custom 404 — spiritual theme + sitemap
-│   └── layout.tsx            → Root layout — Navbar, DisclaimerBadge, ScrollProgress, Footer
+│   ├── apply/                → Next Steps — application portal (Retreat Guru, Aya Advisors, Miracle Retreats)
+│   ├── admin/                → Admin — auth-gated operations portal
+│   ├── not-found.tsx         → Custom 404 — spiritual theme + sitemap + search
+│   └── layout.tsx            → Root layout — Navbar (Guide modal), DisclaimerBadge, ScrollProgress, Footer
 ├── components/
-│   ├── layout/               → Navbar (hamburger, dropdown, portal home), Footer
+│   ├── layout/               → Navbar (hamburger, dropdown, Guide modal, portal home), Footer
 │   ├── TeachingModal.tsx     → Teaching pill modal with FAQ deep-links
 │   ├── DisclaimerBadge.tsx   → Persistent banner + disclosure modal
 │   ├── PageScrollProgress.tsx → Gold scroll progress bar

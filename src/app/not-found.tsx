@@ -31,6 +31,8 @@ import {
   Library,
   FileSearchCorner,
   Code,
+  Footprints,
+  BotMessageSquare,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -66,6 +68,7 @@ function pageLabel(url: string): string {
   const labels: Record<string, string> = {
     faq: "FAQ",
     retreats: "Retreats",
+    apply: "Next Steps",
   };
   return labels[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
 }
@@ -103,6 +106,8 @@ const ghpagesRoutes = [
   { href: "/", label: "Portal Home", icon: Home },
   { href: "/faq", label: "FAQ", icon: BookOpen },
   { href: "/retreats", label: "Retreats", icon: Mountain },
+  { href: "/apply", label: "Next Steps", icon: Footprints },
+  { href: "#guide", label: "AI Guide", icon: BotMessageSquare, action: "open-guide-modal" },
 ];
 
 // Wix site pages — `live: true` = linked in navbar; `live: false` = published but not in nav (in development)
@@ -543,14 +548,24 @@ export default function NotFound() {
               </h2>
               <ul className="space-y-2">
                 {ghpagesRoutes.map((r) => (
-                  <li key={r.href}>
-                    <Link
-                      href={r.href}
-                      className="inline-flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all shadow-sm hover:shadow-md rounded-md px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:-translate-y-0.5"
-                    >
-                      <r.icon className="h-4 w-4 text-amber-500" />
-                      {r.label}
-                    </Link>
+                  <li key={r.href + (r.action || "")}>
+                    {"action" in r && r.action ? (
+                      <button
+                        onClick={() => window.dispatchEvent(new Event(r.action!))}
+                        className="inline-flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-violet-600 dark:hover:text-violet-400 transition-all shadow-sm hover:shadow-md rounded-md px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:-translate-y-0.5"
+                      >
+                        <r.icon className="h-4 w-4 text-violet-500" />
+                        {r.label}
+                      </button>
+                    ) : (
+                      <Link
+                        href={r.href}
+                        className="inline-flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all shadow-sm hover:shadow-md rounded-md px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:-translate-y-0.5"
+                      >
+                        <r.icon className="h-4 w-4 text-amber-500" />
+                        {r.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
 
