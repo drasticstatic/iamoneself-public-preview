@@ -29,6 +29,8 @@ import {
   HelpCircle,
   Sun,
   Library,
+  FileSearchCorner,
+  Code,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -343,8 +345,8 @@ export default function NotFound() {
               <p>
                 <strong>How modal content gets searched:</strong> Some of our richest
                 teaching content lives inside modals (Framer Motion AnimatePresence
-                overlays) — healer bios, the 18 Winged Sun teachings, the Plants &
-                Miracles curriculum, FAQ deep-links, and retreat package details.
+                overlays) — healer bios, the Winged Sun teachings (now on the homepage),
+                the Plants & Miracles curriculum, FAQ deep-links, and retreat package details.
                 Because these modals only render when opened, they don't exist in the
                 DOM at build time and Pagefind can't see them natively. Our solution:
                 each page with modals also includes a{" "}
@@ -385,6 +387,7 @@ export default function NotFound() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-medium text-amber-600 dark:text-amber-400 hover:underline"
                 >
+                  <FileSearchCorner className="h-3 w-3" />
                   Pagefind Docs
                   <ExternalLink className="h-2.5 w-2.5" />
                 </a>
@@ -394,6 +397,7 @@ export default function NotFound() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:underline"
                 >
+                  <Code className="h-3 w-3" />
                   GitHub Source
                   <ExternalLink className="h-2.5 w-2.5" />
                 </a>

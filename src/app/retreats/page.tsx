@@ -21,6 +21,7 @@ import {
   ChevronDown,
   Package,
   Info,
+  Ghost,
 } from "lucide-react";
 
 /* ── Retreat Centers ── */
@@ -406,6 +407,11 @@ export default function RetreatsPage() {
                   View on Wix <ExternalLink className="h-3 w-3" />
                 </a>
               </div>
+              {/* Anonymity footer */}
+              <p className="px-6 pb-4 text-xs text-neutral-400 dark:text-neutral-500 flex items-center gap-1.5">
+                <Ghost className="h-3 w-3 flex-shrink-0" />
+                Healer identities and personal details are shared with respect and consent. What is revealed in ceremony is held in confidence.
+              </p>
             </motion.div>
           </motion.div>
         )}
