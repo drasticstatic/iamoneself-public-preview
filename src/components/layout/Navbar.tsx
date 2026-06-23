@@ -21,12 +21,18 @@ import {
   Sparkles,
   Flower2,
   Phone,
+  MessageSquare,
+  Wrench,
+  NotebookPen,
 } from "lucide-react";
 
 // Internal nav links — shown in main navbar and hamburger
 const navLinks = [
   { href: "/faq", label: "FAQ", icon: BookOpen, external: false },
   { href: "/retreats", label: "Retreats", icon: Mountain, external: false },
+  { href: "/register", label: "Register", icon: NotebookPen, external: false },
+  { href: "/agent", label: "Agent", icon: MessageSquare, external: false },
+  { href: "/admin", label: "Admin", icon: Wrench, external: false },
   { href: "/404", label: "Lost?", icon: Sparkles, external: false },
 ];
 
