@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npx -y pagefind --site out",
+    "build": "next build && npx -y pagefind --site out && cp -r out/pagefind public/pagefind 2>/dev/null; echo 'Pagefind index copied to public/'",
     "build:only": "next build",
-    "index": "npx -y pagefind --site out",
+    "index": "npx -y pagefind --site out && cp -r out/pagefind public/pagefind 2>/dev/null; echo 'Pagefind index copied to public/'",
     "start": "next start",
     "lint": "eslint"
   },
