@@ -53,6 +53,10 @@ Build a robust back-end context engine and interactive FAQ/knowledge-base interf
 - **AI Guide (modal)** — Pagefind-powered search accessible from any page via navbar, with example prompts — no page navigation needed
 - **Custom 404 / Sitemap** — Spiritual theme + integrated Pagefind search + full dual sitemap (live pages + in-development pages with EyeOff indicator) + AI Guide + Next Steps links
 - **Disclaimer Badge** — Persistent amber banner + concept-prototype disclosure modal
+- **ScrollLegend** — Icon-aware sidebar navigation on all pages (Home, FAQ, Apply, Retreats) with Compass footer link
+- **ScrollIndicator** — 3-chevron animated dividers with an optional middle icon; rainbow when prism mode is active
+- **Parallax margin art** — Cloak & P&M logo images fixed to viewport edges with reversed parallax on scroll
+- **Footer compass** — Banner-wide golden compass image linking to Wix Plants & Miracles page
 
 ### Technical
 - Next.js 16 (App Router) — Static Site Generation (`output: 'export'`)
