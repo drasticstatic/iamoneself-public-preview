@@ -53,10 +53,11 @@ Build a robust back-end context engine and interactive FAQ/knowledge-base interf
 - **AI Guide (modal)** — Pagefind-powered search accessible from any page via navbar, with example prompts — no page navigation needed
 - **Custom 404 / Sitemap** — Spiritual theme + integrated Pagefind search + full dual sitemap (live pages + in-development pages with EyeOff indicator) + AI Guide + Next Steps links
 - **Disclaimer Badge** — Persistent amber banner + concept-prototype disclosure modal
-- **ScrollLegend** — Icon-aware sidebar navigation on all pages (Home, FAQ, Apply, Retreats) with Compass footer link
+- **ScrollLegend** — Icon-aware sidebar navigation on all pages (Home, FAQ, Apply, Retreats) with Compass footer link; active knob is amber (default "GoldenHalo") with a GoldenHalo sparkle-wave, or a rose→amber→emerald rainbow gradient in prism mode; inactives fill in the mode color on hover
 - **ScrollIndicator** — 3-chevron animated dividers with an optional middle icon; rainbow when prism mode is active
+- **ScrollReveal** — Framer Motion reverse-parallax section reveals (translate + opacity + a subtle scale 0.97→1) so the story reads forward with a touch of replayable depth
 - **Parallax margin art** — Cloak & P&M logo images fixed to viewport edges with reversed parallax on scroll
-- **Footer compass** — Banner-wide golden compass image linking to Wix Plants & Miracles page
+- **Footer compass-rose** — Elegant breathing compass-rose navigator; gold (default) ↔ rainbow via the prism toggle in Settings; the whole rose is one clickable external link (I Am One Self Navigator → iamoneself.com, Plant & Miracles Navigator → Plants & Miracles), with a flowering-vine border, abstract leaf-bud direction accents, and the active mode's name as arc text
 
 ### Technical
 - Next.js 16 (App Router) — Static Site Generation (`output: 'export'`)
@@ -158,6 +159,34 @@ npm run build
 | **Technical Lead / Builder** | Christopher Wilson |
 | **Agent** | Alfred (Claude Code CLI) |
 | **Observer / Context Bridge** | Littlebird |
+
+---
+
+## ✨ Session Notes (2026-07-08)
+
+Polish pass on the footer navigator + scroll system:
+
+- **Compass-rose redesign** — the footer compass is now a breathing SVG
+  compass-rose (not a bare image). The compass PNG fills the rectangular frame
+  directly (no circle mask — the orb carries its own N/E/S/W arms), the solid
+  border + asterisk fleurons were replaced with a flowering-vine border +
+  corner rosettes (ayahuasca theme), and direction accents are abstract
+  leaf-buds that compliment rather than compete with the orb. Arc text rides
+  wide banner arcs so the full navigator name no longer clips at the ends;
+  only the active mode's name renders (prism → top, gold → bottom).
+- **Footer compass navigates again** — the compass was accidentally toggling
+  prism mode; restored it as an external navigator link (Settings owns the
+  prism toggle that swaps the gold ↔ rainbow image). Whole rose = one click.
+- **ScrollLegend colors** — active knob is amber (GoldenHalo) with a
+  sparkle-wave, or rainbow (prism), never pink; inactives fill in the mode
+  color on hover. Icons + labels pulse together (synchronized).
+- **ScrollReveal** — added a scale 0.97→1 transform alongside the reverse
+  parallax so reveals have visible motion (still tunable toward "intensely tell
+  the story forward but able to reverse the action some and replay the feel").
+- **GoldenHalo light mode is still pending** — iamoneself's `dark:` utilities
+  still key off the OS (no `@custom-variant dark` override yet, unlike FYF).
+  When GoldenHalo lands, add the same one-liner to `globals.css` so the toggle
+  drives chrome, then build the amber-tinted light palette + gradient body.
 
 ---
 
