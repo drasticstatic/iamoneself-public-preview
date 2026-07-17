@@ -61,6 +61,32 @@ never on this site. See the disclaimer on every page for the full wording.
 > the existing form and only handles delivery is the right fit. A hosted UI was
 > considered and set aside.
 
+### A technical note — the failure modal is a portal
+
+When the form cannot submit (no Formspree endpoint configured, or the network
+can't reach it), a small `Form submission unavailable` modal opens so the
+visitor can contact the team directly or reach a listing partner. A discreet
+`See an issue with the form? Contact us here.` link at the foot of the form
+opens the same modal.
+
+That modal is rendered into a **portal at `document.body`** rather than where
+the form sits in the page. The reason is mechanical. The form lives inside a
+scroll-linked reveal wrapper whose inner element is animated with a CSS
+`transform` (the scroll-driven `y` and `scale`). A `transform` on an ancestor
+becomes the containing block for any descendant using `position: fixed`, so a
+modal placed inline there would position itself against that animated ancestor
+instead of the viewport and float in the wrong place. Portaling the modal to
+`<body>` escapes the transformed ancestor, and `position: fixed` resolves to
+the viewport as intended.
+
+The portal is also **static-export safe**. The target is `null` during the
+static pre-render (the build server has no `document`), then set to
+`document.body` in a browser effect, so the exported site never tries to touch
+the DOM. This is the only React portal on the site — most modals here render
+inline at the top of their page with no transformed ancestor above them, so
+they need none. The same pattern is worth knowing for any future interactive
+surface that has to live inside a scroll-linked animation.
+
 ---
 
 ## Part two — how the guide agents work (now and next)
