@@ -4,7 +4,7 @@
 > — ACIM Lesson 95
 
 [![License](https://img.shields.io/badge/license-Private-lightgrey?style=flat)](https://github.com/drasticstatic/iamoneself)
-[![Public Preview](https://img.shields.io/badge/%F0%9F%8C%90%20Public%20Preview-Available-brightgreen)](https://drasticstatic.github.io/iamoneself-public-preview/) [![Synced via GitExporter](https://img.shields.io/badge/Synced%20via-GitExporter-blue)](https://github.com/open-condo-software/gitexporter) [![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code%20CLI-blueviolet)](https://code.claude.com/docs/en/overview) [![Status](https://img.shields.io/badge/Status-%F0%9F%94%A5%20Active%20Build-orange)](https://github.com/drasticstatic/iamoneself)
+[![Public Preview](https://img.shields.io/badge/%F0%9F%8C%90%20Public%20Preview-Available-brightgreen)](https://drasticstatic.github.io/iamoneself-public-preview/) [![Synced via GitHub Actions](https://img.shields.io/badge/Synced%20via-GitHub%20Actions-blue)](https://github.com/open-condo-software/gitexporter) [![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code%20CLI-blueviolet)](https://code.claude.com/docs/en/overview) [![Status](https://img.shields.io/badge/Status-%F0%9F%94%A5%20Active%20Build-orange)](https://github.com/drasticstatic/iamoneself)
 
 ---
 
@@ -12,7 +12,7 @@
 
 ---
 
-> 🔒 **Public mirror notice:** This repository is partially mirrored to a public preview via an automated GitExporter pipeline. The public version includes only sanitized source files. Private configuration, credentials, setup docs, agent configs, and workflow files are excluded.
+> 🔒 **Public mirror notice:** This repository is partially mirrored to a public preview via an automated GitHub Actions pipeline (GitExporter-inspired — GitExporter itself hit an unfixable native-dependency build issue, so this is a from-scratch, dependency-free replacement following the same denylist concept). The public version includes only sanitized source files. Private configuration, credentials, setup docs, agent configs, and workflow files are excluded.
 
 ---
 
@@ -64,7 +64,7 @@ Build a robust back-end context engine and interactive FAQ/knowledge-base interf
 - Tailwind CSS + Framer Motion — spiritual aesthetic, subtle entrance animations
 - TypeScript throughout — typed content data in `src/data/`
 - GitHub Pages deployment via public preview repo
-- Private → public sync via GitExporter denylist pipeline
+- Private → public sync via GitHub Actions denylist pipeline (GitExporter-inspired)
 - Dark mode support across all pages
 - Gold scroll progress bar, scroll indicator, mobile hamburger menu
 
@@ -76,7 +76,7 @@ Build a robust back-end context engine and interactive FAQ/knowledge-base interf
 Private Repo (source + secrets)          Public Repo (GitHub Pages host)
 github.com/drasticstatic/iamoneself →→→ github.com/drasticstatic/iamoneself-public-preview
         │                                        │
-        │  GitExporter (on push to main)         │
+        │  GitHub Actions (on push to main)      │
         │  filters denylist → pushes clean       │
         └──────────────────────────────────────► └── GitHub Pages live URL
 ```
