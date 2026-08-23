@@ -16,6 +16,20 @@
 
 ---
 
+## Table of Contents
+
+- [👋 Dearly Beloved](#dearly-beloved)
+- [🎯 The Goal](#the-goal)
+- [🚀 Capabilities](#capabilities)
+- [🏗️ Architecture](#architecture)
+- [🗺️ Wix Site Map](#wix-site-map)
+- [💻 Development](#development)
+- [📦 Static Build](#static-build)
+- [🤝 Collaboration](#collaboration)
+- [📜 License](#license)
+
+---
+
 ## 👋 Dearly Beloved
 
 **iamoneself.com** is the online home of the **Holy Earth Foundation**, led by Isaiah "Kenney". The site bridges **A Course in Miracles** (The Eagle 🦅) with **Plant Medicine traditions** (The Condor) in a teaching called **Plants & Miracles** — where differences come to an end in the Golden Halo of Light. The Barn Owl 🦉 symbolizes the two birds flying as one — Single-Mindedness.
