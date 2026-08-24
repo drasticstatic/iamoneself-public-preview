@@ -30,6 +30,7 @@
 
 ---
 
+<a id="dearly-beloved"></a>
 ## 👋 Dearly Beloved
 
 **iamoneself.com** is the online home of the **Holy Earth Foundation**, led by Isaiah "Kenney". The site bridges **A Course in Miracles** (The Eagle 🦅) with **Plant Medicine traditions** (The Condor) in a teaching called **Plants & Miracles** — where differences come to an end in the Golden Halo of Light. The Barn Owl 🦉 symbolizes the two birds flying as one — Single-Mindedness.
@@ -42,6 +43,7 @@ This private repo is the build workspace. The public preview (`iamoneself-public
 
 ---
 
+<a id="the-goal"></a>
 ## 🎯 The Goal
 
 Build a robust back-end context engine and interactive FAQ/knowledge-base interface in accordance with the retreats and spiritual coaching services of iamoneself.com — a dev portal that presents the teaching in an interactive Next.js static site with AI-assisted FAQ deep-linking, teaching modals, and scroll-driven discovery. It points to the official Wix site and licensed platforms (Retreat Guru, Aya Advisors) for bookings — never duplicating transactions. We aim to comply with GitHub Pages Terms of Service; as a solo developer learning to use code to help people, I may make mistakes along the way and welcome guidance.
@@ -57,6 +59,7 @@ Build a robust back-end context engine and interactive FAQ/knowledge-base interf
 
 ---
 
+<a id="capabilities"></a>
 ## 🚀 Capabilities
 
 ### Core Features
@@ -84,6 +87,7 @@ Build a robust back-end context engine and interactive FAQ/knowledge-base interf
 
 ---
 
+<a id="architecture"></a>
 ## 🏗️ Architecture
 
 ```
@@ -119,6 +123,7 @@ src/
 
 ---
 
+<a id="wix-site-map"></a>
 ## 🗺️ Wix Site Map
 
 The official Wix-hosted site at [iamoneself.com](https://www.iamoneself.com) includes:
@@ -148,6 +153,7 @@ The official Wix-hosted site at [iamoneself.com](https://www.iamoneself.com) inc
 
 ---
 
+<a id="development"></a>
 ## 💻 Development
 
 ```bash
@@ -156,6 +162,7 @@ npm run dev
 # Opens at http://localhost:3000
 ```
 
+<a id="static-build"></a>
 ## 📦 Static Build
 
 ```bash
@@ -165,6 +172,7 @@ npm run build
 
 ---
 
+<a id="collaboration"></a>
 ## 🤝 Collaboration
 
 | Role | Who |
@@ -176,6 +184,7 @@ npm run build
 
 ---
 
+<a id="license"></a>
 ## 📜 License
 
 Private repository. All rights reserved.
