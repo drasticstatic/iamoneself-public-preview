@@ -7,24 +7,25 @@ portal that a visitor actually touches: how an application reaches the team,
 and how the guide agents work today and as they grow. It is written so anyone
 curious about the machinery can read it plainly. See
 [`sustainability`](sustainability.md) for how the site is hosted and kept lean,
-and the [`roadmap`](roadmap.md) for where it is headed.
+the [`roadmap`](roadmap.md) for where it is headed, and the
+[`privacy-policy`](privacy-policy.md) for exactly what happens to your data.
 
 ---
 
 ## Part one — how an application reaches the team
 
-### What ships today (the graceful placeholder)
+### What ships today
 
 The intake form collects a full application in four steps — personal,
-retreat, health, and journey. Today it ships **unconfigured**: it relays a
-submission through the visitor's own email client (`mailto:`) to the team, or,
-if no address is set yet, points the visitor to the foundation's contact page.
-Nothing about the application is stored by this site.
+retreat, health, and journey. It's now wired to **Formspree**, a
+third-party form backend — submissions relay through Formspree to the
+team's inbox. If Formspree is ever unreachable or unconfigured (e.g. a
+local dev build without the endpoint set), the form falls back to the
+visitor's own email client (`mailto:`), or points to the foundation's
+contact page as a last resort. Nothing about the application is stored by
+this site itself in any case.
 
-### How the form backend (Formspree) works once enabled
-
-The next step is to wire the form to **Formspree**, a third-party form
-backend.
+### How the form backend (Formspree) works
 
 1. A form created at formspree.io returns a **public POST endpoint** — a URL
    like `https://formspree.io/f/abcd1234`. It is a public target, not a secret,
@@ -32,8 +33,10 @@ backend.
 2. When a visitor submits, the form sends the application to that endpoint.
 3. Formspree then takes over delivery:
    - **shows each submission** in its dashboard,
-   - **emails it** to the team inbox (the foundation's Google Workspace on the
-     iamoneself.com domain),
+   - **emails it** to the team inbox — currently the foundation's Google
+     Workspace address for testing, alongside a `iamoneself.com` team
+     address once fully activated (Formspree's free tier supports two
+     notification addresses),
    - and can **forward it** to Google Sheets, Notion, or a webhook/automation
      such as Zapier or Make.
 4. Formspree also exposes an **API to list submissions**, so an early admin
@@ -158,8 +161,10 @@ The point of recording the machinery in the open is twofold:
 
 This portal is a **concept prototype and educational resource**, not the
 official iamoneself.com, and is compliant with GitHub Pages terms of service.
-The Formspree backend and the gateway-connected agents are the next stages
-described here and in the [`roadmap`](roadmap.md), to be undertaken at the
-foundation's pace and the spiritual lead's direction.
+The Formspree backend described above is live. The gateway-connected agents
+are the next stage, described here and in the [`roadmap`](roadmap.md), to be
+undertaken at the foundation's pace and the spiritual lead's direction. See
+the [`privacy-policy`](privacy-policy.md) for exactly what happens to your
+information along the way.
 
 *Into the hands of the gift the gift is given.*
