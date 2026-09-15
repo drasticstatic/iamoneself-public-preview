@@ -190,3 +190,21 @@ npm run build
 This repository is the private development source — not licensed for
 reuse. Its [public preview](https://github.com/drasticstatic/iamoneself-public-preview)
 is available under the [MIT License](https://github.com/drasticstatic/iamoneself-public-preview/blob/main/LICENSE).
+
+---
+
+<a id="handover"></a>
+## 🤝 Provenance and handover
+
+Built by Christopher Wilson's agent fleet under the `drasticstatic` account. The intent is
+**fork, not transfer** — ownership stays here, and a recipient taking this forward gets their own
+copy to run with their own tooling rather than inheriting this account's operational wiring.
+
+Two consequences worth stating plainly:
+
+- **Fleet-internal coordination does not travel.** `AGENT-SYNC/` and `logs/` exist to coordinate
+  *this* fleet's agents and carry no meaning in someone else's. They are not part of the handover
+  and are absent from the published site by construction — the sync workflow deploys built output
+  and a short list of named documents, never the source tree.
+- **This repository remains the historical origin.** If the work continues elsewhere, this copy
+  stays as the record of how it was built, rather than being emptied or redirected.
